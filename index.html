@@ -2,198 +2,258 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotina Divertida</title>
-    <style>
-        /* 1. VARIÁVEIS DE CORES */
-        :root {
-            --roxo-fundo: #1a0026;   /* Roxo escuro profundo */
-            --roxo-brilho: #4a0072;  /* Roxo para o efeito blur */
-            --cor-jogar: #4CAF50;    /* Verde para ação positiva */
-            --cor-recompensa: #FFC107; /* Amarelo/Dourado */
-        }
-
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: var(--roxo-fundo);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-        }
-
-        /* 2. O FUNDO ROXO ESCURO COM BLUR */
-        .fundo-blur {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at 50% 50%, var(--roxo-brilho), var(--roxo-fundo));
-            filter: blur(40px); /* O blur suave que pediste */
-            z-index: -1;
-        }
-
-        /* 3. O TELEMÓVEL */
-        .mobile-frame {
-            width: 100%;
-            max-width: 768px;
-            height: 100vh;
-            background-color: #f4f6f9; /* Cor suave por dentro para não cansar a vista */
-            border-radius: 30px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
-            border: 8px solid #222;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 4. GESTÃO DOS ECRÃS */
-        .ecra {
-            display: none; /* Esconde todos os ecrãs por defeito */
-            flex-direction: column;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .ativo {
-            display: flex; /* Apenas o ecrã com a classe "ativo" aparece */
-        }
-
-        /* 5. DESIGN DO ECRÃ INICIAL */
-        .ecra-inicio {
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .btn-jogar {
-            background-color: var(--cor-jogar);
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            padding: 20px 60px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
-            transition: transform 0.2s;
-        }
-
-        .btn-jogar:hover { transform: scale(1.05); }
-
-        /* 6. DESIGN DO ECRÃ DE NÍVEIS */
-        .cabecalho-niveis {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .btn-recompensas {
-            background-color: var(--cor-recompensa);
-            color: #333;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .lista-niveis {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .cartao-nivel {
-            background: white;
-            border: 2px solid #ddd;
-            padding: 20px;
-            border-radius: 20px;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-align: left;
-        }
-
-        /* Cores de feedback para as dificuldades */
-        .cartao-nivel.facil { border-left: 8px solid #4CAF50; }
-        .cartao-nivel.medio { border-left: 8px solid #FF9800; }
-        .cartao-nivel.dificil { border-left: 8px solid #F44336; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Taskly</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="app-container">
+        <!-- Ecrã 1: Inicial (Home) -->
+        <div id="screen-home" class="screen active">
+            <button class="settings-btn" aria-label="Definições">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </button>
+            <div class="home-content">
+                <h1 class="app-title">Taskly</h1>
+                <p class="subtitle">Escolhe o teu companheiro!</p>
+                
+                <div class="avatar-carousel">
+                    <button class="carousel-nav" id="btn-prev" aria-label="Avatar anterior">‹</button>
+                    
+                    <div class="carousel-viewport">
+                        <div class="carousel-track" id="carousel-track">
+                            <!-- 1. Gatinho -->
+                            <div class="carousel-slide" data-avatar="gatinho">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#fef3c7"/>
+                                        <path d="M25 45 L25 18 L45 35 Z" fill="#fbbf24"/>
+                                        <path d="M75 45 L75 18 L55 35 Z" fill="#fbbf24"/>
+                                        <circle cx="50" cy="55" r="35" fill="#fde68a"/>
+                                        <ellipse cx="50" cy="62" rx="15" ry="10" fill="#fff"/>
+                                        <circle cx="38" cy="48" r="4" fill="#334155"/>
+                                        <circle cx="62" cy="48" r="4" fill="#334155"/>
+                                        <polygon points="48,58 52,58 50,61" fill="#f87171"/>
+                                        <path d="M45 64 Q50 68 55 64" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 2. Cãozinho -->
+                            <div class="carousel-slide" data-avatar="cao">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#ffedd5"/>
+                                        <ellipse cx="25" cy="50" rx="12" ry="25" fill="#d97706" transform="rotate(15 25 50)"/>
+                                        <ellipse cx="75" cy="50" rx="12" ry="25" fill="#d97706" transform="rotate(-15 75 50)"/>
+                                        <circle cx="50" cy="55" r="32" fill="#fcd34d"/>
+                                        <ellipse cx="50" cy="65" rx="18" ry="14" fill="#fff"/>
+                                        <circle cx="40" cy="48" r="4" fill="#334155"/>
+                                        <circle cx="60" cy="48" r="4" fill="#334155"/>
+                                        <ellipse cx="50" cy="60" rx="6" ry="4" fill="#334155"/>
+                                        <path d="M45 68 Q50 72 55 68" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 3. Robô fofo -->
+                            <div class="carousel-slide" data-avatar="robo">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#f1f5f9"/>
+                                        <line x1="50" y1="20" x2="50" y2="10" stroke="#94a3b8" stroke-width="4"/>
+                                        <circle cx="50" cy="10" r="4" fill="#ef4444"/>
+                                        <rect x="15" y="45" width="10" height="20" rx="2" fill="#94a3b8"/>
+                                        <rect x="75" y="45" width="10" height="20" rx="2" fill="#94a3b8"/>
+                                        <rect x="25" y="25" width="50" height="50" rx="12" fill="#cbd5e1"/>
+                                        <rect x="32" y="32" width="36" height="26" rx="6" fill="#0f172a"/>
+                                        <ellipse cx="40" cy="45" rx="4" ry="6" fill="#38bdf8"/>
+                                        <ellipse cx="60" cy="45" rx="4" ry="6" fill="#38bdf8"/>
+                                        <rect x="42" y="62" width="16" height="4" rx="2" fill="#38bdf8"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 4. Coelho -->
+                            <div class="carousel-slide" data-avatar="coelho">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#fdf2f8"/>
+                                        <ellipse cx="38" cy="25" rx="8" ry="25" fill="#fbcfe8"/>
+                                        <ellipse cx="62" cy="25" rx="8" ry="25" fill="#fbcfe8"/>
+                                        <ellipse cx="50" cy="60" rx="30" ry="25" fill="#fff"/>
+                                        <circle cx="40" cy="55" r="4" fill="#334155"/>
+                                        <circle cx="60" cy="55" r="4" fill="#334155"/>
+                                        <circle cx="50" cy="62" r="3" fill="#f472b6"/>
+                                        <path d="M45 66 Q50 69 55 66" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                        <rect x="47" y="67" width="6" height="6" rx="1" fill="#fff" stroke="#cbd5e1"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 5. Estrela -->
+                            <div class="carousel-slide" data-avatar="estrela">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#fffbeb"/>
+                                        <path d="M50 15 L60 38 L85 40 L65 55 L72 78 L50 65 L28 78 L35 55 L15 40 L40 38 Z" fill="#fde047" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/>
+                                        <circle cx="42" cy="48" r="4.5" fill="#334155"/>
+                                        <circle cx="58" cy="48" r="4.5" fill="#334155"/>
+                                        <path d="M45 56 Q50 62 55 56" stroke="#334155" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                        <circle cx="35" cy="50" r="4" fill="#fca5a5" opacity="0.6"/>
+                                        <circle cx="65" cy="50" r="4" fill="#fca5a5" opacity="0.6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 6. Pinguim -->
+                            <div class="carousel-slide" data-avatar="pinguim">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#e0f2fe"/>
+                                        <ellipse cx="50" cy="60" rx="35" ry="40" fill="#0f172a"/>
+                                        <path d="M25 55 C 25 30, 40 25, 50 25 C 60 25, 75 30, 75 55 C 75 80, 65 95, 50 95 C 35 95, 25 80, 25 55 Z" fill="#fff"/>
+                                        <circle cx="40" cy="45" r="4" fill="#0f172a"/>
+                                        <circle cx="60" cy="45" r="4" fill="#0f172a"/>
+                                        <polygon points="45,52 55,52 50,60" fill="#f97316"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 7. Ursinho -->
+                            <div class="carousel-slide" data-avatar="ursinho">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#fef3c7"/>
+                                        <circle cx="28" cy="30" r="14" fill="#92400e"/>
+                                        <circle cx="72" cy="30" r="14" fill="#92400e"/>
+                                        <circle cx="50" cy="55" r="35" fill="#b45309"/>
+                                        <circle cx="50" cy="65" r="15" fill="#fde68a"/>
+                                        <ellipse cx="50" cy="60" rx="7" ry="4" fill="#1c1917"/>
+                                        <path d="M45 68 Q50 72 55 68" stroke="#1c1917" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                        <circle cx="38" cy="48" r="3.5" fill="#1c1917"/>
+                                        <circle cx="62" cy="48" r="3.5" fill="#1c1917"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- 8. Leãozinho -->
+                            <div class="carousel-slide" data-avatar="leao">
+                                <div class="avatar-circle">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="48" fill="#fff7ed"/>
+                                        <path d="M50 10 A40 40 0 0 1 85 30 L90 20 L80 40 A40 40 0 0 1 80 70 L90 80 L75 75 A40 40 0 0 1 25 75 L10 80 L20 70 A40 40 0 0 1 20 40 L10 20 L25 30 A40 40 0 0 1 50 10" fill="#ea580c"/>
+                                        <circle cx="50" cy="50" r="38" fill="#f97316"/>
+                                        <circle cx="30" cy="35" r="8" fill="#fcd34d"/>
+                                        <circle cx="70" cy="35" r="8" fill="#fcd34d"/>
+                                        <circle cx="50" cy="55" r="28" fill="#fbbf24"/>
+                                        <ellipse cx="50" cy="65" rx="14" ry="10" fill="#fff"/>
+                                        <circle cx="40" cy="50" r="3.5" fill="#334155"/>
+                                        <circle cx="60" cy="50" r="3.5" fill="#334155"/>
+                                        <polygon points="45,60 55,60 50,65" fill="#1c1917"/>
+                                        <path d="M46 68 Q50 71 54 68" stroke="#1c1917" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="fundo-blur"></div>
+                    <button class="carousel-nav" id="btn-next" aria-label="Avatar seguinte">›</button>
+                </div>
+                
+                <div class="carousel-indicators" id="carousel-indicators">
+                    <!-- Dots inseridos por JS -->
+                </div>
 
-    <div class="mobile-frame">
-
-        <div id="ecra1" class="ecra ecra-inicio ativo">
-            <h1 style="color: #333; margin-bottom: 50px;">A Minha Rotina</h1>
-            <button class="btn-jogar" onclick="mudarEcra('ecra2')">▶ JOGAR</button>
+                <button id="btn-play" class="primary-btn">Jogar</button>
+            </div>
         </div>
 
-        <div id="ecra2" class="ecra">
-            <div class="cabecalho-niveis">
-                <h2 style="color: #333; margin: 0;">Dificuldade</h2>
-                <button class="btn-recompensas" onclick="abrirRecompensas()">⭐ Recompensas</button>
+        <!-- Ecrã 2: Seleção de Níveis -->
+        <div id="screen-levels" class="screen">
+            <div class="header">
+                <button id="btn-back" class="icon-btn" aria-label="Voltar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2>Níveis</h2>
             </div>
-
-            <div class="lista-niveis">
-                <button class="cartao-nivel facil">
-                    <span style="font-size: 30px;">🟢</span>
-                    <div>
-                        <strong>Fácil</strong><br>
-                        <span style="font-size: 14px; color: #666;">Muitas dicas visuais</span>
+            
+            <div class="levels-container">
+                <!-- Nível 1 -->
+                <div class="level-card unlocked">
+                    <div class="level-icon">1</div>
+                    <div class="level-info">
+                        <h3>Nível 1</h3>
+                        <p>3 passos</p>
                     </div>
-                </button>
-
-                <button class="cartao-nivel medio">
-                    <span style="font-size: 30px;">🟡</span>
-                    <div>
-                        <strong>Médio</strong><br>
-                        <span style="font-size: 14px; color: #666;">Algumas dicas</span>
+                    <div class="level-status">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L10 17L20 7" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
-                </button>
+                </div>
 
-                <button class="cartao-nivel dificil">
-                    <span style="font-size: 30px;">🔴</span>
-                    <div>
-                        <strong>Difícil</strong><br>
-                        <span style="font-size: 14px; color: #666;">Sem ajuda externa</span>
+                <!-- Nível 2 -->
+                <div class="level-card locked">
+                    <div class="level-icon">2</div>
+                    <div class="level-info">
+                        <h3>Nível 2</h3>
+                        <p>4 passos</p>
                     </div>
-                </button>
+                    <div class="level-status">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Nível 3 -->
+                <div class="level-card locked">
+                    <div class="level-icon">3</div>
+                    <div class="level-info">
+                        <h3>Nível 3</h3>
+                        <p>5 passos</p>
+                    </div>
+                    <div class="level-status">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Nível 4 -->
+                <div class="level-card locked">
+                    <div class="level-icon">4</div>
+                    <div class="level-info">
+                        <h3>Nível 4</h3>
+                        <p>6 passos</p>
+                    </div>
+                    <div class="level-status">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Nível 5 -->
+                <div class="level-card locked">
+                    <div class="level-icon">5</div>
+                    <div class="level-info">
+                        <h3>Nível 5</h3>
+                        <p>7 passos</p>
+                    </div>
+                    <div class="level-status">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-
-    <script>
-        // Função para esconder o ecrã atual e mostrar o novo
-        function mudarEcra(idNovoEcra) {
-            // 1. Encontra todos os elementos com a classe 'ecra' e remove a classe 'ativo'
-            let ecras = document.querySelectorAll('.ecra');
-            ecras.forEach(function(ecra) {
-                ecra.classList.remove('ativo');
-            });
-
-            // 2. Adiciona a classe 'ativo' apenas ao ecrã que queremos ver
-            document.getElementById(idNovoEcra).classList.add('ativo');
-        }
-
-        // Função temporária para o botão de recompensas
-        function abrirRecompensas() {
-            alert("A tabela de recompensas vai abrir aqui!");
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
