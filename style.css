@@ -154,6 +154,24 @@ body {
     align-items: center;
 }
 
+.carousel-slide.locked {
+    position: relative;
+}
+.carousel-slide.locked .avatar-circle {
+    filter: grayscale(100%) brightness(0.6);
+    opacity: 0.7;
+}
+.carousel-slide.locked::after {
+    content: "🔒";
+    position: absolute;
+    font-size: 2.5rem;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
 .avatar-circle {
     width: 100%;
     height: 100%;
@@ -196,7 +214,37 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
+}
+
+.unlock-progress-container {
+    width: 100%;
+    margin-bottom: 24px;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.unlock-progress-bar {
+    width: 100%;
+    height: 14px;
+    background-color: #e4e4e7;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+.unlock-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    width: 0%;
+    border-radius: 10px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.unlock-progress-text {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 700;
 }
 
 .dot {
@@ -269,6 +317,26 @@ body {
     color: var(--text-main);
     margin-left: 20px;
     font-weight: 800;
+    flex: 1;
+}
+
+.header-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stars-total {
+    background: #fef3c7;
+    color: #d97706;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    border: 2px solid #fde68a;
 }
 
 .levels-container {
@@ -388,16 +456,22 @@ body {
     background: #f4f4f5;
 }
 
+/* --- Ecrã 3: Jogo Principal --- */
 #screen-game {
     background-color: var(--bg-color);
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 16px;
 }
 
 .game-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 32px;
-    padding-top: 16px;
+    margin-bottom: 24px;
+    padding-top: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .routine-title {
@@ -413,25 +487,27 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     background: #ffffff;
     border-radius: var(--border-radius-lg);
-    padding: 32px 16px;
+    padding: 24px 8px;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.03);
     border: 3px solid transparent;
+    width: 100%;
 }
 
 .slots-container {
     display: flex;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
     justify-content: center;
     flex-wrap: wrap; 
 }
 
 .drag-slot {
-    width: clamp(65px, 22vw, 90px);
-    aspect-ratio: 1;
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
     background: #f4eee6;
     border: 3px dashed #d4d4d8;
     border-radius: var(--border-radius-md);
@@ -450,19 +526,60 @@ body {
 .cards-area {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 8px;
     justify-content: center;
-    padding-bottom: 40px;
-    min-height: 200px;
     align-content: flex-start;
+    padding-bottom: 40px;
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+.cards-area::-webkit-scrollbar {
+    display: none;
 }
 
+.confirm-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 16px 20px 16px;
+    z-index: 50;
+    transition: var(--transition);
+}
+.confirm-container.hidden {
+    display: none;
+}
+.confirm-btn {
+    background-color: #7EB87E;
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 6px 0px #5a9a5a, 0 10px 15px rgba(126, 184, 126, 0.3);
+    font-family: inherit;
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: 320px;
+}
+.confirm-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 0px 0px #5a9a5a;
+}
+
+/* Draggable cards */
 .drag-card {
     background-color: var(--card-bg);
     color: var(--primary-color);
-    padding: 6px;
+    padding: 4px;
     border-radius: var(--border-radius-md);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: 800;
     text-align: center;
     box-shadow: 0 4px 0px #cbd5e1, 0 8px 12px rgba(0,0,0,0.05);
@@ -470,10 +587,11 @@ body {
     cursor: grab;
     user-select: none;
     touch-action: none;
-    width: clamp(65px, 22vw, 90px);
-    aspect-ratio: 1;
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
     word-wrap: break-word;
-    word-break: break-word;
+    word-break: normal;
     hyphens: auto;
     z-index: 100;
     transition: transform 0.1s, box-shadow 0.1s;
@@ -509,7 +627,6 @@ body {
     max-width: none;
     margin: 0;
     padding: 8px;
-    font-size: 0.8rem;
     border-radius: calc(var(--border-radius-md) - 4px);
     animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -618,4 +735,90 @@ body {
     0% { transform: scale(0) translate(0, 0) rotate(0deg); opacity: 1; }
     50% { opacity: 1; transform: scale(1.5) translate(var(--rx), var(--ry)) rotate(180deg); }
     100% { transform: scale(0.5) translate(calc(var(--rx) * 1.5), calc(var(--ry) * 1.5)) rotate(360deg); opacity: 0; }
+}
+
+.stars-toast {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: rgba(254, 243, 199, 0.95);
+    border: 4px solid #fbbf24;
+    padding: 24px 40px;
+    border-radius: 100px;
+    color: #d97706;
+    font-size: 2.5rem;
+    font-weight: 800;
+    z-index: 600;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.stars-toast.show {
+    animation: toastPop 1.8s forwards ease-out;
+}
+@keyframes toastPop {
+    0% { transform: translate(-50%, -10px) scale(0.5); opacity: 0; }
+    15% { transform: translate(-50%, -50px) scale(1.1); opacity: 1; }
+    25% { transform: translate(-50%, -50px) scale(1); opacity: 1; }
+    85% { transform: translate(-50%, -50px) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -90px) scale(0.8); opacity: 0; }
+}
+
+/* --- Definições / Settings Overlay --- */
+#settings-title {
+    margin-bottom: 24px;
+}
+.settings-section {
+    margin: 20px 0 32px 0;
+    text-align: left;
+}
+.settings-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+.size-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.size-btn {
+    background: #f1f5f9;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.size-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.size-btn:active {
+    transform: scale(0.96);
+}
+
+/* Modificadores de tamanho no body */
+body.size-normal .drag-slot,
+body.size-normal .drag-card {
+    width: 86px;
+    height: 86px;
+}
+body.size-normal .drag-card {
+    font-size: 0.85rem;
+}
+
+body.size-small .drag-slot,
+body.size-small .drag-card {
+    width: 76px;
+    height: 76px;
+}
+body.size-small .drag-card {
+    font-size: 0.8rem;
 }
