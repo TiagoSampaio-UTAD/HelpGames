@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Taskly</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Ecrã 1: Inicial (Home) -->
+        <div id="screen-home" class="screen active">
+            <button class="settings-btn btn-open-settings" aria-label="Definições">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </button>
+            <div class="home-content">
+                <h1 class="app-title">Taskly</h1>
+                <p class="subtitle">Escolhe o teu companheiro!</p>
+                
+                <div class="avatar-carousel">
+                    <button class="carousel-nav" id="btn-prev" aria-label="Avatar anterior">‹</button>
+                    
+                    <div class="carousel-viewport">
+                        <div class="carousel-track" id="carousel-track">
+                            <!-- 1. Gatinho -->
+                            <div class="carousel-slide" data-avatar="gatinho"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#fef3c7"/><path d="M25 45 L25 18 L45 35 Z" fill="#fbbf24"/><path d="M75 45 L75 18 L55 35 Z" fill="#fbbf24"/><circle cx="50" cy="55" r="35" fill="#fde68a"/><ellipse cx="50" cy="62" rx="15" ry="10" fill="#fff"/><circle cx="38" cy="48" r="4" fill="#334155"/><circle cx="62" cy="48" r="4" fill="#334155"/><polygon points="48,58 52,58 50,61" fill="#f87171"/><path d="M45 64 Q50 68 55 64" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div></div>
+                            <!-- 2. Cãozinho -->
+                            <div class="carousel-slide" data-avatar="cao"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#ffedd5"/><ellipse cx="25" cy="50" rx="12" ry="25" fill="#d97706" transform="rotate(15 25 50)"/><ellipse cx="75" cy="50" rx="12" ry="25" fill="#d97706" transform="rotate(-15 75 50)"/><circle cx="50" cy="55" r="32" fill="#fcd34d"/><ellipse cx="50" cy="65" rx="18" ry="14" fill="#fff"/><circle cx="40" cy="48" r="4" fill="#334155"/><circle cx="60" cy="48" r="4" fill="#334155"/><ellipse cx="50" cy="60" rx="6" ry="4" fill="#334155"/><path d="M45 68 Q50 72 55 68" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div></div>
+                            <!-- 3. Robô fofo -->
+                            <div class="carousel-slide" data-avatar="robo"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#f1f5f9"/><line x1="50" y1="20" x2="50" y2="10" stroke="#94a3b8" stroke-width="4"/><circle cx="50" cy="10" r="4" fill="#ef4444"/><rect x="15" y="45" width="10" height="20" rx="2" fill="#94a3b8"/><rect x="75" y="45" width="10" height="20" rx="2" fill="#94a3b8"/><rect x="25" y="25" width="50" height="50" rx="12" fill="#cbd5e1"/><rect x="32" y="32" width="36" height="26" rx="6" fill="#0f172a"/><ellipse cx="40" cy="45" rx="4" ry="6" fill="#38bdf8"/><ellipse cx="60" cy="45" rx="4" ry="6" fill="#38bdf8"/><rect x="42" y="62" width="16" height="4" rx="2" fill="#38bdf8"/></svg></div></div>
+                            <!-- 4. Coelho -->
+                            <div class="carousel-slide" data-avatar="coelho"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#fdf2f8"/><ellipse cx="38" cy="25" rx="8" ry="25" fill="#fbcfe8"/><ellipse cx="62" cy="25" rx="8" ry="25" fill="#fbcfe8"/><ellipse cx="50" cy="60" rx="30" ry="25" fill="#fff"/><circle cx="40" cy="55" r="4" fill="#334155"/><circle cx="60" cy="55" r="4" fill="#334155"/><circle cx="50" cy="62" r="3" fill="#f472b6"/><path d="M45 66 Q50 69 55 66" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="47" y="67" width="6" height="6" rx="1" fill="#fff" stroke="#cbd5e1"/></svg></div></div>
+                            <!-- 5. Estrela -->
+                            <div class="carousel-slide" data-avatar="estrela"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#fffbeb"/><path d="M50 15 L60 38 L85 40 L65 55 L72 78 L50 65 L28 78 L35 55 L15 40 L40 38 Z" fill="#fde047" stroke="#facc15" stroke-width="2" stroke-linejoin="round"/><circle cx="42" cy="48" r="4.5" fill="#334155"/><circle cx="58" cy="48" r="4.5" fill="#334155"/><path d="M45 56 Q50 62 55 56" stroke="#334155" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="35" cy="50" r="4" fill="#fca5a5" opacity="0.6"/><circle cx="65" cy="50" r="4" fill="#fca5a5" opacity="0.6"/></svg></div></div>
+                            <!-- 6. Pinguim -->
+                            <div class="carousel-slide" data-avatar="pinguim"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#e0f2fe"/><ellipse cx="50" cy="60" rx="35" ry="40" fill="#0f172a"/><path d="M25 55 C 25 30, 40 25, 50 25 C 60 25, 75 30, 75 55 C 75 80, 65 95, 50 95 C 35 95, 25 80, 25 55 Z" fill="#fff"/><circle cx="40" cy="45" r="4" fill="#0f172a"/><circle cx="60" cy="45" r="4" fill="#0f172a"/><polygon points="45,52 55,52 50,60" fill="#f97316"/></svg></div></div>
+                            <!-- 7. Ursinho -->
+                            <div class="carousel-slide" data-avatar="ursinho"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#fef3c7"/><circle cx="28" cy="30" r="14" fill="#92400e"/><circle cx="72" cy="30" r="14" fill="#92400e"/><circle cx="50" cy="55" r="35" fill="#b45309"/><circle cx="50" cy="65" r="15" fill="#fde68a"/><ellipse cx="50" cy="60" rx="7" ry="4" fill="#1c1917"/><path d="M45 68 Q50 72 55 68" stroke="#1c1917" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="38" cy="48" r="3.5" fill="#1c1917"/><circle cx="62" cy="48" r="3.5" fill="#1c1917"/></svg></div></div>
+                            <!-- 8. Leãozinho -->
+                            <div class="carousel-slide" data-avatar="leao"><div class="avatar-circle"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="48" fill="#fff7ed"/><path d="M50 10 A40 40 0 0 1 85 30 L90 20 L80 40 A40 40 0 0 1 80 70 L90 80 L75 75 A40 40 0 0 1 25 75 L10 80 L20 70 A40 40 0 0 1 20 40 L10 20 L25 30 A40 40 0 0 1 50 10" fill="#ea580c"/><circle cx="50" cy="50" r="38" fill="#f97316"/><circle cx="30" cy="35" r="8" fill="#fcd34d"/><circle cx="70" cy="35" r="8" fill="#fcd34d"/><circle cx="50" cy="55" r="28" fill="#fbbf24"/><ellipse cx="50" cy="65" rx="14" ry="10" fill="#fff"/><circle cx="40" cy="50" r="3.5" fill="#334155"/><circle cx="60" cy="50" r="3.5" fill="#334155"/><polygon points="45,60 55,60 50,65" fill="#1c1917"/><path d="M46 68 Q50 71 54 68" stroke="#1c1917" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div></div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav" id="btn-next" aria-label="Avatar seguinte">›</button>
+                </div>
+                
+                <div class="carousel-indicators" id="carousel-indicators"></div>
+                
+                <div class="unlock-progress-container" id="stars-progress-container">
+                    <div class="unlock-progress-bar">
+                        <div class="unlock-progress-fill" id="stars-progress-fill"></div>
+                    </div>
+                    <p class="unlock-progress-text" id="stars-progress-text">0/15 ⭐ para novo companheiro</p>
+                </div>
+
+                <button id="btn-play" class="primary-btn">Jogar</button>
+            </div>
+        </div>
+
+        <!-- Ecrã 2: Seleção de Níveis -->
+        <div id="screen-levels" class="screen">
+            <div class="header">
+                <button id="btn-back-levels" class="icon-btn" aria-label="Voltar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2>Níveis</h2>
+                <div class="header-right-actions">
+                    <div class="stars-total" id="levels-stars-total">⭐ 0</div>
+                    <button class="icon-btn btn-open-settings" aria-label="Definições">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+            <div class="levels-container">
+                <!-- Nível 1 -->
+                <div class="level-card unlocked" data-level="1">
+                    <div class="level-icon">1</div>
+                    <div class="level-info">
+                        <h3>Nível 1</h3>
+                        <p>3 passos</p>
+                    </div>
+                    <div class="level-status">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12L10 17L20 7" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Nível 2 -->
+                <div class="level-card locked" data-level="2">
+                    <div class="level-icon">2</div>
+                    <div class="level-info">
+                        <h3>Nível 2</h3>
+                        <p>4 passos</p>
+                    </div>
+                    <div class="level-status">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Nível 3 -->
+                <div class="level-card locked" data-level="3">
+                    <div class="level-icon">3</div>
+                    <div class="level-info">
+                        <h3>Nível 3</h3>
+                        <p>5 passos</p>
+                    </div>
+                    <div class="level-status">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Nível 4 -->
+                <div class="level-card locked" data-level="4">
+                    <div class="level-icon">4</div>
+                    <div class="level-info">
+                        <h3>Nível 4</h3>
+                        <p>6 passos</p>
+                    </div>
+                    <div class="level-status">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Nível 5 -->
+                <div class="level-card locked" data-level="5">
+                    <div class="level-icon">5</div>
+                    <div class="level-info">
+                        <h3>Nível 5</h3>
+                        <p>7 passos</p>
+                    </div>
+                    <div class="level-status">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                            <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
+                            <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ecrã 3: Jogo Principal -->
+        <div id="screen-game" class="screen">
+            <div class="game-header">
+                <h2 id="routine-title" class="routine-title">Lavar as mãos</h2>
+                <!-- Seta de voltar de acordo com o pedido, à direita -->
+                <div class="actions" style="display: flex; gap: 8px;">
+                    <button class="icon-btn btn-open-settings" aria-label="Definições">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </button>
+                    <button id="btn-back-game" class="icon-btn" aria-label="Voltar aos Níveis">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="game-area">
+                <div class="slots-container" id="slots-container">
+                    <!-- Drop zones javascript injeção -->
+                </div>
+            </div>
+            
+            <div class="cards-area" id="cards-container">
+                <!-- Draggable cards javascript injeção -->
+            </div>
+
+            <div id="confirm-container" class="confirm-container hidden">
+                <button id="btn-confirm" class="confirm-btn">Confirmar</button>
+            </div>
+
+            <!-- Overlays de Feedback -->
+            <div id="stars-reward-toast" class="stars-toast hidden">
+                <span id="toast-stars-text">+3 ⭐</span>
+            </div>
+
+            <div id="game-overlay" class="game-overlay hidden">
+                <div class="modal-content">
+                    <h3 id="modal-title">Muito bem!</h3>
+                    <p id="modal-text">Completaste a rotina.</p>
+                    <div class="modal-buttons" id="modal-buttons">
+                        <button id="btn-modal-primary" class="primary-btn">Continuar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="stars-container" class="stars-container hidden"></div>
+        </div>
+
+        <!-- Ecrã/Overlay Definições -->
+        <div id="settings-overlay" class="game-overlay hidden" style="z-index: 1000;">
+            <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+                <h3 id="settings-title">Definições</h3>
+                
+                <div class="settings-section">
+                    <h4>Tamanho dos elementos</h4>
+                    <div class="size-options">
+                        <button class="size-btn" data-size="small">Pequeno</button>
+                        <button class="size-btn" data-size="normal">Normal</button>
+                        <button class="size-btn active" data-size="large">Grande</button>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="btn-close-settings" class="primary-btn">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
