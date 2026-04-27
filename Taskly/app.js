@@ -66,6 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let tasklyStars = parseInt(localStorage.getItem('taskly_stars')) || 0;
     let unlockedAvatares = 1;
+    let soundEnabled = localStorage.getItem('taskly_sound') !== 'false';
+    let soundVolume = parseFloat(localStorage.getItem('taskly_volume') ?? '1');
     const AVATAR_THRESHOLDS = [0, 15, 30, 50, 75, 100, 125, 150];
     // ELEMENTOS CRAWL
     const screenHome = document.getElementById('screen-home');
@@ -105,6 +107,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const savedSize = localStorage.getItem('taskly_size') || 'large';
     applySizeConfig(savedSize);
+
+    const toggleSound = document.getElementById('toggle-sound');
+    const sliderVolume = document.getElementById('slider-volume');
+    const volumeValueEl = document.getElementById('volume-value');
+    const volumeRow = document.getElementById('volume-row');
+
+    toggleSound.checked = soundEnabled;
+    sliderVolume.value = Math.round(soundVolume * 100);
+    volumeValueEl.textContent = `${Math.round(soundVolume * 100)}%`;
+    if (!soundEnabled) volumeRow.classList.add('disabled');
+
+    toggleSound.addEventListener('change', () => {
+        soundEnabled = toggleSound.checked;
+        localStorage.setItem('taskly_sound', soundEnabled);
+        volumeRow.classList.toggle('disabled', !soundEnabled);
+    });
+    sliderVolume.addEventListener('input', () => {
+        soundVolume = sliderVolume.value / 100;
+        localStorage.setItem('taskly_volume', soundVolume);
+        volumeValueEl.textContent = `${sliderVolume.value}%`;
+    });
     settingsBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             settingsOverlay.classList.remove('hidden');
@@ -488,30 +511,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 1800); // Wait for toastPop animation completion
         } else {
-            // ERRADO - Reseta e baralha depois de um pequeno tempo de graça
             btnConfirmContainer.classList.add('hidden');
+            playErrorSound();
+
+            slots.forEach(s => {
+                if (s.firstElementChild) s.firstElementChild.classList.add('wobble');
+            });
+
             setTimeout(() => {
                 const cardsContainer = document.getElementById('cards-container');
-                let allCards = Array.from(cardsContainer.children); // Get unslotted (if any)
-                
+                let allCards = Array.from(cardsContainer.children);
+
                 slots.forEach(s => {
                     const card = s.firstElementChild;
                     if (card) {
-                        card.classList.remove('slotted');
+                        card.classList.remove('wobble', 'slotted');
                         allCards.push(card);
                         s.dataset.slottedId = "";
                     }
                 });
-                
-                // Shuffle e re-atribuir homeIndex
+
                 allCards.sort(() => Math.random() - 0.5);
                 cardsContainer.innerHTML = '';
                 allCards.forEach((c, idx) => {
                     c.dataset.homeIndex = idx;
                     cardsContainer.appendChild(c);
                 });
-                
-            }, 150); // 150ms timeout since explicit wait no longer applies heavily
+            }, 600);
         }
     });
 
@@ -566,31 +592,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    // AUDIO WEB API
+    // AUDIO
     function playSuccessSound() {
-        try {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            const ctx = new AudioContext();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            
-            osc.type = 'sine'; // Suave
-            
-            osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-            osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); 
-            osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); 
-            osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.3); // C6
-            
-            gain.gain.setValueAtTime(0, ctx.currentTime);
-            gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.05); 
-            gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.6);
-            
-            osc.start(ctx.currentTime);
-            osc.stop(ctx.currentTime + 0.7);
-        } catch (e) { console.log("WebAudio não suportado"); }
+        if (!soundEnabled) return;
+        const audio = new Audio('sounds/Rotine__Completed.wav');
+        audio.volume = soundVolume;
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+    }
+    function playErrorSound() {
+        if (!soundEnabled) return;
+        const audio = new Audio('sounds/Rotine_Incomplete.wav');
+        audio.volume = soundVolume;
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
     }
     function createStarsAnimation() {
         starsContainer.innerHTML = '';

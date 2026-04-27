@@ -207,7 +207,7 @@
 
         <!-- Ecrã/Overlay Definições -->
         <div id="settings-overlay" class="game-overlay hidden" style="z-index: 1000;">
-            <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+            <div class="modal-content" style="max-height: 70vh; overflow-y: auto;">
                 <h3 id="settings-title">Definições</h3>
                 
                 <div class="settings-section">
@@ -216,6 +216,24 @@
                         <button class="size-btn" data-size="small">Pequeno</button>
                         <button class="size-btn" data-size="normal">Normal</button>
                         <button class="size-btn active" data-size="large">Grande</button>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h4>Som</h4>
+                    <div class="sound-toggle-row">
+                        <span class="toggle-label">Sons de jogo</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-sound" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="volume-row" id="volume-row">
+                        <span class="toggle-label">Volume</span>
+                        <div class="volume-slider-wrap">
+                            <input type="range" id="slider-volume" min="0" max="100" value="100">
+                            <span id="volume-value">100%</span>
+                        </div>
                     </div>
                 </div>
 
