@@ -31,32 +31,161 @@ const LEVELS_DATA = {
         ]}
     ],
     2: [
-        { title: "Escovar os dentes", steps: ["Pegar na escova","Colocar pasta de dentes","Escovar os dentes","Limpar a boca"] },
-        { title: "Preparar a mochila", steps: ["Abrir a mochila","Meter os cadernos e manuais","Meter o estojo","Fechar a mochila"] },
-        { title: "Lavar a cara", steps: ["Abrir a torneira","Molhar a cara","Ensaboar a cara","Lavar e secar"] },
-        { title: "Ir para a cama", steps: ["Vestir o pijama","Escovar os dentes","Deitar","Apagar a luz"] },
-        { title: "Pôr a mesa", steps: ["Pegar nos pratos","Colocar os pratos","Pôr os talheres","Pôr os copos"] }
+        { title: "Escovar os dentes", steps: [
+            { text: "Pegar na escova",         img: },  
+            { text: "Colocar pasta de dentes", img: },
+            { text: "Escovar os dentes",       img: },
+            { text: "Limpar a boca",           img: }
+        ] },
+        { title: "Preparar a mochila", steps: [
+            { text: "Abrir a mochila",             img: },
+            { text: "Meter os cadernos e manuais", img: },
+            { text: "Meter o estojo",              img: }, 
+            { text: "Fechar a mochila",            img: }
+        ]},
+        { title: "Lavar a cara", steps: [
+            { text: "Abrir a torneira", img: },
+            { text: "Molhar a cara",    img: },
+            { text: "Ensaboar a cara",  img: },
+            { text: "Lavar e secar",    img: }
+        ]},
+        { title: "Ir para a cama", steps: [
+            { text: "Vestir o pijama",   img: },
+            { text: "Escovar os dentes", img: },
+            { text: "Deitar",            img: },
+            { text: "Apagar a luz",      img: }
+        ]},
+        { title: "Pôr a mesa", steps: [
+            { text: "Pegar nos pratos",  img: },
+            { text: "Colocar os pratos", img: },
+            { text: "Pôr os talheres",   img: },
+            { text: "Pôr os copos",      img: }
+        ]}
     ],
     3: [
-        { title: "Lavar o cabelo", steps: ["Molhar o cabelo","Deitar champô na mão","Esfregar o cabelo","Tirar o champô do cabelo","Secar com a toalha"] },
-        { title: "Tomar duche", steps: ["Abrir o chuveiro","Molhar o corpo","Ensaboar o corpo","Tirar o sabão do corpo","Fechar o chuveiro"] },
-        { title: "Lavar uma maçã", steps: ["Pegar na maçã","Abrir a torneira","Lavar a maçã na água","Fechar a torneira","Secar a maçã e comer"] },
-        { title: "Aquecer o leite no micro-ondas", steps: ["Abrir o micro-ondas","Pôr a caneca dentro","Fechar o micro-ondas","Carregar no botão para ligar","Tirar a caneca quando apitar"] },
-        { title: "Afiar um lápis", steps: ["Pegar no lápis e no afia","Meter o lápis no buraco do afia","Rodar o lápis com a mão","Tirar o lápis do afia","Deitar o lixo do afia no caixote"] }
+        { title: "Lavar o cabelo", steps: [
+            { text: "Molhar o cabelo",          img: },
+            { text: "Deitar champô na mão",     img: },
+            { text: "Esfregar o cabelo",        img: },
+            { text: "Tirar o champô do cabelo", img: },
+            { text: "Secar com a toalha",       img: }
+        ]},
+        { title: "Tomar duche", steps: [
+            { text: "Abrir o chuveiro",       img: },
+            { text: "Molhar o corpo",         img: },
+            { text: "Ensaboar o corpo",       img: },
+            { text: "Tirar o sabão do corpo", img: },
+            { text: "Fechar o chuveiro",      img: }
+        ]},
+        { title: "Lavar uma maçã", steps: [
+            { text: "Pegar na maçã",        img: },
+            { text: "Abrir a torneira",     img: },
+            { text: "Lavar a maçã na água", img: },
+            { text: "Fechar a torneira",    img: },
+            { text: "Secar a maçã e comer", img: }
+        ]},
+        { title: "Aquecer o leite no micro-ondas", steps: [
+            { text: "Abrir o micro-ondas",          img: },
+            { text: "Pôr a caneca dentro",          img: },
+            { text: "Fechar o micro-ondas",         img: },
+            { text: "Carregar no botão para ligar", img: },
+            { text: "Tirar a caneca quando apitar", img: }
+        ]},
+        { title: "Afiar um lápis", steps: [
+            { text: "Pegar no lápis e no afia",         img: },
+            { text: "Meter o lápis no buraco do afia",  img: },
+            { text: "Rodar o lápis com a mão",          img: },
+            { text: "Tirar o lápis do afia",            img: },
+            { text: "Deitar o lixo do afia no caixote", img: }
+        ]}
     ],
     4: [
-        { title: "Preparar o lanche", steps: ["Pegar no pão","Barrar com manteiga","Meter o fiambre","Fechar o pão","Colocar no saco","Meter na mochila"] },
-        { title: "Rotina da manhã", steps: ["Acordar","Ir à casa de banho","Lavar a cara","Escovar os dentes","Vestir-se","Tomar o pequeno-almoço"] },
-        { title: "Ir à casa de banho", steps: ["Baixar as calças e cuecas","Sentar na sanita","Fazer chichi ou cocó","Limpar com o papel higiénico","Puxar o autoclismo","Vestir as cuecas e as calças"] },
-        { title: "Beber sumo de pacote", steps: ["Pegar no pacote","Tirar a palhinha","Tirar o plástico da palhinha","Espetar a palhinha no buraco","Pôr na boca","Beber"] },
-        { title: "Comer um iogurte", steps: ["Pegar no iogurte","Tirar a tampa","Pegar na colher","Meter a colher no iogurte","Pôr na boca","Comer"] }
+        { title: "Preparar o lanche", steps: [
+            { text: "Pegar no pão",        img: },
+            { text: "Barrar com manteiga", img: },
+            { text: "Meter o fiambre",     img: },
+            { text: "Fechar o pão",        img: },
+            { text: "Colocar no saco",     img: },
+            { text: "Meter na mochila",    img: }
+        ]},
+        { title: "Rotina da manhã", steps: [
+            { text: "Acordar",                img: },
+            { text: "Ir à casa de banho",     img: },
+            { text: "Lavar a cara",           img: },
+            { text: "Escovar os dentes",      img: },
+            { text: "Vestir-se",              img: },
+            { text: "Tomar o pequeno-almoço", img: }
+        ]},
+        { title: "Ir à casa de banho", steps: [
+            { text: "Baixar as calças e cuecas",    img: },
+            { text: "Sentar na sanita",             img: },
+            { text: "Fazer chichi ou cocó",         img: },
+            { text: "Limpar com o papel higiénico", img: },
+            { text: "Puxar o autoclismo",           img: },
+            { text: "Vestir as cuecas e as calças", img: }
+        ]},
+        { title: "Beber sumo de pacote", steps: [
+            { text: "Pegar no pacote",              img: },
+            { text: "Tirar a palhinha",             img: },
+            { text: "Tirar o plástico da palhinha", img: },
+            { text: "Espetar a palhinha no buraco", img: },
+            { text: "Pôr na boca",                  img: },
+            { text: "Beber",                        img: }
+        ]},
+        { title: "Comer um iogurte", steps: [
+            { text: "Pegar no iogurte",          img: },      
+            { text:"Tirar a tampa",              img: },
+            { text: "Pegar na colher",           img: },
+            { text: "Meter a colher no iogurte", img: },
+            { text: "Pôr na boca",               img: },
+            { text: "Comer",                     img: }
+        ]}
     ],
     5: [
-        { title: "Jogar no tablet", steps: ["Pegar no tablet","Ligar o ecrã","Carregar no jogo","Jogar o jogo","Fechar o jogo","Desligar o ecrã","Pousar o tablet na mesa"] },
-        { title: "Rotina do almoço escolar", steps: ["Lavar as mãos","Pegar no tabuleiro","Escolher a refeição","Sentar à mesa","Comer a sopa","Comer o prato principal","Beber água"] },
-        { title: "Dia de escola completo", steps: ["Acordar","Tomar banho","Tomar o pequeno-almoço","Preparar a mochila","Ir para a escola","Chegar a casa","Fazer os trabalhos de casa"] },
-        { title: "Preparar para sair à rua no frio", steps: ["Pegar no casaco","Vestir o casaco","Fechar o fecho","Pôr o gorro na cabeça","Abrir a porta da rua","Sair de casa","Fechar a porta"] },
-        { title: "Rotina completa da noite", steps: ["Jantar","Lavar as mãos","Tomar banho","Vestir o pijama","Escovar os dentes","Preparar a roupa para amanhã","Deitar"] }
+        { title: "Jogar no tablet", steps: [
+            { text: "Pegar no tablet",         img: },
+            { text: "Ligar o ecrã",            img: },
+            { text: "Carregar no jogo",        img: },
+            { text: "Jogar o jogo",            img: },
+            { text: "Fechar o jogo",           img: },
+            { text: "Desligar o ecrã",         img: },
+            { text: "Pousar o tablet na mesa", img: }
+        ]},
+        { title: "Rotina do almoço escolar", steps: [
+            { text: "Lavar as mãos","Pegar no tabuleiro", img: },
+            { text: "Escolher a refeição",                img: },
+            { text: "Sentar à mesa",                      img: },
+            { text: "Comer a sopa",                       img: },
+            { text: "Comer o prato principal",            img: },
+            { text: "Beber água",                         img: }
+        ]},
+        { title: "Dia de escola completo", steps: [
+            { text: "Acordar",                    img: },          
+            { text: "Tomar banho",                img: },
+            { text: "Tomar o pequeno-almoço",     img: },
+            { text: "Preparar a mochila",         img: },
+            { text: "Ir para a escola",           img: },
+            { text: "Chegar a casa",              img: },
+            { text: "Fazer os trabalhos de casa", img: }
+        ]},
+        { title: "Preparar para sair à rua no frio", steps: [
+            { text: "Pegar no casaco",       img: },
+            { text:"Vestir o casaco",        img: },
+            { text: "Fechar o fecho",        img: },
+            { text: "Pôr o gorro na cabeça", img: },
+            { text: "Abrir a porta da rua",  img: },
+            { text: "Sair de casa",          img: },
+            { text: "Fechar a porta",        img: }
+        ]},
+        { title: "Rotina completa da noite", steps: [
+            { text: "Jantar",                       img: },
+            { text: "Lavar as mãos",                img: },
+            { text: "Tomar banho",                  img: },
+            { text: "Vestir o pijama",              img: },
+            { text: "Escovar os dentes",            img: },
+            { text: "Preparar a roupa para amanhã", img: },
+            { text: "Deitar",                       img: }
+        ]}
     ]
 };
 
