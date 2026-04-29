@@ -6,188 +6,63 @@
 const LEVELS_DATA = {
     1: [
         { title: "Lavar as mãos", steps: [
-            { text: "Abrir a torneira",  emoji: "🚰" },
-            { text: "Lavar as mãos",     emoji: "🤲" },
-            { text: "Secar",             emoji: "🧻" }
+            { text: "Abrir a torneira", img: "https://static.arasaac.org/pictograms/21341/21341_2500.png" },
+            { text: "Lavar as mãos",   img: "https://static.arasaac.org/pictograms/8975/8975_2500.png" },
+            { text: "Secar",           img: "https://static.arasaac.org/pictograms/37049/37049_2500.png" }
         ]},
         { title: "Calçar os sapatos", steps: [
-            { text: "Pegar nos sapatos", emoji: "👟" },
-            { text: "Calçar os sapatos", emoji: "🦶" },
-            { text: "Apertar atacadores",emoji: "🎀" }
+            { text: "Pegar nos sapatos",      img: "https://static.arasaac.org/pictograms/39546/39546_2500.png" },
+            { text: "Calçar os sapatos",      img: "https://static.arasaac.org/pictograms/14534/14534_2500.png" },
+            { text: "Apertar os atacadores",  img: "https://static.arasaac.org/pictograms/17026/17026_2500.png" }
         ]},
         { title: "Beber água", steps: [
-            { text: "Pegar no copo",     emoji: "🥤" },
-            { text: "Encher com água",   emoji: "💧" },
-            { text: "Beber",             emoji: "😊" }
+            { text: "Pegar no copo",   img: "https://static.arasaac.org/pictograms/2610/2610_2500.png" },
+            { text: "Encher com água", img: "https://static.arasaac.org/pictograms/4768/4768_2500.png" },
+            { text: "Beber",           img: "https://static.arasaac.org/pictograms/2276/2276_2500.png" }
         ]},
         { title: "Deitar o lixo fora", steps: [
-            { text: "Pegar no lixo",     emoji: "🗑️" },
-            { text: "Ir ao caixote",     emoji: "🚶" },
-            { text: "Deitar dentro",     emoji: "✅" }
+            { text: "Pegar no lixo",  img: "https://static.arasaac.org/pictograms/6065/6065_2500.png" },
+            { text: "Ir ao caixote",  img: "https://static.arasaac.org/pictograms/27208/27208_2500.png" },
+            { text: "Deitar dentro",  img: "https://static.arasaac.org/pictograms/15479/15479_2500.png" }
         ]},
         { title: "Pôr o casaco", steps: [
-            { text: "Pegar no casaco",   emoji: "🧥" },
-            { text: "Enfiar os braços",  emoji: "💪" },
-            { text: "Fechar o fecho",    emoji: "🔒" }
+            { text: "Pegar no casaco",  img: "https://static.arasaac.org/pictograms/3229/3229_2500.png" },
+            { text: "Enfiar os braços", img: "https://static.arasaac.org/pictograms/39853/39853_2500.png" },
+            { text: "Fechar o fecho",   img: "https://static.arasaac.org/pictograms/5357/5357_2500.png" }
         ]}
     ],
     2: [
         { title: "Escovar os dentes", steps: [
-            { text: "Pegar na escova",        emoji: "🪥" },
-            { text: "Colocar pasta",           emoji: "🦷" },
-            { text: "Escovar os dentes",       emoji: "😬" },
-            { text: "Limpar a boca",           emoji: "🧻" }
+           { text: "Pegar na escova", img: },
+           { text: "Colocar pasta de dentes", img: },
+           { text: "Escovar os dentes", img: },
+           { text: "Limpar a boca", img: }
         ]},
-        { title: "Preparar a mochila", steps: [
-            { text: "Abrir a mochila",         emoji: "🎒" },
-            { text: "Meter os cadernos",       emoji: "📚" },
-            { text: "Meter o estojo",          emoji: "✏️" },
-            { text: "Fechar a mochila",        emoji: "🔒" }
-        ]},
-        { title: "Lavar a cara", steps: [
-            { text: "Abrir a torneira",        emoji: "🚰" },
-            { text: "Molhar a cara",           emoji: "💦" },
-            { text: "Ensaboar a cara",         emoji: "🧼" },
-            { text: "Lavar e secar",           emoji: "🧻" }
-        ]},
-        { title: "Ir para a cama", steps: [
-            { text: "Vestir o pijama",         emoji: "😴" },
-            { text: "Escovar os dentes",       emoji: "🦷" },
-            { text: "Deitar",                  emoji: "🛌" },
-            { text: "Apagar a luz",            emoji: "💡" }
-        ]},
-        { title: "Pôr a mesa", steps: [
-            { text: "Pegar nos pratos",        emoji: "🍽️" },
-            { text: "Colocar os pratos",       emoji: "🍽️" },
-            { text: "Pôr os talheres",         emoji: "🍴" },
-            { text: "Pôr os copos",            emoji: "🥤" }
-        ]}
+        { title: "Preparar a mochila", steps: ["Abrir a mochila", "Meter os cadernos e manuais", "Meter o estojo", "Fechar a mochila"] },
+        { title: "Lavar a cara", steps: ["Abrir a torneira", "Molhar a cara", "Ensaboar a cara", "Lavar e secar"] },
+        { title: "Ir para a cama", steps: ["Vestir o pijama", "Escovar os dentes", "Deitar", "Apagar a luz"] },
+        { title: "Pôr a mesa", steps: ["Pegar nos pratos", "Colocar os pratos", "Pôr os talheres", "Pôr os copos"] }
     ],
     3: [
-        { title: "Lavar o cabelo", steps: [
-            { text: "Molhar o cabelo",         emoji: "🚿" },
-            { text: "Deitar champô",           emoji: "🧴" },
-            { text: "Esfregar o cabelo",       emoji: "🙆" },
-            { text: "Tirar o champô",          emoji: "💦" },
-            { text: "Secar com a toalha",      emoji: "🧻" }
-        ]},
-        { title: "Tomar duche", steps: [
-            { text: "Abrir o chuveiro",        emoji: "🚿" },
-            { text: "Molhar o corpo",          emoji: "💦" },
-            { text: "Ensaboar o corpo",        emoji: "🧼" },
-            { text: "Tirar o sabão",           emoji: "💧" },
-            { text: "Fechar o chuveiro",       emoji: "🛑" }
-        ]},
-        { title: "Lavar uma maçã", steps: [
-            { text: "Pegar na maçã",           emoji: "🍎" },
-            { text: "Abrir a torneira",        emoji: "🚰" },
-            { text: "Lavar na água",           emoji: "💧" },
-            { text: "Fechar a torneira",       emoji: "🛑" },
-            { text: "Secar e comer",           emoji: "😋" }
-        ]},
-        { title: "Aquecer o leite", steps: [
-            { text: "Abrir o micro-ondas",     emoji: "📦" },
-            { text: "Pôr a caneca dentro",     emoji: "☕" },
-            { text: "Fechar o micro-ondas",    emoji: "🔒" },
-            { text: "Carregar no botão",       emoji: "▶️" },
-            { text: "Tirar a caneca",          emoji: "🧤" }
-        ]},
-        { title: "Afiar um lápis", steps: [
-            { text: "Pegar no lápis",          emoji: "✏️" },
-            { text: "Meter no buraco do afia", emoji: "🔧" },
-            { text: "Rodar o lápis",           emoji: "🔄" },
-            { text: "Tirar o lápis",           emoji: "✏️" },
-            { text: "Deitar o lixo no caixote",emoji: "🗑️" }
-        ]}
+        { title: "Lavar o cabelo", steps: ["Molhar o cabelo", "Deitar champô na mão", "Esfregar o cabelo", "Tirar o champô do cabelo", "Secar com a toalha"] },
+        { title: "Tomar duche", steps: ["Abrir o chuveiro", "Molhar o corpo", "Ensaboar o corpo", "Tirar o sabão do corpo", "Fechar o chuveiro"] },
+        { title: "Lavar uma maçã", steps: ["Pegar na maçã", "Abrir a torneira", "Lavar a maçã na água", "Fechar a torneira", "Secar a maçã e comer"] },
+        { title: "Aquecer o leite no micro-ondas", steps: ["Abrir o micro-ondas", "Pôr a caneca dentro", "Fechar o micro-ondas", "Carregar no botão para ligar", "Tirar a caneca quando apitar"] },
+        { title: "Afiar um lápis", steps: ["Pegar no lápis e no afia", "Meter o lápis no buraco do afia", "Rodar o lápis com a mão", "Tirar o lápis do afia", "Deitar o lixo do afia no caixote"] }
     ],
     4: [
-        { title: "Preparar o lanche", steps: [
-            { text: "Pegar no pão",            emoji: "🍞" },
-            { text: "Barrar com manteiga",     emoji: "🧈" },
-            { text: "Meter o fiambre",         emoji: "🥩" },
-            { text: "Fechar o pão",            emoji: "🥪" },
-            { text: "Colocar no saco",         emoji: "🛍️" },
-            { text: "Meter na mochila",        emoji: "🎒" }
-        ]},
-        { title: "Rotina da manhã", steps: [
-            { text: "Acordar",                 emoji: "⏰" },
-            { text: "Ir à casa de banho",      emoji: "🚽" },
-            { text: "Lavar a cara",            emoji: "💦" },
-            { text: "Escovar os dentes",       emoji: "🦷" },
-            { text: "Vestir-se",               emoji: "👕" },
-            { text: "Tomar o pequeno-almoço",  emoji: "🍳" }
-        ]},
-        { title: "Ir à casa de banho", steps: [
-            { text: "Baixar as calças",        emoji: "👖" },
-            { text: "Sentar na sanita",        emoji: "🚽" },
-            { text: "Fazer chichi ou cocó",    emoji: "💧" },
-            { text: "Limpar com papel",        emoji: "🧻" },
-            { text: "Puxar o autoclismo",      emoji: "🚿" },
-            { text: "Vestir as calças",        emoji: "👖" }
-        ]},
-        { title: "Beber sumo de pacote", steps: [
-            { text: "Pegar no pacote",         emoji: "🧃" },
-            { text: "Tirar a palhinha",        emoji: "🥤" },
-            { text: "Tirar o plástico",        emoji: "📦" },
-            { text: "Espetar a palhinha",      emoji: "🎯" },
-            { text: "Pôr na boca",             emoji: "😊" },
-            { text: "Beber",                   emoji: "😋" }
-        ]},
-        { title: "Comer um iogurte", steps: [
-            { text: "Pegar no iogurte",        emoji: "🥛" },
-            { text: "Tirar a tampa",           emoji: "🔓" },
-            { text: "Pegar na colher",         emoji: "🥄" },
-            { text: "Meter a colher",          emoji: "🍶" },
-            { text: "Pôr na boca",             emoji: "😊" },
-            { text: "Comer",                   emoji: "😋" }
-        ]}
+        { title: "Preparar o lanche", steps: ["Pegar no pão", "Barrar com manteiga", "Meter o fiambre", "Fechar o pão", "Colocar no saco", "Meter na mochila"] },
+        { title: "Rotina da manhã", steps: ["Acordar", "Ir à casa de banho", "Lavar a cara", "Escovar os dentes", "Vestir-se", "Tomar o pequeno-almoço"] },
+        { title: "Ir à casa de banho", steps: ["Baixar as calças e cuecas", "Sentar na sanita", "Fazer chichi ou cocó", "Limpar com o papel higiénico", "Puxar o autoclismo", "Vestir as cuecas e as calças"] },
+        { title: "Beber sumo de pacote", steps: ["Pegar no pacote", "Tirar a palhinha", "Tirar o plástico da palhinha", "Espetar a palhinha no buraco", "Pôr na boca", "Beber"] },
+        { title: "Comer um iogurte", steps: ["Pegar no iogurte", "Tirar a tampa", "Pegar na colher", "Meter a colher no iogurte", "Pôr na boca", "Comer"] }
     ],
     5: [
-        { title: "Jogar no tablet", steps: [
-            { text: "Pegar no tablet",         emoji: "📱" },
-            { text: "Ligar o ecrã",            emoji: "💡" },
-            { text: "Carregar no jogo",        emoji: "🎮" },
-            { text: "Jogar o jogo",            emoji: "🕹️" },
-            { text: "Fechar o jogo",           emoji: "❌" },
-            { text: "Desligar o ecrã",         emoji: "🔴" },
-            { text: "Pousar o tablet",         emoji: "📲" }
-        ]},
-        { title: "Rotina do almoço", steps: [
-            { text: "Lavar as mãos",           emoji: "🤲" },
-            { text: "Pegar no tabuleiro",      emoji: "🍽️" },
-            { text: "Escolher a refeição",     emoji: "🥗" },
-            { text: "Sentar à mesa",           emoji: "🪑" },
-            { text: "Comer a sopa",            emoji: "🍲" },
-            { text: "Comer o prato principal", emoji: "🍛" },
-            { text: "Beber água",              emoji: "💧" }
-        ]},
-        { title: "Dia de escola", steps: [
-            { text: "Acordar",                 emoji: "⏰" },
-            { text: "Tomar banho",             emoji: "🚿" },
-            { text: "Tomar o pequeno-almoço",  emoji: "🍳" },
-            { text: "Preparar a mochila",      emoji: "🎒" },
-            { text: "Ir para a escola",        emoji: "🚌" },
-            { text: "Chegar a casa",           emoji: "🏠" },
-            { text: "Fazer os trabalhos",      emoji: "📚" }
-        ]},
-        { title: "Sair no frio", steps: [
-            { text: "Pegar no casaco",         emoji: "🧥" },
-            { text: "Vestir o casaco",         emoji: "💪" },
-            { text: "Fechar o fecho",          emoji: "🔒" },
-            { text: "Pôr o gorro",             emoji: "🧢" },
-            { text: "Abrir a porta",           emoji: "🚪" },
-            { text: "Sair de casa",            emoji: "🚶" },
-            { text: "Fechar a porta",          emoji: "🔑" }
-        ]},
-        { title: "Rotina da noite", steps: [
-            { text: "Jantar",                  emoji: "🍽️" },
-            { text: "Lavar as mãos",           emoji: "🤲" },
-            { text: "Tomar banho",             emoji: "🚿" },
-            { text: "Vestir o pijama",         emoji: "😴" },
-            { text: "Escovar os dentes",       emoji: "🦷" },
-            { text: "Preparar a roupa",        emoji: "👕" },
-            { text: "Deitar",                  emoji: "🛌" }
-        ]}
+        { title: "Jogar no tablet", steps: ["Pegar no tablet", "Ligar o ecrã", "Carregar no jogo", "Jogar o jogo", "Fechar o jogo", "Desligar o ecrã", "Pousar o tablet na mesa"] },
+        { title: "Rotina do almoço escolar", steps: ["Lavar as mãos", "Pegar no tabuleiro", "Escolher a refeição", "Sentar à mesa", "Comer a sopa", "Comer o prato principal", "Beber água"] },
+        { title: "Dia de escola completo", steps: ["Acordar", "Tomar banho", "Tomar o pequeno-almoço", "Preparar a mochila", "Ir para a escola", "Chegar a casa", "Fazer os trabalhos de casa"] },
+        { title: "Preparar para sair à rua no frio", steps: ["Pegar no casaco", "Vestir o casaco", "Fechar o fecho", "Pôr o gorro na cabeça", "Abrir a porta da rua", "Sair de casa", "Fechar a porta"] },
+        { title: "Rotina completa da noite", steps: ["Jantar", "Lavar as mãos", "Tomar banho", "Vestir o pijama", "Escovar os dentes", "Preparar a roupa para amanhã", "Deitar"] }
     ]
 };
 
@@ -214,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let tasklyStars       = parseInt(localStorage.getItem('taskly_stars')) || 0;
     let unlockedAvatares  = 1;
     let soundEnabled      = localStorage.getItem('taskly_sound') !== 'false';
-    let masterVolume      = parseFloat(localStorage.getItem('taskly_volume') || '0.8');
+    let soundVolume      = parseFloat(localStorage.getItem('taskly_volume') || '0.8');
     let currentTheme      = localStorage.getItem('taskly_theme') || 'default';
 
     const AVATAR_THRESHOLDS = [0, 15, 30, 50, 75, 100, 125, 150];
@@ -226,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let sessionStarted      = false;
 
     /* ── APP CONTAINER (needed for absolute drag) ── */
-    const appContainer = document.getElementById('app-container');
+    const appContainer = document.getElementById('app-container'); //VERIFICAR NECESSIDADE
 
     /* ── DOM REFS ── */
     const screenWelcome  = document.getElementById('screen-welcome');
@@ -234,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const screenLevels   = document.getElementById('screen-levels');
     const screenGame     = document.getElementById('screen-game');
 
+    /* ── SCREEN WELCOME ── */
     const nameInput      = document.getElementById('name-input');
     const btnStart       = document.getElementById('btn-start');
     const nameHintText   = document.getElementById('name-hint-text');
@@ -242,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPlay        = document.getElementById('btn-play');
     const btnBackLevels  = document.getElementById('btn-back-levels');
     const btnBackGame    = document.getElementById('btn-back-game');
-
     const overlay        = document.getElementById('game-overlay');
     const modalTitle     = document.getElementById('modal-title');
     const modalText      = document.getElementById('modal-text');
@@ -250,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCompanion = document.getElementById('modal-companion');
     const starsContainer = document.getElementById('stars-container');
 
-    const confirmContainer = document.getElementById('confirm-container');
+    const btnconfirmContainer = document.getElementById('confirm-container');
     const btnConfirm       = document.getElementById('btn-confirm');
 
     const starsToast     = document.getElementById('stars-reward-toast');
@@ -272,9 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileCard            = document.getElementById('profile-card');
     const profileNameDisplay     = document.getElementById('profile-name-display');
     const profileNameInput       = document.getElementById('profile-name-input');
-    const soundToggle            = document.getElementById('sound-toggle');
-    const volumeSlider           = document.getElementById('volume-slider');
-    const volumeLabel            = document.getElementById('volume-label');
+    const toggleSound            = document.getElementById('toggle-sound');
+    const sliderVolume           = document.getElementById('slider-volume');
 
     // Carousel
     const track         = document.getElementById('carousel-track');
@@ -323,14 +197,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedSize = localStorage.getItem('taskly_size') || 'large';
     applySizeConfig(savedSize);
 
-    function applySizeConfig(size) {
-        document.body.classList.remove('size-small','size-normal');
-        if (size !== 'large') document.body.classList.add('size-' + size);
-        localStorage.setItem('taskly_size', size);
-        document.querySelectorAll('.size-btn').forEach(b => b.classList.toggle('active', b.dataset.size === size));
+    function applySizeConfig(sizeLevel) {
+        document.body.className = sizeLevel === 'large' ? '' : `size-${sizeLevel}`;
+        localStorage.setItem('taskly_size', sizeLevel);
     }
-    document.querySelectorAll('.size-btn').forEach(btn => {
-        btn.addEventListener('click', () => applySizeConfig(btn.dataset.size));
+    btnPlay.disabled = false;
+    slides.forEach((slide, index) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.dataset.index = index;
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+        });
+        dotsContainer.appendChild(dot);
     });
 
     /* ─────────────────────────────────────────
@@ -373,20 +254,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applySoundSettings() {
-        soundToggle.classList.toggle('active', soundEnabled);
-        soundToggle.setAttribute('aria-checked', soundEnabled);
-        volumeSlider.value = Math.round(masterVolume * 100);
+        toggleSound.classList.toggle('active', soundEnabled);
+        toggleSound.setAttribute('aria-checked', soundEnabled);
+        sliderVolume.value = Math.round(masterVolume * 100);
         volumeLabel.textContent = Math.round(masterVolume * 100) + '%';
     }
-    soundToggle.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
+    toggleSound.addEventListener('change', () => {
+        soundEnabled = toggleSound.checked;
         localStorage.setItem('taskly_sound', soundEnabled);
-        applySoundSettings();
+        volumeRow.classList.toggle('disabled', !soundEnabled);
     });
-    volumeSlider.addEventListener('input', () => {
-        masterVolume = volumeSlider.value / 100;
+    sliderVolume.addEventListener('input', () => {
+        masterVolume = sliderVolume.value / 100;
         localStorage.setItem('taskly_volume', masterVolume);
-        volumeLabel.textContent = volumeSlider.value + '%';
+        volumeLabel.textContent = sliderVolume.value + '%';
     });
     applySoundSettings();
 
