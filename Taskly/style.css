@@ -217,6 +217,7 @@ body {
     margin-bottom: 0;
     font-size: 0.8rem;
     padding: 4px 10px;
+    align-self: flex-start;
 }
 
 /* ─── CAROUSEL ─── */
@@ -666,14 +667,12 @@ body {
 
 /* ─── HINT BUTTON ─── */
 .hint-btn {
-    position: absolute;
-    bottom: 148px; right: 14px;
-    width: 50px; height: 50px; border-radius: 50%;
+    width: 56px; height: 56px; border-radius: var(--border-radius-md);
     background: #fef3c7; border: 3px solid #fbbf24;
     color: #d97706; cursor: pointer;
     display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    z-index: 200; transition: transform 0.15s, box-shadow 0.2s; flex-shrink: 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    flex-shrink: 0; transition: transform 0.15s, box-shadow 0.2s;
 }
 .hint-btn:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.15), 0 0 0 5px rgba(251,191,36,0.2); }
 .hint-btn:active { transform: scale(0.88); }
@@ -992,7 +991,6 @@ body.size-small  .drag-card { font-size: 0.8rem; }
     .drag-card      { border-radius: 22px; }
     .routine-title  { font-size: 1.4rem; }
     .companion-bar  { padding: 8px 4px 4px; }
-    .hint-btn       { bottom: 152px; right: 18px; }
 }
 
 @media (max-height: 620px) {
@@ -1002,5 +1000,4 @@ body.size-small  .drag-card { font-size: 0.8rem; }
     .companion-mini-avatar { width: 46px; height: 46px; }
     .confirm-container { padding: 2px 12px 4px; }
     .confirm-btn    { padding: 11px 28px; font-size: 1.1rem; }
-    .hint-btn       { bottom: 126px; width: 44px; height: 44px; }
 }

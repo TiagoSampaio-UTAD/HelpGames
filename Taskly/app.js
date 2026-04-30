@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         screenWelcome.classList.remove('active');
         screenHome.classList.add('active');
         updateGreeting();
-        startSessionTimer();
     }
 
     nameInputEl.addEventListener('input', () => {
@@ -253,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (profileNameDisplay) profileNameDisplay.textContent = userName;
         screenWelcome.classList.remove('active');
         screenHome.classList.add('active');
-        startSessionTimer();
     });
 
     function updateGreeting() {
@@ -543,6 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ══════════════════════════════ */
     btnPlay.addEventListener('click', () => {
         if (!selectedAvatar) return;
+        startSessionTimer();
         setTimeout(() => {
             screenHome.classList.remove('active');
             screenLevels.classList.add('active');
