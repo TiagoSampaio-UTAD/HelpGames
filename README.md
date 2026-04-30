@@ -1,3 +1,11 @@
 Problemas a corrigir
  - Cores
  - Niveis com o drag-container
+ - Tempo não começa a contar
+ - cores melhores e com propósito
+ - som nas definições se estiver desabilitado no toggle não deve dar para mover no volume
+ - tempo da sessão depois de acabar os 15 minutos depois não deve dar para jogar num período de tempo
+ - no modo de baixa estimulação o som não deve dar
+ - no ecrã dos níveis tem a dizer nos retângulos imagens.
+ - guardar as coisa num ficheiro json
+ - meter direitos de autor do site do Arasaac
