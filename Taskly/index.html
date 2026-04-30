@@ -5,12 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Taskly</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="app-container">
-        <!-- Ecrã 1: Inicial (Home) -->
-        <div id="screen-home" class="screen active">
+
+        <!-- ══ Ecrã 0: Boas-vindas ══ -->
+        <div id="screen-welcome" class="screen active">
+            <div class="welcome-content">
+                <h1 class="app-title">Taskly</h1>
+                <div class="welcome-avatar-ring">
+                    <div class="welcome-avatar-inner">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="48" fill="#fef3c7"/>
+                            <path d="M25 45 L25 18 L45 35 Z" fill="#fbbf24"/>
+                            <path d="M75 45 L75 18 L55 35 Z" fill="#fbbf24"/>
+                            <circle cx="50" cy="55" r="35" fill="#fde68a"/>
+                            <ellipse cx="50" cy="62" rx="15" ry="10" fill="#fff"/>
+                            <circle cx="38" cy="48" r="4" fill="#334155"/>
+                            <circle cx="62" cy="48" r="4" fill="#334155"/>
+                            <polygon points="48,58 52,58 50,61" fill="#f87171"/>
+                            <path d="M45 64 Q50 68 55 64" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="welcome-question">Como te chamas?</h2>
+                <p class="welcome-subtitle">Só o teu primeiro nome!</p>
+                <input type="text" id="name-input" class="name-input" placeholder="O teu nome..." maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+                <button id="btn-start" class="primary-btn" disabled>Começar</button>
+                <p id="name-hint-text" class="hint-text">Escreve o teu nome para começar</p>
+            </div>
+        </div>
+
+        <!-- ══ Ecrã 1: Início / Carrossel ══ -->
+        <div id="screen-home" class="screen">
             <button class="settings-btn btn-open-settings" aria-label="Definições">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="3"></circle>
@@ -19,11 +47,11 @@
             </button>
             <div class="home-content">
                 <h1 class="app-title">Taskly</h1>
-                <p class="subtitle">Escolhe o teu companheiro!</p>
-                
+                <p class="subtitle" id="home-greeting">Escolhe o teu companheiro!</p>
+                <div class="session-timer-pill" id="home-timer-pill">⏱ <span id="home-timer-text">15:00</span></div>
+
                 <div class="avatar-carousel">
                     <button class="carousel-nav" id="btn-prev" aria-label="Avatar anterior">‹</button>
-                    
                     <div class="carousel-viewport">
                         <div class="carousel-track" id="carousel-track">
                             <!-- 1. Gatinho -->
@@ -46,9 +74,9 @@
                     </div>
                     <button class="carousel-nav" id="btn-next" aria-label="Avatar seguinte">›</button>
                 </div>
-                
+
                 <div class="carousel-indicators" id="carousel-indicators"></div>
-                
+
                 <div class="unlock-progress-container" id="stars-progress-container">
                     <div class="unlock-progress-bar">
                         <div class="unlock-progress-fill" id="stars-progress-fill"></div>
@@ -56,11 +84,11 @@
                     <p class="unlock-progress-text" id="stars-progress-text">0/15 ⭐ para novo companheiro</p>
                 </div>
 
-                <button id="btn-play" class="primary-btn">Jogar</button>
+                <button id="btn-play" class="primary-btn">Jogar ▶</button>
             </div>
         </div>
 
-        <!-- Ecrã 2: Seleção de Níveis -->
+        <!-- ══ Ecrã 2: Seleção de Níveis ══ -->
         <div id="screen-levels" class="screen">
             <div class="header">
                 <button id="btn-back-levels" class="icon-btn" aria-label="Voltar">
@@ -70,15 +98,16 @@
                 </button>
                 <h2>Níveis</h2>
                 <div class="header-right-actions">
+                    <div class="session-timer-pill" id="levels-timer-pill">⏱ <span id="levels-timer-text">15:00</span></div>
                     <div class="stars-total" id="levels-stars-total">⭐ 0</div>
                     <button class="icon-btn btn-open-settings" aria-label="Definições">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                    </svg>
-                </button>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </div>
 
             <div class="levels-container">
                 <!-- Nível 1 -->
@@ -116,7 +145,7 @@
                         <p>5 passos</p>
                     </div>
                     <div class="level-status">
-                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
                             <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
                             <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
                         </svg>
@@ -130,7 +159,7 @@
                         <p>6 passos</p>
                     </div>
                     <div class="level-status">
-                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
                             <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
                             <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
                         </svg>
@@ -144,7 +173,7 @@
                         <p>7 passos</p>
                     </div>
                     <div class="level-status">
-                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="padlock-svg">
                             <rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/>
                             <path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/>
                         </svg>
@@ -153,12 +182,14 @@
             </div>
         </div>
 
-        <!-- Ecrã 3: Jogo Principal -->
+        <!-- ══ Ecrã 3: Jogo Principal ══ -->
         <div id="screen-game" class="screen">
             <div class="game-header">
-                <h2 id="routine-title" class="routine-title">Lavar as mãos</h2>
-                <!-- Seta de voltar de acordo com o pedido, à direita -->
-                <div class="actions" style="display: flex; gap: 8px;">
+                <div class="game-title-wrap">
+                    <h2 id="routine-title" class="routine-title">Lavar as mãos</h2>
+                    <div class="session-timer-pill timer-game" id="game-timer-pill">⏱ <span id="game-timer-text">15:00</span></div>
+                </div>
+                <div class="game-actions">
                     <button class="icon-btn btn-open-settings" aria-label="Definições">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"></circle>
@@ -172,73 +203,180 @@
                     </button>
                 </div>
             </div>
-            
-            <div class="game-area">
-                <div class="slots-container" id="slots-container">
-                    <!-- Drop zones javascript injeção -->
+
+            <div class="game-area" id="game-area">
+                <div class="slots-container" id="slots-container"></div>
+            </div>
+
+            <div class="cards-area" id="cards-container"></div>
+
+            <!-- Botão de Dica -->
+            <button id="btn-hint" class="hint-btn" aria-label="Dica: mostrar onde colocar">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="9" y1="18" x2="15" y2="18"/>
+                    <line x1="10" y1="22" x2="14" y2="22"/>
+                    <path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/>
+                </svg>
+            </button>
+
+            <!-- Barra do Companheiro -->
+            <div class="companion-bar">
+                <div class="companion-mini-avatar" id="companion-mini-avatar"></div>
+                <div class="companion-speech-bubble hidden" id="companion-speech-bubble">
+                    <p id="companion-speech-text">Consegues! 💪</p>
                 </div>
             </div>
-            
-            <div class="cards-area" id="cards-container">
-                <!-- Draggable cards javascript injeção -->
-            </div>
 
+            <!-- Botão Verificar -->
             <div id="confirm-container" class="confirm-container hidden">
-                <button id="btn-confirm" class="confirm-btn">Confirmar</button>
+                <button id="btn-confirm" class="confirm-btn">✔ Verificar</button>
             </div>
 
-            <!-- Overlays de Feedback -->
+            <!-- Toast de estrelas -->
             <div id="stars-reward-toast" class="stars-toast hidden">
                 <span id="toast-stars-text">+3 ⭐</span>
             </div>
 
+            <!-- Modal de resultado -->
             <div id="game-overlay" class="game-overlay hidden">
                 <div class="modal-content">
+                    <div id="modal-companion" class="modal-companion"></div>
                     <h3 id="modal-title">Muito bem!</h3>
                     <p id="modal-text">Completaste a rotina.</p>
-                    <div class="modal-buttons" id="modal-buttons">
-                        <button id="btn-modal-primary" class="primary-btn">Continuar</button>
-                    </div>
+                    <div class="modal-buttons" id="modal-buttons"></div>
                 </div>
             </div>
-            
+
+            <!-- Animação de estrelas -->
             <div id="stars-container" class="stars-container hidden"></div>
         </div>
 
-        <!-- Ecrã/Overlay Definições -->
+        <!-- ══ Overlay: Definições ══ -->
         <div id="settings-overlay" class="game-overlay hidden" style="z-index: 1000;">
-            <div class="modal-content" style="max-height: 70vh; overflow-y: auto;">
-                <h3 id="settings-title">Definições</h3>
-                
-                <div class="settings-section">
-                    <h4>Tamanho dos elementos</h4>
-                    <div class="size-options">
-                        <button class="size-btn" data-size="small">Pequeno</button>
-                        <button class="size-btn" data-size="normal">Normal</button>
-                        <button class="size-btn active" data-size="large">Grande</button>
-                    </div>
+            <div class="modal-content settings-modal">
+                <div class="settings-header">
+                    <button id="btn-close-settings" class="icon-btn settings-back-btn" aria-label="Fechar">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <h3>Definições</h3>
                 </div>
 
-                <div class="settings-section">
-                    <h4>Som</h4>
-                    <div class="sound-toggle-row">
-                        <span class="toggle-label">Sons de jogo</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="toggle-sound" checked>
-                            <span class="toggle-slider"></span>
-                        </label>
+                <div class="settings-body">
+
+                    <!-- PERFIL -->
+                    <p class="settings-section-label">PERFIL</p>
+                    <div class="settings-card" id="profile-card">
+                        <div class="settings-row-info">
+                            <span class="settings-row-title">Nome</span>
+                            <div class="settings-row-right">
+                                <span id="profile-name-display">—</span>
+                                <span>✏️</span>
+                            </div>
+                        </div>
+                        <input type="text" id="profile-name-input" class="inline-name-input hidden" maxlength="20" autocomplete="off">
                     </div>
-                    <div class="volume-row" id="volume-row">
-                        <span class="toggle-label">Volume</span>
-                        <div class="volume-slider-wrap">
-                            <input type="range" id="slider-volume" min="0" max="100" value="100">
-                            <span id="volume-value">100%</span>
+
+                    <!-- APARÊNCIA -->
+                    <p class="settings-section-label">APARÊNCIA</p>
+                    <div class="settings-card">
+                        <div class="settings-row-info">
+                            <span class="settings-row-title">Paleta de cores</span>
+                            <div class="color-swatches">
+                                <button class="swatch active" data-theme="default" style="background:#faf5ed;" aria-label="Padrão"></button>
+                                <button class="swatch" data-theme="blue"    style="background:#dbeafe;" aria-label="Azul"></button>
+                                <button class="swatch" data-theme="green"   style="background:#dcfce7;" aria-label="Verde"></button>
+                                <button class="swatch" data-theme="dark"    style="background:#1e293b;" aria-label="Escuro"></button>
+                                <button class="swatch" data-theme="minimal" style="background:#f1f5f9;" aria-label="Minimal"></button>
+                            </div>
+                        </div>
+                        <div class="settings-divider"></div>
+                        <div class="settings-size-block">
+                            <span class="settings-row-title" style="padding: 0 15px; display: block; margin-bottom: 8px;">Tamanho dos elementos</span>
+                            <div class="size-pills-list">
+                                <button class="size-pill-btn" data-size="small">Pequeno</button>
+                                <button class="size-pill-btn" data-size="normal">Normal</button>
+                                <button class="size-pill-btn active" data-size="large">Grande</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                    <!-- SOM -->
+                    <p class="settings-section-label">SOM</p>
+                    <div class="settings-card">
+                        <div class="settings-row-info">
+                            <span class="settings-row-title">Sons de jogo</span>
+                            <button id="sound-toggle" class="toggle-btn active" role="switch" aria-checked="true">
+                                <div class="toggle-thumb"></div>
+                            </button>
+                        </div>
+                        <div class="settings-divider"></div>
+                        <div class="settings-row-info volume-row" id="volume-row">
+                            <div>
+                                <span class="settings-row-title">Volume</span>
+                                <p class="settings-row-sub" id="volume-label">80%</p>
+                            </div>
+                            <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="80">
+                        </div>
+                    </div>
+
+                    <!-- SESSÃO -->
+                    <p class="settings-section-label">SESSÃO</p>
+                    <div class="settings-card">
+                        <div class="settings-row-info">
+                            <div>
+                                <span class="settings-row-title">Tempo de sessão</span>
+                                <p class="settings-row-sub">15 min + 5 min extra se necessário</p>
+                            </div>
+                            <span class="settings-badge">15 min</span>
+                        </div>
+                    </div>
+
+                    <!-- ACESSIBILIDADE -->
+                    <p class="settings-section-label">ACESSIBILIDADE</p>
+                    <div class="settings-card">
+                        <div class="settings-row-info">
+                            <div>
+                                <span class="settings-row-title">Modo de baixa estimulação</span>
+                                <p class="settings-row-sub">Remove animações rápidas e simplifica o fundo</p>
+                            </div>
+                            <button id="low-stim-toggle" class="toggle-btn" role="switch" aria-checked="false">
+                                <div class="toggle-thumb"></div>
+                            </button>
+                        </div>
+                        <div class="settings-divider"></div>
+                        <div class="settings-row-info">
+                            <div>
+                                <span class="settings-row-title">Dicas de teclado</span>
+                                <p class="settings-row-sub">← → cartões &nbsp;·&nbsp; ↑ ↓ slots &nbsp;·&nbsp; Enter colocar</p>
+                            </div>
+                            <span class="settings-badge" style="font-size:1.1rem;">⌨️</span>
+                        </div>
+                    </div>
+
+                </div><!-- /settings-body -->
+
+                <div class="settings-footer">
+                    <button id="btn-close-settings-bottom" class="primary-btn">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ Toast de aviso do timer ══ -->
+        <div id="timer-warning-toast" class="timer-warning-toast hidden">
+            <span id="timer-warning-text">⏱ Faltam 5 minutos!</span>
+        </div>
+
+        <!-- ══ Overlay: Tempo esgotado ══ -->
+        <div id="time-up-overlay" class="game-overlay hidden" style="z-index: 950;">
+            <div class="modal-content time-up-modal">
+                <div class="time-up-icon">⏰</div>
+                <h3>Sessão terminada!</h3>
+                <p>Os teus 15 minutos de hoje acabaram.<br>Fizeste um trabalho incrível! 🌟</p>
                 <div class="modal-buttons">
-                    <button id="btn-close-settings" class="primary-btn">Fechar</button>
+                    <button id="btn-time-continue" class="secondary-btn">Continuar mais 5 min</button>
+                    <button id="btn-time-stop" class="primary-btn">Fechar</button>
                 </div>
             </div>
         </div>
