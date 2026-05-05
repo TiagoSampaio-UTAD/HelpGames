@@ -347,7 +347,7 @@ body {
 
 .header {
     display: flex; align-items: center;
-    margin-bottom: 32px; padding-top: 16px;
+    margin-bottom: 32px; padding-top: 36px;
 }
 
 .icon-btn {
@@ -366,6 +366,19 @@ body {
     margin-left: 20px; font-weight: 800; flex: 1;
 }
 
+.header-title-block {
+    position: relative;
+    display: flex; align-items: center;
+    flex: 1; margin-left: 20px;
+}
+.header-title-block h2 {
+    margin-left: 0; white-space: nowrap; flex: unset;
+}
+.header-title-block .session-timer-pill {
+    position: absolute; bottom: 100%; left: 0;
+    margin-bottom: 6px;
+}
+
 .header-right-actions {
     display: flex; align-items: center; gap: 8px;
 }
@@ -375,8 +388,9 @@ body {
     padding: 8px 16px; border-radius: 100px;
     font-weight: 800; font-size: 1.3rem;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    display: flex; align-items: center;
+    display: flex; align-items: center; justify-content: center;
     border: 2px solid #fde68a;
+    min-width: 100px;
 }
 
 .levels-container, .routines-container {
