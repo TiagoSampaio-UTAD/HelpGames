@@ -34,7 +34,7 @@ body.theme-minimal { --bg-color:#f8fafc; --bg-secondary:#f1f5f9; --primary-color
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #d6d3d1;
+    background-color: var(--bg-secondary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ body {
 
 /* ─── WELCOME SCREEN ─── */
 #screen-welcome {
-    background: linear-gradient(135deg, #fdf8f5 0%, #f4eee6 100%);
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -151,7 +151,7 @@ body {
 
 /* ─── HOME SCREEN ─── */
 #screen-home {
-    background: linear-gradient(135deg, #fdf8f5 0%, #f4eee6 100%);
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 100%);
     justify-content: center;
 }
 
@@ -343,7 +343,7 @@ body {
 .secondary-btn:active { background-color: #f4f4f5; transform: scale(0.96); }
 
 /* ─── LEVELS SCREEN ─── */
-#screen-levels { background-color: var(--bg-color); }
+#screen-levels, #screen-routines { background-color: var(--bg-color); }
 
 .header {
     display: flex; align-items: center;
@@ -379,15 +379,19 @@ body {
     border: 2px solid #fde68a;
 }
 
-.levels-container {
+.levels-container, .routines-container {
     display: flex; flex-direction: column;
     gap: 20px; overflow-y: auto;
     padding-bottom: 40px; padding-right: 8px;
     scrollbar-width: thin; scrollbar-color: #d4d4d8 transparent;
 }
 
-.levels-container::-webkit-scrollbar { width: 6px; }
-.levels-container::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 10px; }
+.levels-container::-webkit-scrollbar,
+.routines-container::-webkit-scrollbar { width: 6px; }
+.levels-container::-webkit-scrollbar-thumb,
+.routines-container::-webkit-scrollbar-thumb { background-color: #d4d4d8; border-radius: 10px; }
+
+.level-card.routine-completed .level-icon { background-color: #dcfce7; color: #16a34a; }
 
 .level-card {
     background: var(--card-bg); border-radius: var(--border-radius-lg);

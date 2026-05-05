@@ -143,6 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let focusedSlotIndex = 0;
     let flyInProgress    = false;
 
+    // Erros consecutivos
+    let consecutiveErrors = 0;
+
+    // Rotinas concluídas por nível: { "1": [0, 2], "2": [0], ... }
+    let completedRoutines = JSON.parse(localStorage.getItem('taskly_completed') || '{}');
+
     // Timer de sessão
     let sessionTime     = 900; // 15 minutos em segundos
     let sessionInterval = null;
@@ -212,6 +218,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const speechText      = document.getElementById('companion-speech-text');
 
     const btnHint = document.getElementById('btn-hint');
+
+    const screenRoutines     = document.getElementById('screen-routines');
+    const routinesLevelTitle = document.getElementById('routines-level-title');
+    const routinesList       = document.getElementById('routines-list');
+    const btnBackRoutines    = document.getElementById('btn-back-routines');
+    const routinesTimerPill  = document.getElementById('routines-timer-pill');
+    const routinesTimerText  = document.getElementById('routines-timer-text');
+    const routinesStars      = document.getElementById('routines-stars-total');
 
     const homeTimerPill   = document.getElementById('home-timer-pill');
     const levelsTimerPill = document.getElementById('levels-timer-pill');
@@ -307,11 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const m    = Math.floor(Math.max(sessionTime, 0) / 60).toString().padStart(2, '0');
         const s    = (Math.max(sessionTime, 0) % 60).toString().padStart(2, '0');
         const text = `${m}:${s}`;
-        if (homeTimerText)   homeTimerText.textContent   = text;
-        if (levelsTimerText) levelsTimerText.textContent = text;
-        if (gameTimerText)   gameTimerText.textContent   = text;
+        if (homeTimerText)     homeTimerText.textContent     = text;
+        if (levelsTimerText)   levelsTimerText.textContent   = text;
+        if (routinesTimerText) routinesTimerText.textContent = text;
+        if (gameTimerText)     gameTimerText.textContent     = text;
 
-        const pills = [homeTimerPill, levelsTimerPill, gameTimerPill].filter(Boolean);
+        const pills = [homeTimerPill, levelsTimerPill, routinesTimerPill, gameTimerPill].filter(Boolean);
         pills.forEach(p => {
             p.classList.remove('warning', 'urgent');
             if (sessionTime <= 60)       p.classList.add('urgent');
@@ -470,7 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = Array.from(document.querySelectorAll('.dot'));
 
     function updateStarsUI() {
-        if (headerStars) headerStars.textContent = `⭐ ${tasklyStars}`;
+        if (headerStars)   headerStars.textContent   = `⭐ ${tasklyStars}`;
+        if (routinesStars) routinesStars.textContent = `⭐ ${tasklyStars}`;
 
         let nextThreshold = null;
         unlockedAvatares  = 0;
@@ -553,12 +569,17 @@ document.addEventListener('DOMContentLoaded', () => {
         screenHome.classList.add('active');
     });
 
+    btnBackRoutines.addEventListener('click', () => {
+        screenRoutines.classList.remove('active');
+        screenLevels.classList.add('active');
+        updateLevelLocksStatus();
+    });
+
     btnBackGame.addEventListener('click', () => {
         screenGame.classList.remove('active');
-        screenLevels.classList.add('active');
         clearKeyboardFocus();
         keyboardMode = false;
-        updateLevelLocksStatus();
+        showRoutinesScreen(currentLevel);
     });
 
     /* ══════════════════════════════
@@ -585,20 +606,78 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('click', () => {
             if (card.classList.contains('locked')) return;
             const lvl = parseInt(card.dataset.level);
-            startGame(lvl);
+            showRoutinesScreen(lvl);
         });
     });
 
     /* ══════════════════════════════
        INÍCIO DO JOGO
     ══════════════════════════════ */
-    function startGame(levelNumber) {
+    function startGame(levelNumber, routineIndex = 0) {
         currentLevel        = levelNumber;
         currentLevelData    = LEVELS_DATA[currentLevel];
-        currentRoutineIndex = 0;
+        currentRoutineIndex = routineIndex;
+        screenRoutines.classList.remove('active');
         screenLevels.classList.remove('active');
         screenGame.classList.add('active');
         loadRoutine();
+    }
+
+    function showRoutinesScreen(levelNumber) {
+        currentLevel     = levelNumber;
+        currentLevelData = LEVELS_DATA[currentLevel];
+
+        routinesLevelTitle.textContent = `Nível ${currentLevel}`;
+        routinesList.innerHTML = '';
+
+        const completed = completedRoutines[currentLevel] || [];
+
+        currentLevelData.forEach((routine, idx) => {
+            const isCompleted = completed.includes(idx);
+            const isAvailable = idx === 0 || completed.includes(idx - 1);
+
+            const card = document.createElement('div');
+            card.classList.add('level-card');
+            card.classList.add(isCompleted || isAvailable ? 'unlocked' : 'locked');
+            if (isCompleted) card.classList.add('routine-completed');
+
+            const icon = document.createElement('div');
+            icon.classList.add('level-icon');
+            icon.textContent = idx + 1;
+
+            const info = document.createElement('div');
+            info.classList.add('level-info');
+            const title = document.createElement('h3');
+            title.textContent = routine.title;
+            const detail = document.createElement('p');
+            detail.textContent = `${routine.steps.length} passos`;
+            info.appendChild(title);
+            info.appendChild(detail);
+
+            const statusEl = document.createElement('div');
+            statusEl.classList.add('level-status');
+            if (isCompleted) {
+                statusEl.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L20 7" stroke="#5aaa65" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            } else if (isAvailable) {
+                statusEl.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            } else {
+                statusEl.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/><path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+            }
+
+            card.appendChild(icon);
+            card.appendChild(info);
+            card.appendChild(statusEl);
+
+            if (isCompleted || isAvailable) {
+                card.addEventListener('click', () => startGame(currentLevel, idx));
+            }
+
+            routinesList.appendChild(card);
+        });
+
+        screenLevels.classList.remove('active');
+        screenGame.classList.remove('active');
+        screenRoutines.classList.add('active');
     }
 
     function loadRoutine() {
@@ -612,10 +691,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btnConfirmContainer.classList.add('hidden');
 
         clearKeyboardFocus();
-        keyboardMode     = false;
-        focusedCardIndex = 0;
-        focusedSlotIndex = 0;
-        flyInProgress    = false;
+        keyboardMode      = false;
+        focusedCardIndex  = 0;
+        focusedSlotIndex  = 0;
+        flyInProgress     = false;
+        consecutiveErrors = 0;
 
         updateCompanionAvatar();
 
@@ -949,6 +1029,8 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.position  = '';
             card.style.width     = '';
             card.style.height    = '';
+            card.style.left      = '';
+            card.style.top       = '';
 
             if (isDragging) {
                 if (currentSlotHover) {
@@ -956,12 +1038,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentSlotHover.appendChild(card);
                     currentSlotHover.dataset.slottedId = card.dataset.id;
                     card.classList.add('slotted');
-                    card.style.left = '';
                     checkWinCondition();
                     giveEncouragement();
                 } else {
                     returnCardToHome(card);
-                    card.style.left = ''; card.style.top = '';
                     checkWinCondition();
                 }
             } else {
@@ -1007,6 +1087,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isCorrect = slots.every(s => String(s.dataset.slottedId) === String(s.dataset.stepIndex));
 
         if (isCorrect) {
+            consecutiveErrors = 0;
             btnConfirmContainer.classList.add('hidden');
             clearKeyboardFocus(); keyboardMode = false;
             playSuccessSound();
@@ -1042,8 +1123,14 @@ document.addEventListener('DOMContentLoaded', () => {
             btnConfirmContainer.classList.add('hidden');
             playErrorSound();
 
+            consecutiveErrors++;
             slots.forEach(s => { if (s.firstElementChild) s.firstElementChild.classList.add('wobble'); });
-            showEncouragement(`Quase! Tenta novamente${userName ? ', ' + userName : ''}! 💪`);
+            if (consecutiveErrors >= 3) {
+                showEncouragement('Experimenta o botão da lâmpada 💡 para te ajudar!');
+                consecutiveErrors = 0;
+            } else {
+                showEncouragement(`Quase! Tenta novamente${userName ? ', ' + userName : ''}! 💪`);
+            }
 
             setTimeout(() => {
                 const cardsContainer = document.getElementById('cards-container');
@@ -1092,30 +1179,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function nextRoutine() {
         hideModal();
-        currentRoutineIndex++;
 
-        if (currentRoutineIndex < currentLevelData.length) {
-            loadRoutine();
+        // Guardar rotina como concluída
+        if (!completedRoutines[currentLevel]) completedRoutines[currentLevel] = [];
+        if (!completedRoutines[currentLevel].includes(currentRoutineIndex)) {
+            completedRoutines[currentLevel].push(currentRoutineIndex);
+            localStorage.setItem('taskly_completed', JSON.stringify(completedRoutines));
+        }
+
+        const isLastRoutine  = currentRoutineIndex >= currentLevelData.length - 1;
+        const completedLvl   = currentLevel;
+
+        if (!isLastRoutine) {
+            startGame(completedLvl, currentRoutineIndex + 1);
         } else {
             if (!unlockedLevels.includes(currentLevel + 1)) {
                 unlockedLevels.push(currentLevel + 1);
             }
+            updateLevelLocksStatus();
             const hasNextLevel = !!LEVELS_DATA[currentLevel + 1];
 
             if (hasNextLevel) {
-                showModal('Nível Completo! 🏅', 'Queres tentar o próximo nível?', [
-                    { text: 'Repetir Nível', class: 'secondary-btn', action: () => { hideModal(); currentRoutineIndex = 0; loadRoutine(); } },
-                    { text: 'Avançar',       class: 'primary-btn',   action: () => { hideModal(); startGame(currentLevel + 1); } }
+                showModal('Nível Completo! 🏅', 'Concluíste todas as rotinas deste nível!', [
+                    { text: 'Ficar neste Nível', class: 'secondary-btn', action: () => {
+                        hideModal();
+                        screenGame.classList.remove('active');
+                        showRoutinesScreen(completedLvl);
+                    }},
+                    { text: 'Próximo Nível', class: 'primary-btn', action: () => {
+                        hideModal();
+                        screenGame.classList.remove('active');
+                        showRoutinesScreen(completedLvl + 1);
+                    }}
                 ]);
             } else {
                 showModal('Fantástico! 🌈', 'Completaste todas as tarefas disponíveis!', [
-                    { text: 'Voltar aos Níveis', class: 'secondary-btn', action: () => {
+                    { text: 'Ver Rotinas', class: 'primary-btn', action: () => {
                         hideModal();
                         screenGame.classList.remove('active');
-                        screenLevels.classList.add('active');
-                        updateLevelLocksStatus();
-                    }},
-                    { text: 'Repetir Nível', class: 'primary-btn', action: () => { hideModal(); currentRoutineIndex = 0; loadRoutine(); } }
+                        showRoutinesScreen(completedLvl);
+                    }}
                 ]);
             }
         }
@@ -1126,7 +1229,7 @@ document.addEventListener('DOMContentLoaded', () => {
        Sons carregados da pasta sounds/ — Web Audio API apenas como fallback do sucesso
     ══════════════════════════════ */
     function playSuccessSound() {
-        if (!soundEnabled) return;
+        if (!soundEnabled || lowStimMode) return;
         try {
             const a = new Audio('sounds/Rotine__Completed.wav');
             a.volume = soundVolume;
@@ -1151,7 +1254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function playErrorSound() {
-        if (!soundEnabled) return;
+        if (!soundEnabled || lowStimMode) return;
         try {
             const a = new Audio('sounds/Rotine_Incomplete.wav');
             a.volume = soundVolume;
