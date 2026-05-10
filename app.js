@@ -1,7 +1,3 @@
-/* ══════════════════════════════════════════
-   TASKLY – app.js  (versão híbrida + acessibilidade ASD)
-   ══════════════════════════════════════════ */
-
 const LEVELS_DATA = {
     1: [
         { title: "Lavar as mãos", steps: [
@@ -32,159 +28,90 @@ const LEVELS_DATA = {
     ],
     2: [
         { title: "Escovar os dentes", steps: [
-            { text: "Pegar na escova",         img: },  
-            { text: "Colocar pasta de dentes", img: },
-            { text: "Escovar os dentes",       img: },
-            { text: "Limpar a boca",           img: }
-        ] },
+            { text: "Pegar na escova" }, { text: "Colocar pasta de dentes" },
+            { text: "Escovar os dentes" }, { text: "Limpar a boca" }
+        ]},
         { title: "Preparar a mochila", steps: [
-            { text: "Abrir a mochila",             img: },
-            { text: "Meter os cadernos e manuais", img: },
-            { text: "Meter o estojo",              img: }, 
-            { text: "Fechar a mochila",            img: }
+            { text: "Abrir a mochila" }, { text: "Meter os cadernos e manuais" },
+            { text: "Meter o estojo" }, { text: "Fechar a mochila" }
         ]},
         { title: "Lavar a cara", steps: [
-            { text: "Abrir a torneira", img: },
-            { text: "Molhar a cara",    img: },
-            { text: "Ensaboar a cara",  img: },
-            { text: "Lavar e secar",    img: }
+            { text: "Abrir a torneira" }, { text: "Molhar a cara" },
+            { text: "Ensaboar a cara" }, { text: "Lavar e secar" }
         ]},
         { title: "Ir para a cama", steps: [
-            { text: "Vestir o pijama",   img: },
-            { text: "Escovar os dentes", img: },
-            { text: "Deitar",            img: },
-            { text: "Apagar a luz",      img: }
+            { text: "Vestir o pijama" }, { text: "Escovar os dentes" },
+            { text: "Deitar" }, { text: "Apagar a luz" }
         ]},
         { title: "Pôr a mesa", steps: [
-            { text: "Pegar nos pratos",  img: },
-            { text: "Colocar os pratos", img: },
-            { text: "Pôr os talheres",   img: },
-            { text: "Pôr os copos",      img: }
+            { text: "Pegar nos pratos" }, { text: "Colocar os pratos" },
+            { text: "Pôr os talheres" }, { text: "Pôr os copos" }
         ]}
     ],
     3: [
         { title: "Lavar o cabelo", steps: [
-            { text: "Molhar o cabelo",          img: },
-            { text: "Deitar champô na mão",     img: },
-            { text: "Esfregar o cabelo",        img: },
-            { text: "Tirar o champô do cabelo", img: },
-            { text: "Secar com a toalha",       img: }
+            { text: "Molhar o cabelo" }, { text: "Deitar champô na mão" },
+            { text: "Esfregar o cabelo" }, { text: "Tirar o champô do cabelo" }, { text: "Secar com a toalha" }
         ]},
         { title: "Tomar duche", steps: [
-            { text: "Abrir o chuveiro",       img: },
-            { text: "Molhar o corpo",         img: },
-            { text: "Ensaboar o corpo",       img: },
-            { text: "Tirar o sabão do corpo", img: },
-            { text: "Fechar o chuveiro",      img: }
+            { text: "Abrir o chuveiro" }, { text: "Molhar o corpo" },
+            { text: "Ensaboar o corpo" }, { text: "Tirar o sabão do corpo" }, { text: "Fechar o chuveiro" }
         ]},
         { title: "Lavar uma maçã", steps: [
-            { text: "Pegar na maçã",        img: },
-            { text: "Abrir a torneira",     img: },
-            { text: "Lavar a maçã na água", img: },
-            { text: "Fechar a torneira",    img: },
-            { text: "Secar a maçã e comer", img: }
+            { text: "Pegar na maçã" }, { text: "Abrir a torneira" },
+            { text: "Lavar a maçã na água" }, { text: "Fechar a torneira" }, { text: "Secar a maçã e comer" }
         ]},
         { title: "Aquecer o leite no micro-ondas", steps: [
-            { text: "Abrir o micro-ondas",          img: },
-            { text: "Pôr a caneca dentro",          img: },
-            { text: "Fechar o micro-ondas",         img: },
-            { text: "Carregar no botão para ligar", img: },
-            { text: "Tirar a caneca quando apitar", img: }
+            { text: "Abrir o micro-ondas" }, { text: "Pôr a caneca dentro" },
+            { text: "Fechar o micro-ondas" }, { text: "Carregar no botão para ligar" }, { text: "Tirar a caneca quando apitar" }
         ]},
         { title: "Afiar um lápis", steps: [
-            { text: "Pegar no lápis e no afia",         img: },
-            { text: "Meter o lápis no buraco do afia",  img: },
-            { text: "Rodar o lápis com a mão",          img: },
-            { text: "Tirar o lápis do afia",            img: },
-            { text: "Deitar o lixo do afia no caixote", img: }
+            { text: "Pegar no lápis e no afia" }, { text: "Meter o lápis no buraco do afia" },
+            { text: "Rodar o lápis com a mão" }, { text: "Tirar o lápis do afia" }, { text: "Deitar o lixo do afia no caixote" }
         ]}
     ],
     4: [
         { title: "Preparar o lanche", steps: [
-            { text: "Pegar no pão",        img: },
-            { text: "Barrar com manteiga", img: },
-            { text: "Meter o fiambre",     img: },
-            { text: "Fechar o pão",        img: },
-            { text: "Colocar no saco",     img: },
-            { text: "Meter na mochila",    img: }
+            { text: "Pegar no pão" }, { text: "Barrar com manteiga" }, { text: "Meter o fiambre" },
+            { text: "Fechar o pão" }, { text: "Colocar no saco" }, { text: "Meter na mochila" }
         ]},
         { title: "Rotina da manhã", steps: [
-            { text: "Acordar",                img: },
-            { text: "Ir à casa de banho",     img: },
-            { text: "Lavar a cara",           img: },
-            { text: "Escovar os dentes",      img: },
-            { text: "Vestir-se",              img: },
-            { text: "Tomar o pequeno-almoço", img: }
+            { text: "Acordar" }, { text: "Ir à casa de banho" }, { text: "Lavar a cara" },
+            { text: "Escovar os dentes" }, { text: "Vestir-se" }, { text: "Tomar o pequeno-almoço" }
         ]},
         { title: "Ir à casa de banho", steps: [
-            { text: "Baixar as calças e cuecas",    img: },
-            { text: "Sentar na sanita",             img: },
-            { text: "Fazer chichi ou cocó",         img: },
-            { text: "Limpar com o papel higiénico", img: },
-            { text: "Puxar o autoclismo",           img: },
-            { text: "Vestir as cuecas e as calças", img: }
+            { text: "Baixar as calças e cuecas" }, { text: "Sentar na sanita" }, { text: "Fazer chichi ou cocó" },
+            { text: "Limpar com o papel higiénico" }, { text: "Puxar o autoclismo" }, { text: "Vestir as cuecas e as calças" }
         ]},
         { title: "Beber sumo de pacote", steps: [
-            { text: "Pegar no pacote",              img: },
-            { text: "Tirar a palhinha",             img: },
-            { text: "Tirar o plástico da palhinha", img: },
-            { text: "Espetar a palhinha no buraco", img: },
-            { text: "Pôr na boca",                  img: },
-            { text: "Beber",                        img: }
+            { text: "Pegar no pacote" }, { text: "Tirar a palhinha" }, { text: "Tirar o plástico da palhinha" },
+            { text: "Espetar a palhinha no buraco" }, { text: "Pôr na boca" }, { text: "Beber" }
         ]},
         { title: "Comer um iogurte", steps: [
-            { text: "Pegar no iogurte",          img: },      
-            { text:"Tirar a tampa",              img: },
-            { text: "Pegar na colher",           img: },
-            { text: "Meter a colher no iogurte", img: },
-            { text: "Pôr na boca",               img: },
-            { text: "Comer",                     img: }
+            { text: "Pegar no iogurte" }, { text: "Tirar a tampa" }, { text: "Pegar na colher" },
+            { text: "Meter a colher no iogurte" }, { text: "Pôr na boca" }, { text: "Comer" }
         ]}
     ],
     5: [
         { title: "Jogar no tablet", steps: [
-            { text: "Pegar no tablet",         img: },
-            { text: "Ligar o ecrã",            img: },
-            { text: "Carregar no jogo",        img: },
-            { text: "Jogar o jogo",            img: },
-            { text: "Fechar o jogo",           img: },
-            { text: "Desligar o ecrã",         img: },
-            { text: "Pousar o tablet na mesa", img: }
+            { text: "Pegar no tablet" }, { text: "Ligar o ecrã" }, { text: "Carregar no jogo" },
+            { text: "Jogar o jogo" }, { text: "Fechar o jogo" }, { text: "Desligar o ecrã" }, { text: "Pousar o tablet na mesa" }
         ]},
         { title: "Rotina do almoço escolar", steps: [
-            { text: "Lavar as mãos","Pegar no tabuleiro", img: },
-            { text: "Escolher a refeição",                img: },
-            { text: "Sentar à mesa",                      img: },
-            { text: "Comer a sopa",                       img: },
-            { text: "Comer o prato principal",            img: },
-            { text: "Beber água",                         img: }
+            { text: "Lavar as mãos" }, { text: "Pegar no tabuleiro" }, { text: "Escolher a refeição" },
+            { text: "Sentar à mesa" }, { text: "Comer a sopa" }, { text: "Comer o prato principal" }, { text: "Beber água" }
         ]},
         { title: "Dia de escola completo", steps: [
-            { text: "Acordar",                    img: },          
-            { text: "Tomar banho",                img: },
-            { text: "Tomar o pequeno-almoço",     img: },
-            { text: "Preparar a mochila",         img: },
-            { text: "Ir para a escola",           img: },
-            { text: "Chegar a casa",              img: },
-            { text: "Fazer os trabalhos de casa", img: }
+            { text: "Acordar" }, { text: "Tomar banho" }, { text: "Tomar o pequeno-almoço" },
+            { text: "Preparar a mochila" }, { text: "Ir para a escola" }, { text: "Chegar a casa" }, { text: "Fazer os trabalhos de casa" }
         ]},
         { title: "Preparar para sair à rua no frio", steps: [
-            { text: "Pegar no casaco",       img: },
-            { text:"Vestir o casaco",        img: },
-            { text: "Fechar o fecho",        img: },
-            { text: "Pôr o gorro na cabeça", img: },
-            { text: "Abrir a porta da rua",  img: },
-            { text: "Sair de casa",          img: },
-            { text: "Fechar a porta",        img: }
+            { text: "Pegar no casaco" }, { text: "Vestir o casaco" }, { text: "Fechar o fecho" },
+            { text: "Pôr o gorro na cabeça" }, { text: "Abrir a porta da rua" }, { text: "Sair de casa" }, { text: "Fechar a porta" }
         ]},
         { title: "Rotina completa da noite", steps: [
-            { text: "Jantar",                       img: },
-            { text: "Lavar as mãos",                img: },
-            { text: "Tomar banho",                  img: },
-            { text: "Vestir o pijama",              img: },
-            { text: "Escovar os dentes",            img: },
-            { text: "Preparar a roupa para amanhã", img: },
-            { text: "Deitar",                       img: }
+            { text: "Jantar" }, { text: "Lavar as mãos" }, { text: "Tomar banho" },
+            { text: "Vestir o pijama" }, { text: "Escovar os dentes" }, { text: "Preparar a roupa para amanhã" }, { text: "Deitar" }
         ]}
     ]
 };
@@ -200,12 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLevel        = 1;
     let currentRoutineIndex = 0;
     let currentLevelData    = [];
-    let tasklyStars         = parseInt(localStorage.getItem('taskly_stars')) || 0;
-    let unlockedAvatares    = 1;
-    let soundEnabled        = localStorage.getItem('taskly_sound') !== 'false';
-    let soundVolume         = parseFloat(localStorage.getItem('taskly_volume') ?? '0.8');
-    let lowStimMode         = localStorage.getItem('taskly_lowstim') === 'true';
-    let userName            = localStorage.getItem('taskly_name') || '';
+
+    let tasklyStars      = parseInt(localStorage.getItem('taskly_stars')) || 0;
+    let unlockedAvatares = 1;
+    let soundEnabled     = localStorage.getItem('taskly_sound') !== 'false';
+    let soundVolume      = parseFloat(localStorage.getItem('taskly_volume') ?? '0.8');
+    let lowStimMode      = localStorage.getItem('taskly_lowstim') === 'true';
+    let userName         = localStorage.getItem('taskly_name') || '';
+
     const AVATAR_THRESHOLDS = [0, 15, 30, 50, 75, 100, 125, 150];
 
     // Teclado
@@ -213,6 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let focusedCardIndex = 0;
     let focusedSlotIndex = 0;
     let flyInProgress    = false;
+
+    // Erros consecutivos
+    let consecutiveErrors = 0;
+
+    // Rotinas concluídas por nível: { "1": [0, 2], "2": [0], ... }
+    let completedRoutines = JSON.parse(localStorage.getItem('taskly_completed') || '{}');
+
+    // Timer de sessão
+    let sessionTime     = 900; // 15 minutos em segundos
+    let sessionInterval = null;
+    let sessionExtended = false;
 
     /* ══════════════════════════════
        REFERÊNCIAS DOM
@@ -259,10 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCloseSettings    = document.getElementById('btn-close-settings');
     const btnCloseSettingsBot = document.getElementById('btn-close-settings-bottom');
 
-    // Corrigido: classe correta é .size-pill-btn (não .size-btn)
-    const sizePillBtns  = document.querySelectorAll('.size-pill-btn');
+    const sizePillBtns = document.querySelectorAll('.size-pill-btn');
 
-    // Corrigido: IDs corretos do HTML
     const soundToggleBtn = document.getElementById('sound-toggle');
     const volumeSlider   = document.getElementById('volume-slider');
     const volumeLabel    = document.getElementById('volume-label');
@@ -280,6 +218,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const speechText      = document.getElementById('companion-speech-text');
 
     const btnHint = document.getElementById('btn-hint');
+
+    const screenRoutines     = document.getElementById('screen-routines');
+    const routinesLevelTitle = document.getElementById('routines-level-title');
+    const routinesList       = document.getElementById('routines-list');
+    const btnBackRoutines    = document.getElementById('btn-back-routines');
+    const routinesTimerPill  = document.getElementById('routines-timer-pill');
+    const routinesTimerText  = document.getElementById('routines-timer-text');
+    const routinesStars      = document.getElementById('routines-stars-total');
+
+    const homeTimerPill   = document.getElementById('home-timer-pill');
+    const levelsTimerPill = document.getElementById('levels-timer-pill');
+    const gameTimerPill   = document.getElementById('game-timer-pill');
+    const homeTimerText   = document.getElementById('home-timer-text');
+    const levelsTimerText = document.getElementById('levels-timer-text');
+    const gameTimerText   = document.getElementById('game-timer-text');
+
+    const timerWarningToast = document.getElementById('timer-warning-toast');
+    const timerWarningText  = document.getElementById('timer-warning-text');
+    const timeUpOverlay     = document.getElementById('time-up-overlay');
+    const btnTimeContinue   = document.getElementById('btn-time-continue');
+    const btnTimeStop       = document.getElementById('btn-time-stop');
 
     /* ══════════════════════════════
        ECRÃ DE BOAS-VINDAS
@@ -340,6 +299,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateGreeting();
             }
             profileNameInput.classList.add('hidden');
+        });
+    }
+
+    /* ══════════════════════════════
+       TIMER DE SESSÃO
+    ══════════════════════════════ */
+    function startSessionTimer() {
+        if (sessionInterval) return;
+        updateTimerDisplay();
+        sessionInterval = setInterval(() => {
+            sessionTime--;
+            updateTimerDisplay();
+            if (sessionTime === 300 && !sessionExtended) showTimerWarning('⏱ Faltam 5 minutos!', false);
+            if (sessionTime === 60)                       showTimerWarning('⏱ Falta 1 minuto!', true);
+            if (sessionTime <= 0)                         showTimeUp();
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const m    = Math.floor(Math.max(sessionTime, 0) / 60).toString().padStart(2, '0');
+        const s    = (Math.max(sessionTime, 0) % 60).toString().padStart(2, '0');
+        const text = `${m}:${s}`;
+        if (homeTimerText)     homeTimerText.textContent     = text;
+        if (levelsTimerText)   levelsTimerText.textContent   = text;
+        if (routinesTimerText) routinesTimerText.textContent = text;
+        if (gameTimerText)     gameTimerText.textContent     = text;
+
+        const pills = [homeTimerPill, levelsTimerPill, routinesTimerPill, gameTimerPill].filter(Boolean);
+        pills.forEach(p => {
+            p.classList.remove('warning', 'urgent');
+            if (sessionTime <= 60)       p.classList.add('urgent');
+            else if (sessionTime <= 300) p.classList.add('warning');
+        });
+    }
+
+    let _warningTimer = null;
+    function showTimerWarning(msg, isUrgent) {
+        if (!timerWarningToast) return;
+        timerWarningText.textContent = msg;
+        timerWarningToast.classList.remove('hidden', 'urgent');
+        if (isUrgent) timerWarningToast.classList.add('urgent');
+        clearTimeout(_warningTimer);
+        _warningTimer = setTimeout(() => timerWarningToast.classList.add('hidden'), 4000);
+    }
+
+    function showTimeUp() {
+        clearInterval(sessionInterval);
+        sessionInterval = null;
+        if (timeUpOverlay) timeUpOverlay.classList.remove('hidden');
+    }
+
+    if (btnTimeContinue) {
+        btnTimeContinue.addEventListener('click', () => {
+            sessionTime     = 300; // +5 minutos
+            sessionExtended = true;
+            timeUpOverlay.classList.add('hidden');
+            updateTimerDisplay();
+            sessionInterval = setInterval(() => {
+                sessionTime--;
+                updateTimerDisplay();
+                if (sessionTime === 60) showTimerWarning('⏱ Falta 1 minuto!', true);
+                if (sessionTime <= 0)   showTimeUp();
+            }, 1000);
+        });
+    }
+
+    if (btnTimeStop) {
+        btnTimeStop.addEventListener('click', () => {
+            timeUpOverlay.classList.add('hidden');
+            // Volta ao ecrã inicial
+            screenGame.classList.remove('active');
+            screenLevels.classList.remove('active');
+            screenHome.classList.add('active');
         });
     }
 
@@ -437,32 +469,54 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ══════════════════════════════
        CARROSSEL DE AVATARES
     ══════════════════════════════ */
+    btnPlay.disabled = false;
+
     slides.forEach((slide, index) => {
         const dot = document.createElement('span');
         dot.classList.add('dot');
         if (index === 0) dot.classList.add('active');
         dot.dataset.index = index;
-        dot.addEventListener('click', () => { currentSlide = index; updateCarousel(); });
+        dot.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+        });
         dotsContainer.appendChild(dot);
     });
     const dots = Array.from(document.querySelectorAll('.dot'));
 
     function updateStarsUI() {
-        if (headerStars) headerStars.textContent = `⭐ ${tasklyStars}`;
+        if (headerStars)   headerStars.textContent   = `⭐ ${tasklyStars}`;
+        if (routinesStars) routinesStars.textContent = `⭐ ${tasklyStars}`;
+
         let nextThreshold = null;
-        unlockedAvatares = 0;
+        unlockedAvatares  = 0;
+
         for (let i = 0; i < AVATAR_THRESHOLDS.length; i++) {
-            if (tasklyStars >= AVATAR_THRESHOLDS[i]) { unlockedAvatares = i + 1; }
-            else if (nextThreshold === null)           { nextThreshold = AVATAR_THRESHOLDS[i]; }
+            if (tasklyStars >= AVATAR_THRESHOLDS[i]) {
+                unlockedAvatares = i + 1;
+            } else if (nextThreshold === null) {
+                nextThreshold = AVATAR_THRESHOLDS[i];
+            }
         }
+
         if (unlockedAvatares > 8) unlockedAvatares = 8;
-        slides.forEach((s, i) => s.classList.toggle('locked', i >= unlockedAvatares));
+
+        slides.forEach((slide, index) => {
+            if (index < unlockedAvatares) {
+                slide.classList.remove('locked');
+            } else {
+                slide.classList.add('locked');
+            }
+        });
+
         if (progressContainer) {
             progressContainer.style.display = 'flex';
             if (nextThreshold !== null) {
-                const prev = AVATAR_THRESHOLDS[unlockedAvatares - 1];
-                const pct  = Math.min(100, ((tasklyStars - prev) / (nextThreshold - prev)) * 100) || 0;
-                progressFill.style.width = `${pct}%`;
+                const prevThreshold       = AVATAR_THRESHOLDS[unlockedAvatares - 1];
+                const gainedInCurrentLevel = tasklyStars - prevThreshold;
+                const neededForNext        = nextThreshold - prevThreshold;
+                const percentage = Math.min(100, (gainedInCurrentLevel / neededForNext) * 100) || 0;
+                progressFill.style.width = `${percentage}%`;
                 progressText.textContent = `${tasklyStars}/${nextThreshold} ⭐ para novo companheiro`;
             } else {
                 progressFill.style.width = '100%';
@@ -475,70 +529,155 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCarousel() {
         track.style.transform = `translateX(-${currentSlide * 100}%)`;
         selectedAvatar = slides[currentSlide].dataset.avatar;
-        dots.forEach(d => d.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
         dots[currentSlide].classList.add('active');
-        const locked = slides[currentSlide].classList.contains('locked');
-        btnPlay.disabled = locked;
-        btnPlay.style.opacity = locked ? '0.5' : '1';
-        btnPlay.textContent   = locked ? `Precisa de ${AVATAR_THRESHOLDS[currentSlide]} ⭐` : 'Jogar ▶';
-        if (!locked) {
+
+        const isLocked = slides[currentSlide].classList.contains('locked');
+        btnPlay.disabled     = isLocked;
+        btnPlay.style.opacity = isLocked ? '0.5' : '1';
+        btnPlay.textContent   = isLocked ? `Precisa de ${AVATAR_THRESHOLDS[currentSlide]} ⭐` : 'Jogar ▶';
+
+        if (!isLocked) {
             btnPlay.style.transform = 'scale(1.05)';
             setTimeout(() => { btnPlay.style.transform = 'scale(1)'; }, 150);
         }
     }
 
-    btnNext.addEventListener('click', () => { currentSlide = (currentSlide + 1) % slides.length; updateCarousel(); });
-    btnPrev.addEventListener('click', () => { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateCarousel(); });
+    btnNext.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    });
+    btnPrev.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+    });
 
     /* ══════════════════════════════
        NAVEGAÇÃO PRINCIPAL
     ══════════════════════════════ */
-    btnPlay.disabled = false;
-
     btnPlay.addEventListener('click', () => {
         if (!selectedAvatar) return;
-        setTimeout(() => { screenHome.classList.remove('active'); screenLevels.classList.add('active'); }, 150);
+        startSessionTimer();
+        setTimeout(() => {
+            screenHome.classList.remove('active');
+            screenLevels.classList.add('active');
+        }, 150);
     });
-    btnBackLevels.addEventListener('click', () => { screenLevels.classList.remove('active'); screenHome.classList.add('active'); });
+
+    btnBackLevels.addEventListener('click', () => {
+        screenLevels.classList.remove('active');
+        screenHome.classList.add('active');
+    });
+
+    btnBackRoutines.addEventListener('click', () => {
+        screenRoutines.classList.remove('active');
+        screenLevels.classList.add('active');
+        updateLevelLocksStatus();
+    });
+
     btnBackGame.addEventListener('click', () => {
         screenGame.classList.remove('active');
-        screenLevels.classList.add('active');
         clearKeyboardFocus();
         keyboardMode = false;
-        updateLevelLocksStatus();
+        showRoutinesScreen(currentLevel);
     });
 
     /* ══════════════════════════════
        NÍVEIS
     ══════════════════════════════ */
     function updateLevelLocksStatus() {
-        document.querySelectorAll('.level-card').forEach(card => {
+        const cards = document.querySelectorAll('.level-card');
+        cards.forEach(card => {
             const lvl = parseInt(card.dataset.level);
             if (unlockedLevels.includes(lvl)) {
-                card.classList.remove('locked'); card.classList.add('unlocked');
-                card.querySelector('.level-status').innerHTML =
-                    `<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L20 7" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+                card.classList.remove('locked');
+                card.classList.add('unlocked');
+                const status = card.querySelector('.level-status');
+                status.innerHTML = `
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12L10 17L20 7" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>`;
             }
         });
     }
 
-    document.querySelectorAll('.level-card').forEach(card => {
+    const levelCards = document.querySelectorAll('.level-card');
+    levelCards.forEach(card => {
         card.addEventListener('click', () => {
             if (card.classList.contains('locked')) return;
-            startGame(parseInt(card.dataset.level));
+            const lvl = parseInt(card.dataset.level);
+            showRoutinesScreen(lvl);
         });
     });
 
     /* ══════════════════════════════
        INÍCIO DO JOGO
     ══════════════════════════════ */
-    function startGame(levelNumber) {
-        currentLevel = levelNumber;
-        currentLevelData = LEVELS_DATA[currentLevel];
-        currentRoutineIndex = 0;
+    function startGame(levelNumber, routineIndex = 0) {
+        currentLevel        = levelNumber;
+        currentLevelData    = LEVELS_DATA[currentLevel];
+        currentRoutineIndex = routineIndex;
+        screenRoutines.classList.remove('active');
         screenLevels.classList.remove('active');
         screenGame.classList.add('active');
         loadRoutine();
+    }
+
+    function showRoutinesScreen(levelNumber) {
+        currentLevel     = levelNumber;
+        currentLevelData = LEVELS_DATA[currentLevel];
+
+        routinesLevelTitle.textContent = `Nível ${currentLevel}`;
+        routinesList.innerHTML = '';
+
+        const completed = completedRoutines[currentLevel] || [];
+
+        currentLevelData.forEach((routine, idx) => {
+            const isCompleted = completed.includes(idx);
+            const isAvailable = idx === 0 || completed.includes(idx - 1);
+
+            const card = document.createElement('div');
+            card.classList.add('level-card');
+            card.classList.add(isCompleted || isAvailable ? 'unlocked' : 'locked');
+            if (isCompleted) card.classList.add('routine-completed');
+
+            const icon = document.createElement('div');
+            icon.classList.add('level-icon');
+            icon.textContent = idx + 1;
+
+            const info = document.createElement('div');
+            info.classList.add('level-info');
+            const title = document.createElement('h3');
+            title.textContent = routine.title;
+            const detail = document.createElement('p');
+            detail.textContent = `${routine.steps.length} passos`;
+            info.appendChild(title);
+            info.appendChild(detail);
+
+            const statusEl = document.createElement('div');
+            statusEl.classList.add('level-status');
+            if (isCompleted) {
+                statusEl.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12L10 17L20 7" stroke="#5aaa65" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            } else if (isAvailable) {
+                statusEl.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            } else {
+                statusEl.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="#a1a1aa" stroke-width="2.5"/><path d="M17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11" stroke="#a1a1aa" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+            }
+
+            card.appendChild(icon);
+            card.appendChild(info);
+            card.appendChild(statusEl);
+
+            if (isCompleted || isAvailable) {
+                card.addEventListener('click', () => startGame(currentLevel, idx));
+            }
+
+            routinesList.appendChild(card);
+        });
+
+        screenLevels.classList.remove('active');
+        screenGame.classList.remove('active');
+        screenRoutines.classList.add('active');
     }
 
     function loadRoutine() {
@@ -552,10 +691,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btnConfirmContainer.classList.add('hidden');
 
         clearKeyboardFocus();
-        keyboardMode     = false;
-        focusedCardIndex = 0;
-        focusedSlotIndex = 0;
-        flyInProgress    = false;
+        keyboardMode      = false;
+        focusedCardIndex  = 0;
+        focusedSlotIndex  = 0;
+        flyInProgress     = false;
+        consecutiveErrors = 0;
 
         updateCompanionAvatar();
 
@@ -581,7 +721,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img   = document.createElement('img');
                 img.src = step.img; img.alt = step.text; img.draggable = false;
                 const label = document.createElement('span');
-                label.className = 'drag-card-label'; label.textContent = step.text;
+                label.className   = 'drag-card-label';
+                label.textContent = step.text;
                 card.appendChild(img); card.appendChild(label);
             } else {
                 const label = document.createElement('span');
@@ -592,6 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cardsArr.push(card);
         });
 
+        // Randomizar
         cardsArr.sort(() => Math.random() - 0.5);
         cardsArr.forEach((card, idx) => {
             card.dataset.homeIndex = idx;
@@ -602,6 +744,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => showEncouragement(`Vamos lá${userName ? ', ' + userName : ''}! 🚀`), 600);
     }
 
+    /* ══════════════════════════════
+       COMPANHEIRO
+    ══════════════════════════════ */
     function updateCompanionAvatar() {
         const slide = slides.find(s => s.dataset.avatar === selectedAvatar);
         if (!slide) return;
@@ -610,9 +755,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (svgEl && modalCompanion)  modalCompanion.innerHTML  = svgEl.outerHTML;
     }
 
-    /* ══════════════════════════════
-       COMPANHEIRO: ENCORAJAMENTO
-    ══════════════════════════════ */
     const ENCOURAGEMENTS = [
         (n) => `Estás quase lá${n ? ', ' + n : ''}! 💪`,
         ()  => 'Excelente escolha! ⭐',
@@ -657,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
         if (cards.length === 0) return;
 
-        const hintCard = cards[0];
+        const hintCard  = cards[0];
         const targetIdx = parseInt(hintCard.dataset.id);
         const allSlots  = Array.from(document.querySelectorAll('.drag-slot'));
         const hintSlot  = allSlots.find(s => parseInt(s.dataset.stepIndex) === targetIdx && !s.firstElementChild);
@@ -702,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'ArrowDown': {
                 e.preventDefault();
                 if (!allSlots.length) return;
-                keyboardMode = true;
+                keyboardMode     = true;
                 focusedSlotIndex = (focusedSlotIndex + (e.key === 'ArrowDown' ? 1 : -1) + allSlots.length) % allSlots.length;
                 updateKeyboardFocus(playableCards, allSlots);
                 break;
@@ -710,8 +852,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'Enter': {
                 e.preventDefault();
                 if (!keyboardMode) {
-                    // Primeira vez: activa modo teclado
-                    keyboardMode = true;
+                    keyboardMode     = true;
                     focusedCardIndex = 0;
                     focusedSlotIndex = 0;
                     updateKeyboardFocus(playableCards, allSlots);
@@ -747,7 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ══════════════════════════════
-       ANIMAÇÃO "VÔO" DO CARTÃO
+       ANIMAÇÃO "VÔO" DO CARTÃO (teclado → slot)
     ══════════════════════════════ */
     function flyCardToSlot(card, slot) {
         if (flyInProgress) return;
@@ -758,7 +899,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const cardRect = card.getBoundingClientRect();
         const slotRect = slot.getBoundingClientRect();
 
-        // Ghost posicionado como fixed, por cima de tudo
         const ghost = card.cloneNode(true);
         ghost.classList.remove('element-focused', 'hint-target', 'slotted');
         ghost.style.cssText = [
@@ -804,11 +944,10 @@ document.addEventListener('DOMContentLoaded', () => {
             checkWinCondition();
             giveEncouragement();
 
-            // Actualiza foco para o próximo cartão/slot
             setTimeout(() => {
-                const cc   = document.getElementById('cards-container');
-                const rem  = Array.from(cc?.querySelectorAll('.drag-card') || []);
-                const slt  = Array.from(document.querySelectorAll('.drag-slot'));
+                const cc  = document.getElementById('cards-container');
+                const rem = Array.from(cc?.querySelectorAll('.drag-card') || []);
+                const slt = Array.from(document.querySelectorAll('.drag-slot'));
                 if (rem.length > 0) {
                     focusedCardIndex = Math.min(focusedCardIndex, rem.length - 1);
                     const ne = slt.findIndex((s, i) => i !== focusedSlotIndex && !s.firstElementChild);
@@ -822,7 +961,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ══════════════════════════════
-       DRAG & DROP (Pointer Events)
+       DRAG & DROP (Pointer Events para Mobile e PC)
     ══════════════════════════════ */
     let draggingElement  = null;
     let currentSlotHover = null;
@@ -860,9 +999,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isDragging) {
+                const x = e.clientX - parseFloat(card.dataset.offsetX);
+                const y = e.clientY - parseFloat(card.dataset.offsetY);
                 card.style.position = 'fixed';
-                card.style.left     = `${e.clientX - parseFloat(card.dataset.offsetX)}px`;
-                card.style.top      = `${e.clientY - parseFloat(card.dataset.offsetY)}px`;
+                card.style.left     = `${x}px`;
+                card.style.top      = `${y}px`;
                 card.style.zIndex   = '10000';
 
                 const elemBelow = document.elementFromPoint(e.clientX, e.clientY);
@@ -871,7 +1012,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (elemBelow) {
                     const slot = elemBelow.closest('.drag-slot');
-                    // Brilho suave apenas em slots VAZIOS
                     if (slot && !slot.firstElementChild) {
                         slot.classList.add('highlight');
                         currentSlotHover = slot;
@@ -885,8 +1025,12 @@ document.addEventListener('DOMContentLoaded', () => {
             draggingElement = null;
             card.releasePointerCapture(e.pointerId);
             card.classList.remove('dragging');
-            card.style.zIndex = ''; card.style.position = '';
-            card.style.width  = ''; card.style.height   = '';
+            card.style.zIndex    = '';
+            card.style.position  = '';
+            card.style.width     = '';
+            card.style.height    = '';
+            card.style.left      = '';
+            card.style.top       = '';
 
             if (isDragging) {
                 if (currentSlotHover) {
@@ -894,12 +1038,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentSlotHover.appendChild(card);
                     currentSlotHover.dataset.slottedId = card.dataset.id;
                     card.classList.add('slotted');
-                    card.style.left = '';
                     checkWinCondition();
                     giveEncouragement();
                 } else {
                     returnCardToHome(card);
-                    card.style.left = ''; card.style.top = '';
                     checkWinCondition();
                 }
             } else {
@@ -945,6 +1087,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isCorrect = slots.every(s => String(s.dataset.slottedId) === String(s.dataset.stepIndex));
 
         if (isCorrect) {
+            consecutiveErrors = 0;
             btnConfirmContainer.classList.add('hidden');
             clearKeyboardFocus(); keyboardMode = false;
             playSuccessSound();
@@ -958,16 +1101,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentUnlocked = unlockedAvatares;
 
             toastText.textContent = `+${starsAwarded} ⭐`;
-            starsToast.classList.remove('hidden'); starsToast.classList.add('show');
+            starsToast.classList.remove('hidden');
+            starsToast.classList.add('show');
 
             setTimeout(() => {
-                starsToast.classList.remove('show'); starsToast.classList.add('hidden');
+                starsToast.classList.remove('show');
+                starsToast.classList.add('hidden');
+
                 if (currentUnlocked > previousUnlocked) {
-                    showModal('Novo companheiro!', 'Desbloqueaste um novo avatar especial no ecrã inicial!',
-                        [{ text: 'Fantástico!', class: 'primary-btn', action: nextRoutine }]);
+                    showModal('Novo companheiro!', 'Desbloqueaste um novo avatar especial no ecrã inicial!', [
+                        { text: 'Fantástico!', class: 'primary-btn', action: nextRoutine }
+                    ]);
                 } else {
-                    showModal('Muito bem! 🌟', 'Completaste a rotina de forma perfeita.',
-                        [{ text: 'Continuar', class: 'primary-btn', action: nextRoutine }]);
+                    showModal('Muito bem! 🌟', 'Completaste a rotina de forma perfeita.', [
+                        { text: 'Continuar', class: 'primary-btn', action: nextRoutine }
+                    ]);
                 }
             }, 1800);
 
@@ -975,15 +1123,25 @@ document.addEventListener('DOMContentLoaded', () => {
             btnConfirmContainer.classList.add('hidden');
             playErrorSound();
 
+            consecutiveErrors++;
             slots.forEach(s => { if (s.firstElementChild) s.firstElementChild.classList.add('wobble'); });
-            showEncouragement(`Quase! Tenta novamente${userName ? ', ' + userName : ''}! 💪`);
+            if (consecutiveErrors >= 3) {
+                showEncouragement('Experimenta o botão da lâmpada 💡 para te ajudar!');
+                consecutiveErrors = 0;
+            } else {
+                showEncouragement(`Quase! Tenta novamente${userName ? ', ' + userName : ''}! 💪`);
+            }
 
             setTimeout(() => {
                 const cardsContainer = document.getElementById('cards-container');
                 let allCards = Array.from(cardsContainer.children);
                 slots.forEach(s => {
                     const card = s.firstElementChild;
-                    if (card) { card.classList.remove('wobble', 'slotted'); allCards.push(card); s.dataset.slottedId = ''; }
+                    if (card) {
+                        card.classList.remove('wobble', 'slotted');
+                        allCards.push(card);
+                        s.dataset.slottedId = '';
+                    }
                 });
                 allCards.sort(() => Math.random() - 0.5);
                 cardsContainer.innerHTML = '';
@@ -1021,21 +1179,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function nextRoutine() {
         hideModal();
-        currentRoutineIndex++;
-        if (currentRoutineIndex < currentLevelData.length) {
-            loadRoutine();
+
+        // Guardar rotina como concluída
+        if (!completedRoutines[currentLevel]) completedRoutines[currentLevel] = [];
+        if (!completedRoutines[currentLevel].includes(currentRoutineIndex)) {
+            completedRoutines[currentLevel].push(currentRoutineIndex);
+            localStorage.setItem('taskly_completed', JSON.stringify(completedRoutines));
+        }
+
+        const isLastRoutine  = currentRoutineIndex >= currentLevelData.length - 1;
+        const completedLvl   = currentLevel;
+
+        if (!isLastRoutine) {
+            startGame(completedLvl, currentRoutineIndex + 1);
         } else {
-            if (!unlockedLevels.includes(currentLevel + 1)) unlockedLevels.push(currentLevel + 1);
-            const hasNext = !!LEVELS_DATA[currentLevel + 1];
-            if (hasNext) {
-                showModal('Nível Completo! 🏅', 'Queres tentar o próximo nível?', [
-                    { text: 'Repetir Nível', class: 'secondary-btn', action: () => { hideModal(); currentRoutineIndex = 0; loadRoutine(); } },
-                    { text: 'Avançar',       class: 'primary-btn',   action: () => { hideModal(); startGame(currentLevel + 1); } }
+            if (!unlockedLevels.includes(currentLevel + 1)) {
+                unlockedLevels.push(currentLevel + 1);
+            }
+            updateLevelLocksStatus();
+            const hasNextLevel = !!LEVELS_DATA[currentLevel + 1];
+
+            if (hasNextLevel) {
+                showModal('Nível Completo! 🏅', 'Concluíste todas as rotinas deste nível!', [
+                    { text: 'Ficar neste Nível', class: 'secondary-btn', action: () => {
+                        hideModal();
+                        screenGame.classList.remove('active');
+                        showRoutinesScreen(completedLvl);
+                    }},
+                    { text: 'Próximo Nível', class: 'primary-btn', action: () => {
+                        hideModal();
+                        screenGame.classList.remove('active');
+                        showRoutinesScreen(completedLvl + 1);
+                    }}
                 ]);
             } else {
                 showModal('Fantástico! 🌈', 'Completaste todas as tarefas disponíveis!', [
-                    { text: 'Voltar aos Níveis', class: 'secondary-btn', action: () => { hideModal(); screenGame.classList.remove('active'); screenLevels.classList.add('active'); updateLevelLocksStatus(); } },
-                    { text: 'Repetir Nível',     class: 'primary-btn',   action: () => { hideModal(); currentRoutineIndex = 0; loadRoutine(); } }
+                    { text: 'Ver Rotinas', class: 'primary-btn', action: () => {
+                        hideModal();
+                        screenGame.classList.remove('active');
+                        showRoutinesScreen(completedLvl);
+                    }}
                 ]);
             }
         }
@@ -1043,10 +1226,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ══════════════════════════════
        ÁUDIO
-       Sons suaves e graves — nunca agudos/estridentes
+       Sons carregados da pasta sounds/ — Web Audio API apenas como fallback do sucesso
     ══════════════════════════════ */
     function playSuccessSound() {
-        if (!soundEnabled) return;
+        if (!soundEnabled || lowStimMode) return;
         try {
             const a = new Audio('sounds/Rotine__Completed.wav');
             a.volume = soundVolume;
@@ -1071,22 +1254,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function playErrorSound() {
-        if (!soundEnabled) return;
-        // Som grave suave: 200 Hz → 80 Hz, volume baixo
+        if (!soundEnabled || lowStimMode) return;
         try {
-            const ctx  = new (window.AudioContext || window.webkitAudioContext)();
-            const osc  = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(200, ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.35);
-            gain.gain.setValueAtTime(soundVolume * 0.3, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
-            osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.45);
-        } catch (_) {
-            try { const a = new Audio('sounds/Rotine_Incomplete.wav'); a.volume = soundVolume * 0.35; a.play().catch(() => {}); } catch (__) {}
-        }
+            const a = new Audio('sounds/Rotine_Incomplete.wav');
+            a.volume = soundVolume;
+            a.currentTime = 0;
+            a.play().catch(() => {});
+        } catch (_) {}
     }
 
     /* ══════════════════════════════
@@ -1099,13 +1273,16 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < 15; i++) {
             const star = document.createElement('div');
             star.className = 'floating-star';
-            star.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="#fbbf24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`;
+            star.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" /></svg>`;
             star.style.setProperty('--rx', `${(Math.random() - 0.5) * 300}px`);
             star.style.setProperty('--ry', `${(Math.random() - 0.5) * 300}px`);
             star.style.animationDelay = `${Math.random() * 0.2}s`;
             starsContainer.appendChild(star);
         }
-        setTimeout(() => { starsContainer.classList.add('hidden'); starsContainer.innerHTML = ''; }, 1500);
+        setTimeout(() => {
+            starsContainer.classList.add('hidden');
+            starsContainer.innerHTML = '';
+        }, 1500);
     }
 
-}); // fim DOMContentLoaded
+});
