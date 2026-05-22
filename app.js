@@ -116,6 +116,47 @@ const LEVELS_DATA = {
     ]
 };
 
+/* ════════════════════════════════════════════════
+   MAPEAMENTO DE TECLAS – Padrão e persistência
+   ════════════════════════════════════════════════ */
+const DEFAULT_KEYMAP = {
+    nav_left:  { label: 'Mover cartão à esquerda',  key: 'ArrowLeft',  display: '←' },
+    nav_right: { label: 'Mover cartão à direita',   key: 'ArrowRight', display: '→' },
+    nav_up:    { label: 'Mover slot acima',          key: 'ArrowUp',    display: '↑' },
+    nav_down:  { label: 'Mover slot abaixo',         key: 'ArrowDown',  display: '↓' },
+    confirm:   { label: 'Colocar / Confirmar',       key: 'Enter',      display: 'Enter' },
+    close:     { label: 'Fechar / Cancelar',         key: 'Escape',     display: 'Esc' },
+    hint:      { label: 'Mostrar dica',              key: 'h',          display: 'H' },
+};
+
+function loadKeymap() {
+    try {
+        const saved = localStorage.getItem('taskly_keymap');
+        if (!saved) return JSON.parse(JSON.stringify(DEFAULT_KEYMAP));
+        const parsed = JSON.parse(saved);
+        const merged = JSON.parse(JSON.stringify(DEFAULT_KEYMAP));
+        for (const action in merged) {
+            if (parsed[action]) {
+                merged[action].key     = parsed[action].key;
+                merged[action].display = parsed[action].display;
+            }
+        }
+        return merged;
+    } catch (_) { return JSON.parse(JSON.stringify(DEFAULT_KEYMAP)); }
+}
+
+function saveKeymap(km) {
+    localStorage.setItem('taskly_keymap', JSON.stringify(km));
+}
+
+function keyDisplay(key) {
+    const map = {
+        'ArrowLeft': '←', 'ArrowRight': '→', 'ArrowUp': '↑', 'ArrowDown': '↓',
+        'Enter': 'Enter', 'Escape': 'Esc', 'Backspace': '⌫', 'Tab': 'Tab', ' ': 'Space',
+    };
+    return map[key] || key.toUpperCase();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ══════════════════════════════
@@ -135,13 +176,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let lowStimMode      = localStorage.getItem('taskly_lowstim') === 'true';
     let userName         = localStorage.getItem('taskly_name') || '';
 
+    let keymap = loadKeymap();
+
     const AVATAR_THRESHOLDS = [0, 15, 30, 50, 75, 100, 125, 150];
 
-    // Teclado
+    // Teclado — jogo
     let keyboardMode     = false;
     let focusedCardIndex = 0;
     let focusedSlotIndex = 0;
     let flyInProgress    = false;
+
+    // Teclado — níveis e rotinas
+    let focusedLevelIndex   = 0;
+    let focusedRoutineIndex = 0;
 
     // Erros consecutivos
     let consecutiveErrors = 0;
@@ -150,9 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let completedRoutines = JSON.parse(localStorage.getItem('taskly_completed') || '{}');
 
     // Timer de sessão
-    let sessionTime     = 900; // 15 minutos em segundos
+    let sessionTime     = 900;
     let sessionInterval = null;
     let sessionExtended = false;
+    let blockInterval   = null;
 
     /* ══════════════════════════════
        REFERÊNCIAS DOM
@@ -211,8 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileNameDisplay = document.getElementById('profile-name-display');
     const profileNameInput   = document.getElementById('profile-name-input');
 
-    const swatches = document.querySelectorAll('.swatch');
-
     const companionAvatar = document.getElementById('companion-mini-avatar');
     const speechBubble    = document.getElementById('companion-speech-bubble');
     const speechText      = document.getElementById('companion-speech-text');
@@ -236,9 +282,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const timerWarningToast = document.getElementById('timer-warning-toast');
     const timerWarningText  = document.getElementById('timer-warning-text');
-    const timeUpOverlay     = document.getElementById('time-up-overlay');
-    const btnTimeContinue   = document.getElementById('btn-time-continue');
-    const btnTimeStop       = document.getElementById('btn-time-stop');
+
+    const extensionToast   = document.getElementById('extension-toast');
+    const btnExtension     = document.getElementById('btn-extension');
+    const restModeOverlay  = document.getElementById('rest-mode-overlay');
+    const restTimerText    = document.getElementById('rest-timer-text');
+    const tutorialOverlay  = document.getElementById('tutorial-overlay');
+    const keymapCard       = document.getElementById('keymap-card');
+    const btnStartTutorial = document.getElementById('btn-start-tutorial');
+    const btnHelpHome      = document.getElementById('btn-help-home');
 
     /* ══════════════════════════════
        ECRÃ DE BOAS-VINDAS
@@ -257,15 +309,25 @@ document.addEventListener('DOMContentLoaded', () => {
             : 'Escreve o teu nome para começar';
     });
 
+    // Enter no campo de nome → avançar
+    nameInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !btnStart.disabled) {
+            e.preventDefault();
+            btnStart.click();
+        }
+    });
+
     btnStart.addEventListener('click', () => {
         const name = nameInputEl.value.trim();
         if (!name) return;
+        const isFirstVisit = !localStorage.getItem('taskly_name');
         userName = name;
         localStorage.setItem('taskly_name', userName);
         updateGreeting();
         if (profileNameDisplay) profileNameDisplay.textContent = userName;
         screenWelcome.classList.remove('active');
         screenHome.classList.add('active');
+        if (isFirstVisit) setTimeout(() => startTutorial(), 600);
     });
 
     function updateGreeting() {
@@ -303,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ══════════════════════════════
-       TIMER DE SESSÃO
+       TIMER DE SESSÃO E BLOQUEIO (15+5+30)
     ══════════════════════════════ */
     function startSessionTimer() {
         if (sessionInterval) return;
@@ -311,9 +373,12 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionInterval = setInterval(() => {
             sessionTime--;
             updateTimerDisplay();
-            if (sessionTime === 300 && !sessionExtended) showTimerWarning('⏱ Faltam 5 minutos!', false);
-            if (sessionTime === 60)                       showTimerWarning('⏱ Falta 1 minuto!', true);
-            if (sessionTime <= 0)                         showTimeUp();
+            if (sessionTime === 300) showTimerWarning('⏱ Faltam 5 minutos!', false);
+            if (sessionTime === 60 && !sessionExtended) {
+                showTimerWarning('⏱ Falta 1 minuto!', true);
+                showExtensionToast();
+            }
+            if (sessionTime <= 0) showRestMode();
         }, 1000);
     }
 
@@ -344,35 +409,76 @@ document.addEventListener('DOMContentLoaded', () => {
         _warningTimer = setTimeout(() => timerWarningToast.classList.add('hidden'), 4000);
     }
 
-    function showTimeUp() {
+    function showExtensionToast() {
+        if (!extensionToast) return;
+        extensionToast.classList.remove('hidden');
+    }
+
+    function hideExtensionToast() {
+        if (!extensionToast) return;
+        extensionToast.classList.add('hidden');
+    }
+
+    if (btnExtension) {
+        btnExtension.addEventListener('click', () => {
+            if (sessionExtended) return;
+            sessionExtended = true;
+            sessionTime += 300;
+            updateTimerDisplay();
+            hideExtensionToast();
+            showTimerWarning('✅ Mais 5 minutos adicionados!', false);
+        });
+    }
+
+    function showRestMode() {
         clearInterval(sessionInterval);
         sessionInterval = null;
-        if (timeUpOverlay) timeUpOverlay.classList.remove('hidden');
+        hideExtensionToast();
+        const now           = Date.now();
+        const blockDuration = 30 * 60 * 1000;
+        let   blockUntil    = localStorage.getItem('taskly_block_until');
+        if (!blockUntil || parseInt(blockUntil) <= now) {
+            blockUntil = now + blockDuration;
+            localStorage.setItem('taskly_block_until', String(blockUntil));
+        }
+        activateRestMode(parseInt(blockUntil));
     }
 
-    if (btnTimeContinue) {
-        btnTimeContinue.addEventListener('click', () => {
-            sessionTime     = 300; // +5 minutos
-            sessionExtended = true;
-            timeUpOverlay.classList.add('hidden');
-            updateTimerDisplay();
-            sessionInterval = setInterval(() => {
-                sessionTime--;
-                updateTimerDisplay();
-                if (sessionTime === 60) showTimerWarning('⏱ Falta 1 minuto!', true);
-                if (sessionTime <= 0)   showTimeUp();
-            }, 1000);
-        });
+    function activateRestMode(blockUntil) {
+        document.body.classList.add('rest-mode');
+        if (restModeOverlay) restModeOverlay.style.display = 'flex';
+        if (blockInterval) clearInterval(blockInterval);
+        const tick = () => {
+            const remaining = blockUntil - Date.now();
+            if (remaining <= 0) {
+                clearInterval(blockInterval);
+                deactivateRestMode();
+            } else {
+                const m = Math.floor(remaining / 60000).toString().padStart(2, '0');
+                const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0');
+                if (restTimerText) restTimerText.textContent = `${m}:${s}`;
+            }
+        };
+        tick();
+        blockInterval = setInterval(tick, 1000);
     }
 
-    if (btnTimeStop) {
-        btnTimeStop.addEventListener('click', () => {
-            timeUpOverlay.classList.add('hidden');
-            // Volta ao ecrã inicial
-            screenGame.classList.remove('active');
-            screenLevels.classList.remove('active');
-            screenHome.classList.add('active');
-        });
+    function deactivateRestMode() {
+        document.body.classList.remove('rest-mode');
+        localStorage.removeItem('taskly_block_until');
+        if (restModeOverlay) restModeOverlay.style.display = 'none';
+        sessionTime     = 900;
+        sessionExtended = false;
+        updateTimerDisplay();
+        screenGame.classList.remove('active');
+        screenLevels.classList.remove('active');
+        screenRoutines.classList.remove('active');
+        screenHome.classList.add('active');
+    }
+
+    const existingBlock = localStorage.getItem('taskly_block_until');
+    if (existingBlock && parseInt(existingBlock) > Date.now()) {
+        activateRestMode(parseInt(existingBlock));
     }
 
     /* ══════════════════════════════
@@ -400,20 +506,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ══════════════════════════════
-       PALETA DE CORES
+       PALETA DE CORES – RGB PICKERS
     ══════════════════════════════ */
-    const savedTheme = localStorage.getItem('taskly_theme') || 'default';
-    applyTheme(savedTheme, false);
+    const colorBgInput        = document.getElementById('color-bg');
+    const colorPrimaryInput   = document.getElementById('color-primary');
+    const colorAccentInput    = document.getElementById('color-accent');
+    const colorOuterBgInput   = document.getElementById('color-outer-bg');
+    const previewBg           = document.getElementById('preview-bg');
+    const previewPrimary      = document.getElementById('preview-primary');
+    const previewAccent       = document.getElementById('preview-accent');
+    const previewOuterBg      = document.getElementById('preview-outer-bg');
+    const btnResetColors      = document.getElementById('btn-reset-colors');
 
-    swatches.forEach(sw => sw.addEventListener('click', () => applyTheme(sw.dataset.theme)));
+    const DEFAULT_COLORS = { bg: '#faf5ed', primary: '#475569', accent: '#fbbf24', outerBg: '#f4eee6' };
 
-    function applyTheme(theme, save = true) {
-        const keep = [...document.body.classList].filter(c => c.startsWith('size-') || c === 'low-stim');
-        document.body.className = keep.join(' ');
-        if (theme !== 'default') document.body.classList.add(`theme-${theme}`);
-        if (save) localStorage.setItem('taskly_theme', theme);
-        swatches.forEach(s => s.classList.toggle('active', s.dataset.theme === theme));
+    function shadeColor(hex, percent) {
+        const num = parseInt(hex.replace('#',''), 16);
+        const r   = Math.min(255, Math.max(0, (num >> 16) + Math.round(2.55 * percent)));
+        const g   = Math.min(255, Math.max(0, ((num >> 8) & 0x00ff) + Math.round(2.55 * percent)));
+        const b   = Math.min(255, Math.max(0, (num & 0x0000ff) + Math.round(2.55 * percent)));
+        return '#' + [r, g, b].map(v => v.toString(16).padStart(2,'0')).join('');
     }
+
+    function hexToRgb(hex) {
+        const num = parseInt(hex.replace('#',''), 16);
+        return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+    }
+
+    function applyCustomColors(bg, primary, accent, outerBg, save = true) {
+        const root = document.documentElement;
+        root.style.setProperty('--bg-color',       bg);
+        root.style.setProperty('--bg-secondary',   shadeColor(bg, -5));
+        root.style.setProperty('--outer-bg',       outerBg);
+        root.style.setProperty('--primary-color',  primary);
+        root.style.setProperty('--primary-hover',  shadeColor(primary, -15));
+        root.style.setProperty('--primary-shadow', shadeColor(primary, -25));
+        root.style.setProperty('--accent',         accent);
+        root.style.setProperty('--accent-rgb',     hexToRgb(accent));
+        if (previewBg)      previewBg.style.background      = bg;
+        if (previewPrimary) previewPrimary.style.background = primary;
+        if (previewAccent)  previewAccent.style.background  = accent;
+        if (previewOuterBg) previewOuterBg.style.background = outerBg;
+        if (colorBgInput      && colorBgInput.value      !== bg)      colorBgInput.value      = bg;
+        if (colorPrimaryInput && colorPrimaryInput.value !== primary) colorPrimaryInput.value = primary;
+        if (colorAccentInput  && colorAccentInput.value  !== accent)  colorAccentInput.value  = accent;
+        if (colorOuterBgInput && colorOuterBgInput.value !== outerBg) colorOuterBgInput.value = outerBg;
+        if (save) {
+            localStorage.setItem('taskly_color_bg',       bg);
+            localStorage.setItem('taskly_color_primary',  primary);
+            localStorage.setItem('taskly_color_accent',   accent);
+            localStorage.setItem('taskly_color_outer_bg', outerBg);
+        }
+    }
+
+    function readColors() {
+        return {
+            bg:      colorBgInput?.value      || DEFAULT_COLORS.bg,
+            primary: colorPrimaryInput?.value || DEFAULT_COLORS.primary,
+            accent:  colorAccentInput?.value  || DEFAULT_COLORS.accent,
+            outerBg: colorOuterBgInput?.value || DEFAULT_COLORS.outerBg,
+        };
+    }
+
+    const savedBg      = localStorage.getItem('taskly_color_bg')       || DEFAULT_COLORS.bg;
+    const savedPrimary = localStorage.getItem('taskly_color_primary')  || DEFAULT_COLORS.primary;
+    const savedAccent  = localStorage.getItem('taskly_color_accent')   || DEFAULT_COLORS.accent;
+    const savedOuterBg = localStorage.getItem('taskly_color_outer_bg') || DEFAULT_COLORS.outerBg;
+    applyCustomColors(savedBg, savedPrimary, savedAccent, savedOuterBg, false);
+
+    if (colorBgInput)      colorBgInput.addEventListener('input',      () => { const c = readColors(); applyCustomColors(c.bg, c.primary, c.accent, c.outerBg); });
+    if (colorPrimaryInput) colorPrimaryInput.addEventListener('input', () => { const c = readColors(); applyCustomColors(c.bg, c.primary, c.accent, c.outerBg); });
+    if (colorAccentInput)  colorAccentInput.addEventListener('input',  () => { const c = readColors(); applyCustomColors(c.bg, c.primary, c.accent, c.outerBg); });
+    if (colorOuterBgInput) colorOuterBgInput.addEventListener('input', () => { const c = readColors(); applyCustomColors(c.bg, c.primary, c.accent, c.outerBg); });
+    if (btnResetColors) btnResetColors.addEventListener('click', () =>
+        applyCustomColors(DEFAULT_COLORS.bg, DEFAULT_COLORS.primary, DEFAULT_COLORS.accent, DEFAULT_COLORS.outerBg));
 
     /* ══════════════════════════════
        SOM
@@ -457,14 +623,166 @@ document.addEventListener('DOMContentLoaded', () => {
             lowStimToggle.setAttribute('aria-checked', String(enabled));
         }
         if (save) localStorage.setItem('taskly_lowstim', enabled);
+        if (starsContainer) starsContainer.classList.toggle('hidden', enabled);
     }
+
+    /* ══════════════════════════════
+       TUTORIAL INTERATIVO
+    ══════════════════════════════ */
+    const TUTORIAL_STEPS = 5;
+    let tutorialStep = 0;
+
+    const tutorialProgress = document.getElementById('tutorial-progress');
+    const btnTutorialPrev  = document.getElementById('btn-tutorial-prev');
+    const btnTutorialNext  = document.getElementById('btn-tutorial-next');
+    const btnTutorialSkip  = document.getElementById('btn-tutorial-skip');
+
+    function buildTutorialProgress() {
+        if (!tutorialProgress) return;
+        tutorialProgress.innerHTML = '';
+        for (let i = 0; i < TUTORIAL_STEPS; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'tutorial-dot';
+            if (i === tutorialStep) dot.classList.add('active');
+            if (i < tutorialStep)  dot.classList.add('done');
+            tutorialProgress.appendChild(dot);
+        }
+    }
+
+    function goToTutorialStep(step) {
+        const steps = tutorialOverlay?.querySelectorAll('.tutorial-step');
+        if (!steps) return;
+        steps.forEach((s, i) => s.classList.toggle('active', i === step));
+        tutorialStep = step;
+        buildTutorialProgress();
+        if (btnTutorialPrev) btnTutorialPrev.disabled = step === 0;
+        if (btnTutorialNext) {
+            const isLast = step === TUTORIAL_STEPS - 1;
+            btnTutorialNext.textContent = isLast ? '✔ Concluir' : 'Próximo ›';
+            btnTutorialNext.classList.toggle('tutorial-finish-btn', isLast);
+        }
+    }
+
+    function startTutorial() {
+        if (!tutorialOverlay) return;
+        tutorialStep = 0;
+        goToTutorialStep(0);
+        tutorialOverlay.classList.remove('hidden');
+    }
+
+    function closeTutorial() {
+        if (!tutorialOverlay) return;
+        tutorialOverlay.classList.add('hidden');
+        localStorage.setItem('taskly_tutorial_done', 'true');
+    }
+
+    if (btnTutorialNext) btnTutorialNext.addEventListener('click', () => {
+        if (tutorialStep >= TUTORIAL_STEPS - 1) closeTutorial();
+        else goToTutorialStep(tutorialStep + 1);
+    });
+    if (btnTutorialPrev) btnTutorialPrev.addEventListener('click', () => {
+        if (tutorialStep > 0) goToTutorialStep(tutorialStep - 1);
+    });
+    if (btnTutorialSkip)  btnTutorialSkip.addEventListener('click', closeTutorial);
+    if (btnStartTutorial) btnStartTutorial.addEventListener('click', () => {
+        settingsOverlay.classList.add('hidden');
+        startTutorial();
+    });
+    if (btnHelpHome) btnHelpHome.addEventListener('click', startTutorial);
+
+    /* ══════════════════════════════
+       MAPEAMENTO DE TECLAS
+    ══════════════════════════════ */
+    let capturingAction = null;
+    let captureListener = null;
+
+    function renderKeymap() {
+        if (!keymapCard) return;
+        keymapCard.innerHTML = '';
+        const order = ['nav_left','nav_right','nav_up','nav_down','confirm','close','hint'];
+        order.forEach((action, idx) => {
+            const entry = keymap[action];
+            const row = document.createElement('div');
+            row.className = 'keymap-row';
+
+            const label = document.createElement('span');
+            label.className   = 'keymap-action-label';
+            label.textContent = entry.label;
+
+            const keyEl = document.createElement('span');
+            keyEl.className   = 'keymap-key-display';
+            keyEl.id          = `keymap-display-${action}`;
+            keyEl.textContent = entry.display;
+
+            const resetBtn = document.createElement('button');
+            resetBtn.className   = 'keymap-reset-btn';
+            resetBtn.id          = `keymap-btn-${action}`;
+            resetBtn.textContent = 'Redefinir';
+            resetBtn.addEventListener('click', () => startCapture(action));
+
+            row.appendChild(label);
+            row.appendChild(keyEl);
+            row.appendChild(resetBtn);
+            keymapCard.appendChild(row);
+
+            if (idx < order.length - 1) {
+                const div = document.createElement('div');
+                div.className = 'settings-divider';
+                keymapCard.appendChild(div);
+            }
+        });
+    }
+
+    function startCapture(action) {
+        if (capturingAction) cancelCapture();
+        capturingAction = action;
+        const keyEl    = document.getElementById(`keymap-display-${action}`);
+        const resetBtn = document.getElementById(`keymap-btn-${action}`);
+        if (keyEl)    { keyEl.textContent = 'Prima uma tecla…'; keyEl.classList.add('capturing'); }
+        if (resetBtn) { resetBtn.textContent = 'Cancelar'; resetBtn.classList.add('listening'); }
+        resetBtn.replaceWith(resetBtn.cloneNode(true));
+        const newBtn = document.getElementById(`keymap-btn-${action}`);
+        newBtn.addEventListener('click', cancelCapture);
+        captureListener = (e) => {
+            e.preventDefault(); e.stopPropagation();
+            const forbidden = ['Tab', 'CapsLock', 'Meta', 'Control', 'Alt', 'Shift'];
+            if (forbidden.includes(e.key)) return;
+            for (const a in keymap) {
+                if (a !== action && keymap[a].key === e.key) {
+                    keymap[a].key     = DEFAULT_KEYMAP[a].key;
+                    keymap[a].display = DEFAULT_KEYMAP[a].display;
+                }
+            }
+            keymap[action].key     = e.key;
+            keymap[action].display = keyDisplay(e.key);
+            saveKeymap(keymap);
+            finishCapture();
+            renderKeymap();
+        };
+        document.addEventListener('keydown', captureListener, { capture: true });
+    }
+
+    function cancelCapture() { finishCapture(); renderKeymap(); }
+
+    function finishCapture() {
+        if (captureListener) {
+            document.removeEventListener('keydown', captureListener, { capture: true });
+            captureListener = null;
+        }
+        capturingAction = null;
+    }
+
+    renderKeymap();
 
     /* ══════════════════════════════
        DEFINIÇÕES – ABRIR / FECHAR
     ══════════════════════════════ */
-    settingsBtns.forEach(btn => btn.addEventListener('click', () => settingsOverlay.classList.remove('hidden')));
-    btnCloseSettings.addEventListener('click', () => settingsOverlay.classList.add('hidden'));
-    if (btnCloseSettingsBot) btnCloseSettingsBot.addEventListener('click', () => settingsOverlay.classList.add('hidden'));
+    function openSettings()  { settingsOverlay.classList.remove('hidden'); }
+    function closeSettings() { settingsOverlay.classList.add('hidden'); }
+
+    settingsBtns.forEach(btn => btn.addEventListener('click', openSettings));
+    btnCloseSettings.addEventListener('click', closeSettings);
+    if (btnCloseSettingsBot) btnCloseSettingsBot.addEventListener('click', closeSettings);
 
     /* ══════════════════════════════
        CARROSSEL DE AVATARES
@@ -512,7 +830,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressContainer) {
             progressContainer.style.display = 'flex';
             if (nextThreshold !== null) {
-                const prevThreshold       = AVATAR_THRESHOLDS[unlockedAvatares - 1];
+                const prevThreshold        = AVATAR_THRESHOLDS[unlockedAvatares - 1];
                 const gainedInCurrentLevel = tasklyStars - prevThreshold;
                 const neededForNext        = nextThreshold - prevThreshold;
                 const percentage = Math.min(100, (gainedInCurrentLevel / neededForNext) * 100) || 0;
@@ -533,9 +851,13 @@ document.addEventListener('DOMContentLoaded', () => {
         dots[currentSlide].classList.add('active');
 
         const isLocked = slides[currentSlide].classList.contains('locked');
-        btnPlay.disabled     = isLocked;
+        btnPlay.disabled      = isLocked;
         btnPlay.style.opacity = isLocked ? '0.5' : '1';
-        btnPlay.textContent   = isLocked ? `Precisa de ${AVATAR_THRESHOLDS[currentSlide]} ⭐` : 'Jogar ▶';
+        // Usar innerHTML para manter o badge de teclado
+        btnPlay.innerHTML = (isLocked
+            ? `Precisa de ${AVATAR_THRESHOLDS[currentSlide]} ⭐`
+            : 'Jogar ▶')
+            + ' <kbd class="btn-key-badge"></kbd>';
 
         if (!isLocked) {
             btnPlay.style.transform = 'scale(1.05)';
@@ -558,6 +880,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPlay.addEventListener('click', () => {
         if (!selectedAvatar) return;
         startSessionTimer();
+        focusedLevelIndex = 0;
         setTimeout(() => {
             screenHome.classList.remove('active');
             screenLevels.classList.add('active');
@@ -565,11 +888,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnBackLevels.addEventListener('click', () => {
+        clearLevelFocus();
         screenLevels.classList.remove('active');
         screenHome.classList.add('active');
     });
 
     btnBackRoutines.addEventListener('click', () => {
+        clearRoutineFocus();
+        focusedLevelIndex = 0;
         screenRoutines.classList.remove('active');
         screenLevels.classList.add('active');
         updateLevelLocksStatus();
@@ -579,6 +905,7 @@ document.addEventListener('DOMContentLoaded', () => {
         screenGame.classList.remove('active');
         clearKeyboardFocus();
         keyboardMode = false;
+        focusedRoutineIndex = 0;
         showRoutinesScreen(currentLevel);
     });
 
@@ -626,6 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showRoutinesScreen(levelNumber) {
         currentLevel     = levelNumber;
         currentLevelData = LEVELS_DATA[currentLevel];
+        focusedRoutineIndex = 0; // Resetar foco ao entrar no ecrã
 
         routinesLevelTitle.textContent = `Nível ${currentLevel}`;
         routinesList.innerHTML = '';
@@ -816,76 +1144,287 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.hint-target').forEach(el => el.classList.remove('hint-target'));
     }
 
-    /* ══════════════════════════════
-       NAVEGAÇÃO POR TECLADO
-       ← → cartões  |  ↑ ↓ slots  |  Enter colocar
-    ══════════════════════════════ */
-    document.addEventListener('keydown', (e) => {
-        if (!screenGame.classList.contains('active')) return;
-        if (!overlay.classList.contains('hidden'))   return;
-        if (flyInProgress) return;
-
-        const cardsContainer = document.getElementById('cards-container');
-        if (!cardsContainer) return;
-        const playableCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
-        const allSlots      = Array.from(document.querySelectorAll('.drag-slot'));
-
-        switch (e.key) {
-            case 'ArrowLeft':
-            case 'ArrowRight': {
-                e.preventDefault();
-                if (!playableCards.length) return;
-                keyboardMode = true;
-                focusedCardIndex = (focusedCardIndex + (e.key === 'ArrowRight' ? 1 : -1) + playableCards.length) % playableCards.length;
-                updateKeyboardFocus(playableCards, allSlots);
-                break;
-            }
-            case 'ArrowUp':
-            case 'ArrowDown': {
-                e.preventDefault();
-                if (!allSlots.length) return;
-                keyboardMode     = true;
-                focusedSlotIndex = (focusedSlotIndex + (e.key === 'ArrowDown' ? 1 : -1) + allSlots.length) % allSlots.length;
-                updateKeyboardFocus(playableCards, allSlots);
-                break;
-            }
-            case 'Enter': {
-                e.preventDefault();
-                if (!keyboardMode) {
-                    keyboardMode     = true;
-                    focusedCardIndex = 0;
-                    focusedSlotIndex = 0;
-                    updateKeyboardFocus(playableCards, allSlots);
-                    showEncouragement('Usa ← → para cartões, ↑ ↓ para slots! ⌨️');
-                    return;
-                }
-                if (!playableCards.length) return;
-                const card = playableCards[focusedCardIndex];
-                const slot = allSlots[focusedSlotIndex];
-                if (!card || !slot) return;
-                if (slot.firstElementChild) {
-                    showEncouragement('Este slot já está preenchido! Escolhe outro. 👆');
-                    return;
-                }
-                flyCardToSlot(card, slot);
-                break;
-            }
-            case 'Escape':
-                clearKeyboardFocus();
-                keyboardMode = false;
-                break;
+    /* ════════════════════════════════
+       FOCO DE TECLADO — NÍVEIS
+    ════════════════════════════════ */
+    function updateLevelKeyboardFocus(cards) {
+        clearLevelFocus();
+        const card = cards[focusedLevelIndex];
+        if (card) {
+            card.classList.add('element-focused');
+            card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
-    });
+    }
+    function clearLevelFocus() {
+        document.querySelectorAll('#screen-levels .element-focused')
+            .forEach(el => el.classList.remove('element-focused'));
+    }
 
+    /* ════════════════════════════════
+       FOCO DE TECLADO — ROTINAS
+    ════════════════════════════════ */
+    function updateRoutineKeyboardFocus(cards) {
+        clearRoutineFocus();
+        const card = cards[focusedRoutineIndex];
+        if (card) {
+            card.classList.add('element-focused');
+            card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+    }
+    function clearRoutineFocus() {
+        document.querySelectorAll('#routines-list .element-focused')
+            .forEach(el => el.classList.remove('element-focused'));
+    }
+
+    /* ════════════════════════════════
+       FOCO DE TECLADO — JOGO
+    ════════════════════════════════ */
     function updateKeyboardFocus(playableCards, allSlots) {
         clearKeyboardFocus();
         if (playableCards[focusedCardIndex]) playableCards[focusedCardIndex].classList.add('element-focused');
         if (allSlots[focusedSlotIndex])      allSlots[focusedSlotIndex].classList.add('element-focused');
     }
-
     function clearKeyboardFocus() {
         document.querySelectorAll('.element-focused').forEach(el => el.classList.remove('element-focused'));
     }
+
+    /* ══════════════════════════════════════════════════════
+       NAVEGAÇÃO POR TECLADO — SISTEMA COMPLETO
+       ══════════════════════════════════════════════════════
+       Atalhos fixos (todos os ecrãs):
+         Esc         → Abrir/fechar Definições
+         Space       → Jogar (home) · Verificar (jogo)
+         Backspace   → Voltar ao ecrã anterior
+         ← →         → Carousel (home) · Cartões (jogo)
+         ↑ ↓         → Níveis · Rotinas · Slots de jogo
+         Enter       → Confirmar / Selecionar / Colocar peça
+         H           → Dica (jogo, configurável)
+       Tutorial:
+         → / Enter   → Próximo passo
+         ← / ←       → Passo anterior
+         Esc         → Fechar
+       Modal de resultado:
+         Enter/Space → Botão primário
+    ══════════════════════════════════════════════════════ */
+    document.addEventListener('keydown', (e) => {
+        // Não interferir durante captura de remap
+        if (capturingAction) return;
+
+        // Não interferir em modo de repouso
+        if (document.body.classList.contains('rest-mode')) return;
+
+        const k        = e.key;
+        const activeEl = document.activeElement;
+        const isTyping = activeEl && (
+            activeEl.tagName === 'INPUT' ||
+            activeEl.tagName === 'TEXTAREA' ||
+            activeEl.isContentEditable
+        );
+
+        /* ── DEFINIÇÕES abertas ──────────────────────── */
+        if (!settingsOverlay.classList.contains('hidden')) {
+            if (k === 'Escape') { e.preventDefault(); closeSettings(); }
+            // Deixar todas as outras teclas funcionarem nas definições
+            return;
+        }
+
+        /* ── TUTORIAL aberto ─────────────────────────── */
+        if (tutorialOverlay && !tutorialOverlay.classList.contains('hidden')) {
+            if (k === 'Escape') {
+                e.preventDefault(); closeTutorial(); return;
+            }
+            if ((k === 'ArrowRight' || k === 'Enter') && !isTyping) {
+                e.preventDefault();
+                if (tutorialStep >= TUTORIAL_STEPS - 1) closeTutorial();
+                else goToTutorialStep(tutorialStep + 1);
+                return;
+            }
+            if (k === 'ArrowLeft' && !isTyping) {
+                e.preventDefault();
+                if (tutorialStep > 0) goToTutorialStep(tutorialStep - 1);
+                return;
+            }
+            return;
+        }
+
+        /* ── MODAL DE RESULTADO aberto ───────────────── */
+        if (!overlay.classList.contains('hidden')) {
+            if ((k === 'Enter' || k === ' ') && !isTyping) {
+                e.preventDefault();
+                const primaryBtn = modalButtons.querySelector('.primary-btn');
+                if (primaryBtn) primaryBtn.click();
+            }
+            return;
+        }
+
+        /* ── Não intercetamos escrita em campos de texto ── */
+        if (isTyping) return;
+
+        /* ── ESC → abrir Definições (qualquer ecrã exceto boas-vindas) ── */
+        if (k === 'Escape') {
+            const onMain = [screenHome, screenLevels, screenRoutines, screenGame]
+                .some(s => s.classList.contains('active'));
+            if (onMain) { e.preventDefault(); openSettings(); }
+            return;
+        }
+
+        /* ════ ECRÃ: BOAS-VINDAS ═══════════════════════ */
+        if (screenWelcome.classList.contains('active')) {
+            // Enter tratado diretamente pelo listener no nameInputEl
+            return;
+        }
+
+        /* ════ ECRÃ: INÍCIO (home) ══════════════════════ */
+        if (screenHome.classList.contains('active')) {
+            if (k === ' ' || k === 'Enter') {
+                e.preventDefault();
+                if (!btnPlay.disabled) btnPlay.click();
+                return;
+            }
+            if (k === 'ArrowLeft') {
+                e.preventDefault(); btnPrev.click(); return;
+            }
+            if (k === 'ArrowRight') {
+                e.preventDefault(); btnNext.click(); return;
+            }
+            return;
+        }
+
+        /* ════ ECRÃ: NÍVEIS ═════════════════════════════ */
+        if (screenLevels.classList.contains('active')) {
+            const lvlCards = Array.from(document.querySelectorAll('#screen-levels .level-card'));
+
+            if (k === 'Backspace') {
+                e.preventDefault(); clearLevelFocus(); btnBackLevels.click(); return;
+            }
+            if (k === 'ArrowUp') {
+                e.preventDefault();
+                focusedLevelIndex = Math.max(0, focusedLevelIndex - 1);
+                updateLevelKeyboardFocus(lvlCards); return;
+            }
+            if (k === 'ArrowDown') {
+                e.preventDefault();
+                focusedLevelIndex = Math.min(lvlCards.length - 1, focusedLevelIndex + 1);
+                updateLevelKeyboardFocus(lvlCards); return;
+            }
+            if (k === 'Enter' || k === ' ') {
+                e.preventDefault();
+                const focused = lvlCards[focusedLevelIndex];
+                if (focused && !focused.classList.contains('locked')) focused.click();
+                return;
+            }
+            return;
+        }
+
+        /* ════ ECRÃ: ROTINAS ════════════════════════════ */
+        if (screenRoutines.classList.contains('active')) {
+            const routCards = Array.from(document.querySelectorAll('#routines-list .level-card'));
+
+            if (k === 'Backspace') {
+                e.preventDefault(); clearRoutineFocus(); btnBackRoutines.click(); return;
+            }
+            if (k === 'ArrowUp') {
+                e.preventDefault();
+                focusedRoutineIndex = Math.max(0, focusedRoutineIndex - 1);
+                updateRoutineKeyboardFocus(routCards); return;
+            }
+            if (k === 'ArrowDown') {
+                e.preventDefault();
+                focusedRoutineIndex = Math.min(routCards.length - 1, focusedRoutineIndex + 1);
+                updateRoutineKeyboardFocus(routCards); return;
+            }
+            if (k === 'Enter' || k === ' ') {
+                e.preventDefault();
+                const focused = routCards[focusedRoutineIndex];
+                if (focused && !focused.classList.contains('locked')) focused.click();
+                return;
+            }
+            return;
+        }
+
+        /* ════ ECRÃ: JOGO ═══════════════════════════════ */
+        /* ════ ECRÃ: JOGO ═══════════════════════════════ */
+        if (screenGame.classList.contains('active')) {
+            if (flyInProgress) return;
+
+            // Backspace → voltar
+            if (k === 'Backspace') {
+                e.preventDefault(); btnBackGame.click(); return;
+            }
+
+            // Space → Verificar (apenas quando botão está visível)
+            if (k === ' ') {
+                if (!btnConfirmContainer.classList.contains('hidden')) {
+                    e.preventDefault(); btnConfirm.click();
+                }
+                return;
+            }
+
+            const cardsContainer = document.getElementById('cards-container');
+            if (!cardsContainer) return;
+            const playableCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
+            const allSlots      = Array.from(document.querySelectorAll('.drag-slot'));
+
+            if (k === keymap.nav_left.key || k === keymap.nav_right.key) {
+                e.preventDefault();
+                if (!playableCards.length) return;
+                keyboardMode = true;
+                const dir = (k === keymap.nav_right.key) ? 1 : -1;
+                focusedCardIndex = (focusedCardIndex + dir + playableCards.length) % playableCards.length;
+                updateKeyboardFocus(playableCards, allSlots);
+            } else if (k === keymap.nav_up.key || k === keymap.nav_down.key) {
+                e.preventDefault();
+                if (!allSlots.length) return;
+                keyboardMode = true;
+                const dir = (k === keymap.nav_down.key) ? 1 : -1;
+                focusedSlotIndex = (focusedSlotIndex + dir + allSlots.length) % allSlots.length;
+                updateKeyboardFocus(playableCards, allSlots);
+            } else if (k === keymap.hint.key || k === keymap.hint.key.toUpperCase()) {
+                e.preventDefault();
+                showHint();
+            } else if (k === keymap.confirm.key) {
+                e.preventDefault();
+                
+                // Ativa o modo de teclado se for a primeira vez que se carrega no Enter
+                if (!keyboardMode) {
+                    keyboardMode = true; 
+                    focusedCardIndex = 0; 
+                    focusedSlotIndex = 0;
+                    updateKeyboardFocus(playableCards, allSlots);
+                    showEncouragement(`Usa ${keymap.nav_left.display}/${keymap.nav_right.display} para cartões, ${keymap.nav_up.display}/${keymap.nav_down.display} para slots! ⌨️`);
+                    return;
+                }
+
+                const slot = allSlots[focusedSlotIndex];
+
+                // 1. LÓGICA DE REMOÇÃO: Se o slot focado já tiver um cartão, remove-o
+                if (slot && slot.firstElementChild) {
+                    const cardToRemove = slot.firstElementChild;
+                    
+                    // Limpa os dados do slot e a classe do cartão
+                    slot.dataset.slottedId = '';
+                    cardToRemove.classList.remove('slotted');
+                    
+                    // Devolve o cartão à base
+                    returnCardToHome(cardToRemove);
+                    checkWinCondition();
+                    
+                    // Atualiza a lista de cartões jogáveis e reajusta o foco visual
+                    const updatedCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
+                    updateKeyboardFocus(updatedCards, allSlots);
+                    return;
+                }
+
+                // 2. LÓGICA DE COLOCAÇÃO: Se o slot estiver vazio, tenta colocar o cartão
+                if (!playableCards.length) return;
+                const card = playableCards[focusedCardIndex];
+                
+                if (card && slot && !slot.firstElementChild) {
+                    flyCardToSlot(card, slot);
+                }
+            }
+        }
+    });
 
     /* ══════════════════════════════
        ANIMAÇÃO "VÔO" DO CARTÃO (teclado → slot)
@@ -901,6 +1440,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const ghost = card.cloneNode(true);
         ghost.classList.remove('element-focused', 'hint-target', 'slotted');
+        ghost.classList.add('fly-ghost');
         ghost.style.cssText = [
             `position:fixed`,
             `left:${cardRect.left}px`,
@@ -1100,13 +1640,17 @@ document.addEventListener('DOMContentLoaded', () => {
             updateStarsUI();
             const currentUnlocked = unlockedAvatares;
 
-            toastText.textContent = `+${starsAwarded} ⭐`;
-            starsToast.classList.remove('hidden');
-            starsToast.classList.add('show');
+            if (!lowStimMode) {
+                toastText.textContent = `+${starsAwarded} ⭐`;
+                starsToast.classList.remove('hidden');
+                starsToast.classList.add('show');
+            }
 
             setTimeout(() => {
-                starsToast.classList.remove('show');
-                starsToast.classList.add('hidden');
+                if (!lowStimMode) {
+                    starsToast.classList.remove('show');
+                    starsToast.classList.add('hidden');
+                }
 
                 if (currentUnlocked > previousUnlocked) {
                     showModal('Novo companheiro!', 'Desbloqueaste um novo avatar especial no ecrã inicial!', [
@@ -1117,7 +1661,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         { text: 'Continuar', class: 'primary-btn', action: nextRoutine }
                     ]);
                 }
-            }, 1800);
+            }, lowStimMode ? 400 : 1800);
 
         } else {
             btnConfirmContainer.classList.add('hidden');
@@ -1180,15 +1724,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function nextRoutine() {
         hideModal();
 
-        // Guardar rotina como concluída
         if (!completedRoutines[currentLevel]) completedRoutines[currentLevel] = [];
         if (!completedRoutines[currentLevel].includes(currentRoutineIndex)) {
             completedRoutines[currentLevel].push(currentRoutineIndex);
             localStorage.setItem('taskly_completed', JSON.stringify(completedRoutines));
         }
 
-        const isLastRoutine  = currentRoutineIndex >= currentLevelData.length - 1;
-        const completedLvl   = currentLevel;
+        const isLastRoutine = currentRoutineIndex >= currentLevelData.length - 1;
+        const completedLvl  = currentLevel;
 
         if (!isLastRoutine) {
             startGame(completedLvl, currentRoutineIndex + 1);
@@ -1226,7 +1769,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ══════════════════════════════
        ÁUDIO
-       Sons carregados da pasta sounds/ — Web Audio API apenas como fallback do sucesso
     ══════════════════════════════ */
     function playSuccessSound() {
         if (!soundEnabled || lowStimMode) return;
@@ -1284,5 +1826,31 @@ document.addEventListener('DOMContentLoaded', () => {
             starsContainer.innerHTML = '';
         }, 1500);
     }
+
+    /* ══════════════════════════════
+       BADGES DE ATALHO NOS BOTÕES
+    ══════════════════════════════ */
+    function addKeyHintBadges() {
+        // Badge [Space] no botão Jogar (aplicado via updateCarousel)
+        updateCarousel();
+
+        // Badge [Space] no botão Verificar
+        if (btnConfirm) {
+            btnConfirm.innerHTML = '✔ Verificar <kbd class="btn-key-badge"></kbd>';
+        }
+
+        // Tooltips (title) nos botões de voltar
+        if (btnBackLevels)   btnBackLevels.title   = 'Voltar (Backspace ⌫)';
+        if (btnBackRoutines) btnBackRoutines.title  = 'Voltar (Backspace ⌫)';
+        if (btnBackGame)     btnBackGame.title      = 'Voltar (Backspace ⌫)';
+
+        // Tooltips nos botões de definições
+        settingsBtns.forEach(btn => { btn.title = 'Definições (Esc)'; });
+
+        // Tooltip na dica
+        if (btnHint) btnHint.title = `Dica (${keymap.hint.display})`;
+    }
+
+    addKeyHintBadges();
 
 });
