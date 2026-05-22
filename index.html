@@ -45,6 +45,14 @@
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                 </svg>
             </button>
+            <!-- Botão de ajuda / tutorial -->
+            <button id="btn-help-home" class="help-btn" aria-label="Ajuda e tutorial">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </button>
             <div class="home-content">
                 <h1 class="app-title">Taskly</h1>
                 <p class="subtitle" id="home-greeting">Escolhe o teu companheiro!</p>
@@ -217,7 +225,7 @@
                     <div class="session-timer-pill timer-game" id="game-timer-pill">⏱ <span id="game-timer-text">15:00</span></div>
                 </div>
                 <div class="game-actions">
-                    <button id="btn-hint" class="hint-btn" aria-label="Dica: mostrar onde colocar">
+                    <button id="btn-hint" class="hint-btn" aria-label="Dica (tecla H)">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="9" y1="18" x2="15" y2="18"/>
                             <line x1="10" y1="22" x2="14" y2="22"/>
@@ -308,13 +316,39 @@
                     <div class="settings-card">
                         <div class="settings-row-info">
                             <span class="settings-row-title">Paleta de cores</span>
-                            <div class="color-swatches">
-                                <button class="swatch active" data-theme="default" style="background:#faf5ed;" aria-label="Padrão"></button>
-                                <button class="swatch" data-theme="blue"    style="background:#dbeafe;" aria-label="Azul"></button>
-                                <button class="swatch" data-theme="green"   style="background:#dcfce7;" aria-label="Verde"></button>
-                                <button class="swatch" data-theme="dark"    style="background:#1e293b;" aria-label="Escuro"></button>
-                                <button class="swatch" data-theme="minimal" style="background:#f1f5f9;" aria-label="Minimal"></button>
+                        </div>
+                        <div class="rgb-pickers-grid">
+                            <div class="rgb-picker-item">
+                                <label class="rgb-picker-label">Exterior</label>
+                                <div class="rgb-wheel-btn-wrap">
+                                    <input type="color" id="color-outer-bg" class="rgb-wheel-input" value="#f4eee6" title="Cor de fundo exterior">
+                                    <div class="rgb-wheel-preview" id="preview-outer-bg" style="background:#f4eee6;"></div>
+                                </div>
                             </div>
+                            <div class="rgb-picker-item">
+                                <label class="rgb-picker-label">Interior</label>
+                                <div class="rgb-wheel-btn-wrap">
+                                    <input type="color" id="color-bg" class="rgb-wheel-input" value="#faf5ed" title="Cor de fundo interior">
+                                    <div class="rgb-wheel-preview" id="preview-bg" style="background:#faf5ed;"></div>
+                                </div>
+                            </div>
+                            <div class="rgb-picker-item">
+                                <label class="rgb-picker-label">Botões</label>
+                                <div class="rgb-wheel-btn-wrap">
+                                    <input type="color" id="color-primary" class="rgb-wheel-input" value="#475569" title="Cor dos botões">
+                                    <div class="rgb-wheel-preview" id="preview-primary" style="background:#475569;"></div>
+                                </div>
+                            </div>
+                            <div class="rgb-picker-item">
+                                <label class="rgb-picker-label">Destaque</label>
+                                <div class="rgb-wheel-btn-wrap">
+                                    <input type="color" id="color-accent" class="rgb-wheel-input" value="#fbbf24" title="Cor de destaque">
+                                    <div class="rgb-wheel-preview" id="preview-accent" style="background:#fbbf24;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rgb-reset-row">
+                            <button id="btn-reset-colors" class="rgb-reset-btn">↺ Repor padrão</button>
                         </div>
                         <div class="settings-divider"></div>
                         <div class="settings-size-block">
@@ -352,7 +386,7 @@
                         <div class="settings-row-info">
                             <div>
                                 <span class="settings-row-title">Tempo de sessão</span>
-                                <p class="settings-row-sub">15 min + 5 min extra se necessário</p>
+                                <p class="settings-row-sub">15 min + 5 min extra se necessário · 30 min repouso</p>
                             </div>
                             <span class="settings-badge">15 min</span>
                         </div>
@@ -374,9 +408,44 @@
                         <div class="settings-row-info">
                             <div>
                                 <span class="settings-row-title">Dicas de teclado</span>
-                                <p class="settings-row-sub">← → cartões &nbsp;·&nbsp; ↑ ↓ slots &nbsp;·&nbsp; Enter colocar</p>
+                                <p class="settings-row-sub">Space jogar/verificar &nbsp;·&nbsp; ← → avatar/cartões &nbsp;·&nbsp; ↑ ↓ níveis/slots &nbsp;·&nbsp; Enter confirmar &nbsp;·&nbsp; ⌫ voltar &nbsp;·&nbsp; H dica &nbsp;·&nbsp; Esc definições</p>
                             </div>
                             <span class="settings-badge" style="font-size:1.1rem;">⌨️</span>
+                        </div>
+                    </div>
+
+                    <!-- MAPEAMENTO DE TECLAS -->
+                    <p class="settings-section-label">MAPEAMENTO DE TECLAS</p>
+                    <div class="settings-card" id="keymap-card">
+                        <div class="keymap-loading" style="padding:16px;text-align:center;color:var(--text-muted);font-weight:700;">A carregar...</div>
+                    </div>
+
+                    <!-- AJUDA -->
+                    <p class="settings-section-label">AJUDA</p>
+                    <div class="settings-card">
+                        <div class="settings-row-info">
+                            <div>
+                                <span class="settings-row-title">Tutorial interativo</span>
+                                <p class="settings-row-sub">Ver o guia passo a passo da aplicação</p>
+                            </div>
+                            <button id="btn-start-tutorial" class="settings-badge" style="cursor:pointer;background:var(--primary-color);color:white;border:none;font-size:0.85rem;font-weight:800;font-family:inherit;">Iniciar</button>
+                        </div>
+                    </div>
+
+                    <!-- CRÉDITOS -->
+                    <p class="settings-section-label">CRÉDITOS</p>
+                    <div class="settings-card">
+                        <div style="padding: 16px;">
+                            <p style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; line-height: 1.6; text-align:center;">
+                                Os símbolos pictográficos utilizados são propriedade do Governo de Aragão e foram criados por Sergio Palao para a
+                                <strong>ARASAAC</strong>
+                                (<a href="http://www.arasaac.org" target="_blank" rel="noopener" style="color: var(--primary-color); text-decoration: underline;">www.arasaac.org</a>),
+                                que os distribui sob licença
+                                <strong>Creative Commons BY-NC-SA 4.0</strong>.
+                            </p>
+                            <p style="font-size:0.72rem; color:var(--text-muted); text-align:center; margin-top:8px; font-weight:600;">
+                                © Governo de Aragão · Autor: Sergio Palao · Licença: CC BY-NC-SA 4.0
+                            </p>
                         </div>
                     </div>
 
@@ -393,15 +462,110 @@
             <span id="timer-warning-text">⏱ Faltam 5 minutos!</span>
         </div>
 
-        <!-- ══ Overlay: Tempo esgotado ══ -->
-        <div id="time-up-overlay" class="game-overlay hidden" style="z-index: 950;">
-            <div class="modal-content time-up-modal">
-                <div class="time-up-icon">⏰</div>
-                <h3>Sessão terminada!</h3>
-                <p>Os teus 15 minutos de hoje acabaram.<br>Fizeste um trabalho incrível! 🌟</p>
-                <div class="modal-buttons">
-                    <button id="btn-time-continue" class="secondary-btn">Continuar mais 5 min</button>
-                    <button id="btn-time-stop" class="primary-btn">Fechar</button>
+        <!-- ══ Toast de extensão de sessão ══ -->
+        <div id="extension-toast" class="extension-toast hidden" role="alert" aria-live="polite">
+            <div class="extension-toast-content">
+                <span class="extension-toast-icon">⏳</span>
+                <div class="extension-toast-text">
+                    <strong>Falta 1 minuto!</strong>
+                    <span>Queres mais tempo?</span>
+                </div>
+                <button id="btn-extension" class="extension-btn">+5 min</button>
+            </div>
+        </div>
+
+        <!-- ══ Overlay: Modo de Repouso (30 min) ══ -->
+        <div id="rest-mode-overlay" class="rest-mode-overlay hidden" role="dialog" aria-modal="true" aria-label="Modo de repouso ativo">
+            <div class="rest-mode-modal">
+                <div class="rest-mode-icon">😴</div>
+                <h3 class="rest-mode-title">Tempo de Repouso</h3>
+                <p class="rest-mode-subtitle">
+                    Fizeste um trabalho incrível hoje! 🌟<br>
+                    A aplicação está em pausa. Volta em:
+                </p>
+                <div class="rest-mode-countdown">
+                    <span id="rest-timer-text">30:00</span>
+                </div>
+                <p class="rest-mode-tip">💡 Aproveita para beber água, esticar-te ou descansar os olhos.</p>
+            </div>
+        </div>
+
+        <!-- ══ Overlay: Tutorial ══ -->
+        <div id="tutorial-overlay" class="tutorial-overlay hidden" role="dialog" aria-modal="true" aria-label="Tutorial do Taskly">
+            <div class="tutorial-modal">
+                <div class="tutorial-progress" id="tutorial-progress"></div>
+
+                <!-- Step 0: Boas-vindas -->
+                <div class="tutorial-step active" data-step="0">
+                    <div class="tutorial-step-icon">🎉</div>
+                    <h3 class="tutorial-step-title">Bem-vindo ao Taskly!</h3>
+                    <p class="tutorial-step-text">Vou mostrar-te como usar a aplicação em 4 passos simples. Podes saltar se quiseres!</p>
+                    <div class="tutorial-visual tutorial-visual--welcome">
+                        <span class="tutorial-chip">📱 Taskly</span>
+                        <span class="tutorial-arrow">→</span>
+                        <span class="tutorial-chip">🐱 Companheiro</span>
+                        <span class="tutorial-arrow">→</span>
+                        <span class="tutorial-chip">🏆 Nível</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Escolher companheiro -->
+                <div class="tutorial-step" data-step="1">
+                    <div class="tutorial-step-icon">🐾</div>
+                    <h3 class="tutorial-step-title">1. Escolhe o teu Companheiro</h3>
+                    <p class="tutorial-step-text">No ecrã inicial, desliza o carrossel para escolher o teu avatar favorito. Podes usar as setas <strong>← →</strong> no teclado ou tocar nos botões.</p>
+                    <div class="tutorial-visual tutorial-visual--carousel">
+                        <span class="tutorial-avatar-dot"></span>
+                        <span class="tutorial-avatar-dot tutorial-avatar-dot--active">🐱</span>
+                        <span class="tutorial-avatar-dot"></span>
+                    </div>
+                </div>
+
+                <!-- Step 2: Escolher Nível -->
+                <div class="tutorial-step" data-step="2">
+                    <div class="tutorial-step-icon">🏅</div>
+                    <h3 class="tutorial-step-title">2. Escolhe um Nível</h3>
+                    <p class="tutorial-step-text">Carrega em <strong>Jogar ▶</strong> e escolhe o nível que queres praticar. Os níveis desbloqueiam-se à medida que ganhas ⭐ estrelas!</p>
+                    <div class="tutorial-visual tutorial-visual--levels">
+                        <div class="tutorial-level-chip tutorial-level-chip--active">Nível 1 ✔</div>
+                        <div class="tutorial-level-chip tutorial-level-chip--locked">Nível 2 🔒</div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Jogar -->
+                <div class="tutorial-step" data-step="3">
+                    <div class="tutorial-step-icon">🧩</div>
+                    <h3 class="tutorial-step-title">3. Organiza as Peças</h3>
+                    <p class="tutorial-step-text">Arrasta cada peça para o espaço certo, pela ordem correta. Podes usar o <strong>teclado</strong> ou o toque. Prima <strong>H</strong> se precisares de uma dica!</p>
+                    <div class="tutorial-visual tutorial-visual--game">
+                        <div class="tutorial-slot tutorial-slot--filled">🤲<span>1</span></div>
+                        <div class="tutorial-slot">__<span>2</span></div>
+                        <div class="tutorial-slot">__<span>3</span></div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Teclado -->
+                <div class="tutorial-step" data-step="4">
+                    <div class="tutorial-step-icon">⌨️</div>
+                    <h3 class="tutorial-step-title">4. Atalhos de Teclado</h3>
+                    <p class="tutorial-step-text">Podes controlar <strong>tudo</strong> com o teclado! Os atalhos do jogo podem ser personalizados nas Definições.</p>
+                    <div class="tutorial-keyboard-grid">
+                        <div class="tutorial-key-row"><kbd>Space</kbd><span>Jogar / Verificar resposta</span></div>
+                        <div class="tutorial-key-row"><kbd>← →</kbd><span>Avatar / Navegar cartões</span></div>
+                        <div class="tutorial-key-row"><kbd>↑ ↓</kbd><span>Níveis / Rotinas / Slots</span></div>
+                        <div class="tutorial-key-row"><kbd>Enter</kbd><span>Confirmar / Colocar peça</span></div>
+                        <div class="tutorial-key-row"><kbd>⌫</kbd><span>Voltar ao ecrã anterior</span></div>
+                        <div class="tutorial-key-row"><kbd>H</kbd><span>Mostrar dica (no jogo)</span></div>
+                        <div class="tutorial-key-row"><kbd>Esc</kbd><span>Abrir / Fechar Definições</span></div>
+                    </div>
+                </div>
+
+                <div class="tutorial-nav">
+                    <button id="btn-tutorial-skip" class="tutorial-skip-btn">Saltar</button>
+                    <div class="tutorial-nav-right">
+                        <button id="btn-tutorial-prev" class="tutorial-prev-btn" disabled>‹ Anterior</button>
+                        <button id="btn-tutorial-next" class="tutorial-next-btn">Próximo ›</button>
+                    </div>
                 </div>
             </div>
         </div>
