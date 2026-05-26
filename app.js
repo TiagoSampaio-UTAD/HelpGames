@@ -145,13 +145,14 @@ const LEVELS_DATA = {
    MAPEAMENTO DE TECLAS – Padrão e persistência
    ════════════════════════════════════════════════ */
 const DEFAULT_KEYMAP = {
-    nav_left:  { label: 'Mover cartão à esquerda',  key: 'ArrowLeft',  display: '←' },
-    nav_right: { label: 'Mover cartão à direita',   key: 'ArrowRight', display: '→' },
-    nav_up:    { label: 'Mover slot acima',          key: 'ArrowUp',    display: '↑' },
-    nav_down:  { label: 'Mover slot abaixo',         key: 'ArrowDown',  display: '↓' },
-    confirm:   { label: 'Colocar / Confirmar',       key: 'Enter',      display: 'Enter' },
-    close:     { label: 'Fechar / Cancelar',         key: 'Escape',     display: 'Esc' },
-    hint:      { label: 'Mostrar dica',              key: 'h',          display: 'H' },
+    confirm:   { label: 'Confirmar / Jogar',       key: 'Enter',      display: 'Enter' },
+    nav_left:  { label: 'Mover à esquerda',        key: 'ArrowLeft',  display: '←' },
+    nav_right: { label: 'Mover à direita',         key: 'ArrowRight', display: '→' },
+    nav_up:    { label: 'Mover para cima',         key: 'ArrowUp',    display: '↑' },
+    nav_down:  { label: 'Mover para baixo',        key: 'ArrowDown',  display: '↓' },
+    back:      { label: 'Voltar atrás',            key: 'Backspace',  display: '⌫' },
+    hint:      { label: 'Mostrar Dica',            key: 'h',          display: 'H' },
+    settings:  { label: 'Abrir Definições',        key: 'Escape',     display: 'Esc' }
 };
 
 function loadKeymap() {
@@ -354,6 +355,22 @@ document.addEventListener('DOMContentLoaded', () => {
         screenHome.classList.add('active');
         if (isFirstVisit) setTimeout(() => startTutorial(), 600);
     });
+
+    function updateTutorialKeys() {
+        const mapping = {
+            'tut-confirm': keymap.confirm.display,
+            'tut-nav_left_right': `${keymap.nav_left.display} ${keymap.nav_right.display}`,
+            'tut-nav_up_down': `${keymap.nav_up.display} ${keymap.nav_down.display}`,
+            'tut-back': keymap.back.display,
+            'tut-hint': keymap.hint.display,
+            'tut-settings': keymap.settings.display 
+        };
+
+        for (const [id, value] of Object.entries(mapping)) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+        }
+    }
 
     function updateGreeting() {
         if (!homeGreeting) return;
@@ -1232,39 +1249,31 @@ document.addEventListener('DOMContentLoaded', () => {
          Enter/Space → Botão primário
     ══════════════════════════════════════════════════════ */
     document.addEventListener('keydown', (e) => {
-        // Não interferir durante captura de remap
         if (capturingAction) return;
-
-        // Não interferir em modo de repouso
         if (document.body.classList.contains('rest-mode')) return;
 
-        const k        = e.key;
+        const k = e.key;
         const activeEl = document.activeElement;
         const isTyping = activeEl && (
-            activeEl.tagName === 'INPUT' ||
-            activeEl.tagName === 'TEXTAREA' ||
-            activeEl.isContentEditable
+            activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable
         );
 
-        /* ── DEFINIÇÕES abertas ──────────────────────── */
+        /* ── DEFINIÇÕES abertas ── */
         if (!settingsOverlay.classList.contains('hidden')) {
-            if (k === 'Escape') { e.preventDefault(); closeSettings(); }
-            // Deixar todas as outras teclas funcionarem nas definições
+            if (k === keymap.settings.key || k === 'Escape') { e.preventDefault(); closeSettings(); }
             return;
         }
 
-        /* ── TUTORIAL aberto ─────────────────────────── */
+        /* ── TUTORIAL aberto ── */
         if (tutorialOverlay && !tutorialOverlay.classList.contains('hidden')) {
-            if (k === 'Escape') {
-                e.preventDefault(); closeTutorial(); return;
-            }
-            if ((k === 'ArrowRight' || k === 'Enter') && !isTyping) {
+            if (k === keymap.settings.key || k === 'Escape') { e.preventDefault(); closeTutorial(); return; }
+            if ((k === keymap.nav_right.key || k === keymap.confirm.key) && !isTyping) {
                 e.preventDefault();
                 if (tutorialStep >= TUTORIAL_STEPS - 1) closeTutorial();
                 else goToTutorialStep(tutorialStep + 1);
                 return;
             }
-            if (k === 'ArrowLeft' && !isTyping) {
+            if (k === keymap.nav_left.key && !isTyping) {
                 e.preventDefault();
                 if (tutorialStep > 0) goToTutorialStep(tutorialStep - 1);
                 return;
@@ -1272,9 +1281,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        /* ── MODAL DE RESULTADO aberto ───────────────── */
+        /* ── MODAL DE RESULTADO aberto ── */
         if (!overlay.classList.contains('hidden')) {
-            if ((k === 'Enter' || k === ' ') && !isTyping) {
+            if ((k === keymap.confirm.key || k === ' ') && !isTyping) {
                 e.preventDefault();
                 const primaryBtn = modalButtons.querySelector('.primary-btn');
                 if (primaryBtn) primaryBtn.click();
@@ -1282,107 +1291,68 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        /* ── Não intercetamos escrita em campos de texto ── */
         if (isTyping) return;
 
-        /* ── ESC → abrir Definições (qualquer ecrã exceto boas-vindas) ── */
-        if (k === 'Escape') {
-            const onMain = [screenHome, screenLevels, screenRoutines, screenGame]
-                .some(s => s.classList.contains('active'));
+        /* ── ABRIR DEFINIÇÕES ── */
+        if (k === keymap.settings.key || k === 'Escape') {
+            const onMain = [screenHome, screenLevels, screenRoutines, screenGame].some(s => s.classList.contains('active'));
             if (onMain) { e.preventDefault(); openSettings(); }
             return;
         }
 
-        /* ════ ECRÃ: BOAS-VINDAS ═══════════════════════ */
-        if (screenWelcome.classList.contains('active')) {
-            // Enter tratado diretamente pelo listener no nameInputEl
-            return;
-        }
-
-        /* ════ ECRÃ: INÍCIO (home) ══════════════════════ */
+        /* ════ ECRÃ: INÍCIO (home) ════ */
         if (screenHome.classList.contains('active')) {
-            if (k === ' ' || k === 'Enter') {
-                e.preventDefault();
-                if (!btnPlay.disabled) btnPlay.click();
-                return;
-            }
-            if (k === 'ArrowLeft') {
-                e.preventDefault(); btnPrev.click(); return;
-            }
-            if (k === 'ArrowRight') {
-                e.preventDefault(); btnNext.click(); return;
-            }
+            if (k === keymap.confirm.key || k === ' ') { e.preventDefault(); if (!btnPlay.disabled) btnPlay.click(); return; }
+            if (k === keymap.nav_left.key) { e.preventDefault(); btnPrev.click(); return; }
+            if (k === keymap.nav_right.key) { e.preventDefault(); btnNext.click(); return; }
             return;
         }
 
-        /* ════ ECRÃ: NÍVEIS ═════════════════════════════ */
+        /* ════ ECRÃ: NÍVEIS ════ */
         if (screenLevels.classList.contains('active')) {
             const lvlCards = Array.from(document.querySelectorAll('#screen-levels .level-card'));
-
-            if (k === 'Backspace') {
-                e.preventDefault(); clearLevelFocus(); btnBackLevels.click(); return;
+            if (k === keymap.back.key || k === 'Backspace') { e.preventDefault(); clearLevelFocus(); btnBackLevels.click(); return; }
+            if (k === keymap.nav_up.key) {
+                e.preventDefault(); focusedLevelIndex = Math.max(0, focusedLevelIndex - 1); updateLevelKeyboardFocus(lvlCards); return;
             }
-            if (k === 'ArrowUp') {
-                e.preventDefault();
-                focusedLevelIndex = Math.max(0, focusedLevelIndex - 1);
-                updateLevelKeyboardFocus(lvlCards); return;
+            if (k === keymap.nav_down.key) {
+                e.preventDefault(); focusedLevelIndex = Math.min(lvlCards.length - 1, focusedLevelIndex + 1); updateLevelKeyboardFocus(lvlCards); return;
             }
-            if (k === 'ArrowDown') {
-                e.preventDefault();
-                focusedLevelIndex = Math.min(lvlCards.length - 1, focusedLevelIndex + 1);
-                updateLevelKeyboardFocus(lvlCards); return;
-            }
-            if (k === 'Enter' || k === ' ') {
-                e.preventDefault();
-                const focused = lvlCards[focusedLevelIndex];
-                if (focused && !focused.classList.contains('locked')) focused.click();
-                return;
+            if (k === keymap.confirm.key || k === ' ') {
+                e.preventDefault(); const focused = lvlCards[focusedLevelIndex]; if (focused && !focused.classList.contains('locked')) focused.click(); return;
             }
             return;
         }
 
-        /* ════ ECRÃ: ROTINAS ════════════════════════════ */
+        /* ════ ECRÃ: ROTINAS ════ */
         if (screenRoutines.classList.contains('active')) {
             const routCards = Array.from(document.querySelectorAll('#routines-list .level-card'));
-
-            if (k === 'Backspace') {
-                e.preventDefault(); clearRoutineFocus(); btnBackRoutines.click(); return;
+            if (k === keymap.back.key || k === 'Backspace') { e.preventDefault(); clearRoutineFocus(); btnBackRoutines.click(); return; }
+            if (k === keymap.nav_up.key) {
+                e.preventDefault(); focusedRoutineIndex = Math.max(0, focusedRoutineIndex - 1); updateRoutineKeyboardFocus(routCards); return;
             }
-            if (k === 'ArrowUp') {
-                e.preventDefault();
-                focusedRoutineIndex = Math.max(0, focusedRoutineIndex - 1);
-                updateRoutineKeyboardFocus(routCards); return;
+            if (k === keymap.nav_down.key) {
+                e.preventDefault(); focusedRoutineIndex = Math.min(routCards.length - 1, focusedRoutineIndex + 1); updateRoutineKeyboardFocus(routCards); return;
             }
-            if (k === 'ArrowDown') {
-                e.preventDefault();
-                focusedRoutineIndex = Math.min(routCards.length - 1, focusedRoutineIndex + 1);
-                updateRoutineKeyboardFocus(routCards); return;
-            }
-            if (k === 'Enter' || k === ' ') {
-                e.preventDefault();
-                const focused = routCards[focusedRoutineIndex];
-                if (focused && !focused.classList.contains('locked')) focused.click();
-                return;
+            if (k === keymap.confirm.key || k === ' ') {
+                e.preventDefault(); const focused = routCards[focusedRoutineIndex]; if (focused && !focused.classList.contains('locked')) focused.click(); return;
             }
             return;
         }
 
-        /* ════ ECRÃ: JOGO ═══════════════════════════════ */
-        /* ════ ECRÃ: JOGO ═══════════════════════════════ */
+        /* ════ ECRÃ: JOGO ════ */
         if (screenGame.classList.contains('active')) {
             if (flyInProgress) return;
 
-            // Backspace → voltar
-            if (k === 'Backspace') {
-                e.preventDefault(); btnBackGame.click(); return;
-            }
+            // Voltar
+            if (k === keymap.back.key || k === 'Backspace') { e.preventDefault(); btnBackGame.click(); return; }
 
-            // Space → Verificar (apenas quando botão está visível)
-            if (k === ' ') {
+            // Se o botão Verificar está ativo, o confirm ou space ativam-no
+            if (k === keymap.confirm.key || k === ' ') {
                 if (!btnConfirmContainer.classList.contains('hidden')) {
                     e.preventDefault(); btnConfirm.click();
+                    return; 
                 }
-                return;
             }
 
             const cardsContainer = document.getElementById('cards-container');
@@ -1391,66 +1361,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const allSlots      = Array.from(document.querySelectorAll('.drag-slot'));
 
             if (k === keymap.nav_left.key || k === keymap.nav_right.key) {
-                e.preventDefault();
-                if (!playableCards.length) return;
-                keyboardMode = true;
+                e.preventDefault(); if (!playableCards.length) return; keyboardMode = true;
                 const dir = (k === keymap.nav_right.key) ? 1 : -1;
                 focusedCardIndex = (focusedCardIndex + dir + playableCards.length) % playableCards.length;
                 updateKeyboardFocus(playableCards, allSlots);
             } else if (k === keymap.nav_up.key || k === keymap.nav_down.key) {
-                e.preventDefault();
-                if (!allSlots.length) return;
-                keyboardMode = true;
+                e.preventDefault(); if (!allSlots.length) return; keyboardMode = true;
                 const dir = (k === keymap.nav_down.key) ? 1 : -1;
                 focusedSlotIndex = (focusedSlotIndex + dir + allSlots.length) % allSlots.length;
                 updateKeyboardFocus(playableCards, allSlots);
             } else if (k === keymap.hint.key || k === keymap.hint.key.toUpperCase()) {
-                e.preventDefault();
-                showHint();
+                e.preventDefault(); showHint();
             } else if (k === keymap.confirm.key) {
                 e.preventDefault();
-                
-                // Ativa o modo de teclado se for a primeira vez que se carrega no Enter
                 if (!keyboardMode) {
-                    keyboardMode = true; 
-                    focusedCardIndex = 0; 
-                    focusedSlotIndex = 0;
+                    keyboardMode = true; focusedCardIndex = 0; focusedSlotIndex = 0;
                     updateKeyboardFocus(playableCards, allSlots);
                     showEncouragement(`Usa ${keymap.nav_left.display}/${keymap.nav_right.display} para cartões, ${keymap.nav_up.display}/${keymap.nav_down.display} para slots! ⌨️`);
                     return;
                 }
-
                 const slot = allSlots[focusedSlotIndex];
-
-                // 1. LÓGICA DE REMOÇÃO: Se o slot focado já tiver um cartão, remove-o
                 if (slot && slot.firstElementChild) {
                     const cardToRemove = slot.firstElementChild;
-                    
-                    // Limpa os dados do slot e a classe do cartão
-                    slot.dataset.slottedId = '';
-                    cardToRemove.classList.remove('slotted');
-                    
-                    // Devolve o cartão à base
-                    returnCardToHome(cardToRemove);
-                    checkWinCondition();
-                    
-                    // Atualiza a lista de cartões jogáveis e reajusta o foco visual
-                    const updatedCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
-                    updateKeyboardFocus(updatedCards, allSlots);
+                    slot.dataset.slottedId = ''; cardToRemove.classList.remove('slotted');
+                    returnCardToHome(cardToRemove); checkWinCondition();
+                    updateKeyboardFocus(Array.from(cardsContainer.querySelectorAll('.drag-card')), allSlots);
                     return;
                 }
-
-                // 2. LÓGICA DE COLOCAÇÃO: Se o slot estiver vazio, tenta colocar o cartão
                 if (!playableCards.length) return;
                 const card = playableCards[focusedCardIndex];
-                
-                if (card && slot && !slot.firstElementChild) {
-                    flyCardToSlot(card, slot);
-                }
+                if (card && slot && !slot.firstElementChild) flyCardToSlot(card, slot);
             }
         }
     });
-
     /* ══════════════════════════════
        ANIMAÇÃO "VÔO" DO CARTÃO (teclado → slot)
     ══════════════════════════════ */
