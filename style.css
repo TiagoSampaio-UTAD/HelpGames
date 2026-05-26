@@ -1145,23 +1145,42 @@ body.size-small  .drag-card { font-size: 0.8rem; }
     max-width: 360px; width: 100%;
     box-shadow: 0 30px 60px rgba(0,0,0,0.3);
     animation: tutorialEntry 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    max-height: 90vh;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden; 
 }
 @keyframes tutorialEntry { 0% { transform: scale(0.8) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
 
-.tutorial-progress { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
+.tutorial-progress { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-shrink: 0;}
 .tutorial-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-light); transition: var(--transition); }
 .tutorial-dot.active { background: var(--primary-color); transform: scale(1.3); }
 .tutorial-dot.done   { background: #5aaa65; }
 
-.tutorial-step {display: none; text-align: center; flex: 1; overflow-y: auto; padding-bottom: 10px;}
+.tutorial-step {
+    display: none;
+    flex-direction: column; 
+    text-align: center;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden; 
+    padding-bottom: 4px;
+}
 .tutorial-step::-webkit-scrollbar { width: 6px; }
 .tutorial-step::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 10px; }.tutorial-step.active { display: block; }.tutorial-step.active { display: block; }
 
+.tutorial-step.active { 
+    display: flex; /* Tem de ser flex em vez de block */
+}
+
 .tutorial-step-icon { font-size: 3rem; margin-bottom: 10px; animation: iconBounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.tutorial-step-icon,
+.tutorial-step-title,
+.tutorial-step-text {
+    flex-shrink: 0;
+}
+
 @keyframes iconBounceIn { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.2); } 100% { transform: scale(1); opacity: 1; } }
 
 .tutorial-step-title { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); margin-bottom: 10px; }
@@ -1199,7 +1218,26 @@ body.size-small  .drag-card { font-size: 0.8rem; }
 .tutorial-slot--filled { background: var(--primary-color); border-color: var(--primary-color); color: white; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .tutorial-slot--filled span { color: rgba(255,255,255,0.7); }
 
-.tutorial-keyboard-grid { display: flex; flex-direction: column; gap: 10px; text-align: left; margin: 8px 0; }
+.tutorial-keyboard-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    text-align: left; 
+    margin: 8px 0 0 0; 
+    
+    /* A Magia do Scroll Interno */
+    flex: 1; 
+    overflow-y: auto; 
+    min-height: 0; /* Regra de ouro para o flexbox scroll funcionar! */
+    padding-right: 8px; /* Dá um espacinho para a barra não colar no texto */
+}
+
+/* Apaga as antigas regras de scroll do .tutorial-step e usa estas para a grid */
+.tutorial-keyboard-grid::-webkit-scrollbar { width: 6px; }
+.tutorial-keyboard-grid::-webkit-scrollbar-thumb { 
+    background: var(--border-light); 
+    border-radius: 10px; 
+}
 .tutorial-key-row { display: flex; align-items: center; gap: 14px; }
 .tutorial-key-row kbd {
     background: var(--bg-secondary); border: 2px solid var(--border-light); border-bottom-width: 4px;
@@ -1211,9 +1249,15 @@ body.size-small  .drag-card { font-size: 0.8rem; }
 .tutorial-key-row span { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
 
 .tutorial-nav {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 20px; padding-top: 16px; border-top: 2px solid var(--bg-secondary);
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    margin-top: 20px; 
+    padding-top: 16px; 
+    border-top: 2px solid var(--bg-secondary);
+    flex-shrink: 0;
 }
+
 .tutorial-nav-right { display: flex; gap: 8px; }
 .tutorial-skip-btn {
     background: transparent; border: none; font-family: inherit;
