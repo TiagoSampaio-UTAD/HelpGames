@@ -146,7 +146,7 @@ const LEVELS_DATA = {
    ════════════════════════════════════════════════ */
 const DEFAULT_KEYMAP = {
     confirm:   { label: 'Jogar',                   key: 'Enter',      display: 'Enter' },
-    space:     { label: 'Confirmar',               key: ' ',          display: 'Space' },
+    space:     { label: 'Verificar/Confirmar',     key: ' ',          display: 'Space' },
     nav_left:  { label: 'Mover à esquerda',        key: 'ArrowLeft',  display: '←' },
     nav_right: { label: 'Mover à direita',         key: 'ArrowRight', display: '→' },
     nav_up:    { label: 'Mover para cima',         key: 'ArrowUp',    display: '↑' },
