@@ -20,98 +20,168 @@ const LEVELS_DATA = {
             { text: "Ir ao caixote",  img: "https://static.arasaac.org/pictograms/27208/27208_2500.png" },
             { text: "Deitar dentro",  img: "https://static.arasaac.org/pictograms/15479/15479_2500.png" }
         ]},
-        { title: "Pôr o casaco", steps: [
-            { text: "Pegar no casaco",  img: "https://static.arasaac.org/pictograms/3229/3229_2500.png" },
+        { title: "Pôr a bata", steps: [
+            { text: "Pegar na bata",  img: "https://static.arasaac.org/pictograms/3229/3229_2500.png" },
             { text: "Enfiar os braços", img: "https://static.arasaac.org/pictograms/39853/39853_2500.png" },
-            { text: "Fechar o fecho",   img: "https://static.arasaac.org/pictograms/5357/5357_2500.png" }
+            { text: "Abotoar a bata",   img: "https://static.arasaac.org/pictograms/5357/5357_2500.png" }
         ]}
     ],
     2: [
         { title: "Escovar os dentes", steps: [
-            { text: "Pegar na escova" }, { text: "Colocar pasta de dentes" },
-            { text: "Escovar os dentes" }, { text: "Limpar a boca" }
+            { text: "Pegar na escova",         img: "https://static.arasaac.org/pictograms/38813/38813_2500.png" },
+            { text: "Colocar pasta de dentes", img: "https://static.arasaac.org/pictograms/30087/30087_2500.png" },
+            { text: "Escovar os dentes",       img: "https://static.arasaac.org/pictograms/2326/2326_2500.png" },
+            { text: "Limpar a boca",           img: "https://static.arasaac.org/pictograms/8560/8560_2500.png" }
         ]},
         { title: "Preparar a mochila", steps: [
-            { text: "Abrir a mochila" }, { text: "Meter os cadernos e manuais" },
-            { text: "Meter o estojo" }, { text: "Fechar a mochila" }
+            { text: "Abrir a mochila",             img: "https://static.arasaac.org/pictograms/38700/38700_2500.png" },
+            { text: "Meter os cadernos e manuais", img: "https://static.arasaac.org/pictograms/8166/8166_2500.png" },
+            { text: "Meter o lanche",              img: "https://static.arasaac.org/pictograms/36418/36418_2500.png" },
+            { text: "Fechar a mochila",            img: "https://static.arasaac.org/pictograms/38695/38695_2500.png" }
         ]},
         { title: "Lavar a cara", steps: [
-            { text: "Abrir a torneira" }, { text: "Molhar a cara" },
-            { text: "Ensaboar a cara" }, { text: "Lavar e secar" }
+            { text: "Abrir a torneira", img: "https://static.arasaac.org/pictograms/21341/21341_2500.png" },
+            { text: "Molhar a cara",    img: "https://static.arasaac.org/pictograms/34777/34777_2500.png" },
+            { text: "Ensaboar a cara",  img: "https://static.arasaac.org/pictograms/6546/6546_2500.png" },
+            { text: "Lavar e secar",    img: "https://static.arasaac.org/pictograms/37835/37835_2500.png" }
         ]},
         { title: "Ir para a cama", steps: [
-            { text: "Vestir o pijama" }, { text: "Escovar os dentes" },
-            { text: "Deitar" }, { text: "Apagar a luz" }
+            { text: "Deitar na cama",    img: "https://static.arasaac.org/pictograms/6027/6027_2500.png" },
+            { text: "Tapar com a manta", img: "https://static.arasaac.org/pictograms/34465/34465_2500.png" },
+            { text: "Apagar a luz",      img: "img/turned_off_lamp_edited.png" },
+            { text: "Dormir",            img: "https://static.arasaac.org/pictograms/6479/6479_2500.png" }
         ]},
-        { title: "Pôr a mesa", steps: [
-            { text: "Pegar nos pratos" }, { text: "Colocar os pratos" },
-            { text: "Pôr os talheres" }, { text: "Pôr os copos" }
+        { title: "Andar de Autocarro", steps: [
+            { text: "Esperar na paragem",  img: "https://static.arasaac.org/pictograms/25078/25078_2500.png" },
+            { text: "Entrar no autocarro", img: "https://static.arasaac.org/pictograms/36595/36595_2500.png" },
+            { text: "Andar de autocarro",  img: "https://static.arasaac.org/pictograms/36962/36962_2500.png" },
+            { text: "Sair do autocarro",   img: "https://static.arasaac.org/pictograms/36842/36842_2500.png" }
         ]}
     ],
     3: [
+        { title: "Lavar uma maçã", steps: [
+            { text: "Pegar na maçã",        img: "https://static.arasaac.org/pictograms/2462/2462_2500.png" },
+            { text: "Abrir a torneira",     img: "https://static.arasaac.org/pictograms/21341/21341_2500.png" },
+            { text: "Lavar a maçã na água", img: "https://static.arasaac.org/pictograms/34826/34826_2500.png" },
+            { text: "Fechar a torneira",    img: "https://static.arasaac.org/pictograms/11739/11739_2500.png" },
+            { text: "Secar a maçã e comer", img: "img/apple_edited.png" }
+        ]},
         { title: "Lavar o cabelo", steps: [
-            { text: "Molhar o cabelo" }, { text: "Deitar champô na mão" },
-            { text: "Esfregar o cabelo" }, { text: "Tirar o champô do cabelo" }, { text: "Secar com a toalha" }
+            { text: "Molhar o cabelo",          img: "https://static.arasaac.org/pictograms/8978/8978_2500.png" },
+            { text: "Deitar champô na mão",     img: "https://static.arasaac.org/pictograms/2699/2699_2500.png" },
+            { text: "Esfregar o cabelo",        img: "https://static.arasaac.org/pictograms/38555/38555_2500.png" },
+            { text: "Tirar o champô do cabelo", img: "https://static.arasaac.org/pictograms/26945/26945_2500.png" },
+            { text: "Secar com a toalha",       img: "https://static.arasaac.org/pictograms/28503/28503_2500.png" }
         ]},
         { title: "Tomar duche", steps: [
-            { text: "Abrir o chuveiro" }, { text: "Molhar o corpo" },
-            { text: "Ensaboar o corpo" }, { text: "Tirar o sabão do corpo" }, { text: "Fechar o chuveiro" }
-        ]},
-        { title: "Lavar uma maçã", steps: [
-            { text: "Pegar na maçã" }, { text: "Abrir a torneira" },
-            { text: "Lavar a maçã na água" }, { text: "Fechar a torneira" }, { text: "Secar a maçã e comer" }
+            { text: "Abrir o chuveiro",         img: "https://static.arasaac.org/pictograms/2370/2370_2500.png" },
+            { text: "Molhar o corpo",           img: "https://static.arasaac.org/pictograms/26803/26803_2500.png" },
+            { text: "Ensaboar o corpo",         img: "https://static.arasaac.org/pictograms/21826/21826_2500.png" },
+            { text: "Tirar o sabão do corpo",   img: "https://static.arasaac.org/pictograms/28505/28505_2500.png"}, 
+            { text: "Fechar o chuveiro",        img: "img/shower_edited.png" },
         ]},
         { title: "Aquecer o leite no micro-ondas", steps: [
-            { text: "Abrir o micro-ondas" }, { text: "Pôr a caneca dentro" },
-            { text: "Fechar o micro-ondas" }, { text: "Carregar no botão para ligar" }, { text: "Tirar a caneca quando apitar" }
+            { text: "Abrir o micro-ondas",            img: "img/microwave_opened_edited.png" },
+            { text: "Pôr a caneca dentro",            img: "img/microwave_with_mug_edited.png" },
+            { text: "Fechar o micro-ondas",           img: "img/microwave_with_mug_closed_edited.png" },
+            { text: "Carregar no botão para ligar",   img: "img/microwave_turned_on_edited.png" },
+            { text: "Tirar a caneca quando apitar",   img: "img/microwave_ringing_edited.png" }
         ]},
         { title: "Afiar um lápis", steps: [
-            { text: "Pegar no lápis e no afia" }, { text: "Meter o lápis no buraco do afia" },
-            { text: "Rodar o lápis com a mão" }, { text: "Tirar o lápis do afia" }, { text: "Deitar o lixo do afia no caixote" }
+            { text: "Pegar no lápis e no afia",           img:"" },
+            { text: "Meter o lápis no buraco do afia",    img:"" },
+            { text: "Rodar o lápis com a mão",            img:"" },
+            { text: "Tirar o lápis do afia",              img:"" },
+            { text: "Deitar o lixo do afia no caixote",   img:"" }
         ]}
     ],
     4: [
         { title: "Preparar o lanche", steps: [
-            { text: "Pegar no pão" }, { text: "Barrar com manteiga" }, { text: "Meter o fiambre" },
-            { text: "Fechar o pão" }, { text: "Colocar no saco" }, { text: "Meter na mochila" }
-        ]},
-        { title: "Rotina da manhã", steps: [
-            { text: "Acordar" }, { text: "Ir à casa de banho" }, { text: "Lavar a cara" },
-            { text: "Escovar os dentes" }, { text: "Vestir-se" }, { text: "Tomar o pequeno-almoço" }
+            { text: "Pegar no pão",                 img:"https://static.arasaac.org/pictograms/2865/2865_2500.png" }, 
+            { text: "Barrar com manteiga",          img:"https://static.arasaac.org/pictograms/7292/7292_2500.png" }, 
+            { text: "Meter o fiambre e o queijo",   img:"img/Ham_and_Cheese_edited.png" },
+            { text: "Fechar o pão",                 img:"https://static.arasaac.org/pictograms/38504/38504_2500.png" }, 
+            { text: "Colocar no saco",              img:"img/Sandwich_edited.png" }, 
+            { text: "Meter na mochila",             img:"img/Putting_sandwich_on_backpack_edited.png" }
         ]},
         { title: "Ir à casa de banho", steps: [
-            { text: "Baixar as calças e cuecas" }, { text: "Sentar na sanita" }, { text: "Fazer chichi ou cocó" },
-            { text: "Limpar com o papel higiénico" }, { text: "Puxar o autoclismo" }, { text: "Vestir as cuecas e as calças" }
+            { text: "Baixar as calças e cuecas",      img:"https://static.arasaac.org/pictograms/10143/10143_2500.png" }, 
+            { text: "Sentar na sanita",               img:"https://static.arasaac.org/pictograms/16889/16889_2500.png" }, 
+            { text: "Fazer chichi ou cocó",           img:"https://static.arasaac.org/pictograms/16709/16709_2500.png" },
+            { text: "Limpar com o papel higiénico",   img:"https://static.arasaac.org/pictograms/37402/37402_2500.png" }, 
+            { text: "Puxar o autoclismo",             img:"img/autoclism_edited.png" }, 
+            { text: "Vestir as cuecas e as calças",   img:"https://static.arasaac.org/pictograms/10180/10180_2500.png" }
         ]},
         { title: "Beber sumo de pacote", steps: [
-            { text: "Pegar no pacote" }, { text: "Tirar a palhinha" }, { text: "Tirar o plástico da palhinha" },
-            { text: "Espetar a palhinha no buraco" }, { text: "Pôr na boca" }, { text: "Beber" }
+            { text: "Pegar no pacote",                img:"" }, 
+            { text: "Tirar a palhinha",               img:"" }, 
+            { text: "Tirar o plástico da palhinha",   img:"" },
+            { text: "Espetar a palhinha no buraco",   img:"" }, 
+            { text: "Pôr na boca",                    img:"" }, 
+            { text: "Beber",                          img:"" }
         ]},
         { title: "Comer um iogurte", steps: [
-            { text: "Pegar no iogurte" }, { text: "Tirar a tampa" }, { text: "Pegar na colher" },
-            { text: "Meter a colher no iogurte" }, { text: "Pôr na boca" }, { text: "Comer" }
+            { text: "Pegar no iogurte",            img:"" },
+            { text: "Tirar a tampa",               img:"" }, 
+            { text: "Pegar na colher",             img:"" },
+            { text: "Meter a colher no iogurte",   img:"" }, 
+            { text: "Pôr na boca",                 img:"" }, 
+            { text: "Comer",                       img:"" }
+        ]}, 
+        { title: "Jogar no tablet", steps: [
+            { text: "Pegar no tablet",    img:"" }, 
+            { text: "Ligar o ecrã",       img:"" }, 
+            { text: "Carregar no jogo",   img:"" },
+            { text: "Jogar o jogo",       img:"" }, 
+            { text: "Fechar o jogo",      img:"" }, 
+            { text: "Desligar o ecrã",    img:"" }
         ]}
     ],
     5: [
-        { title: "Jogar no tablet", steps: [
-            { text: "Pegar no tablet" }, { text: "Ligar o ecrã" }, { text: "Carregar no jogo" },
-            { text: "Jogar o jogo" }, { text: "Fechar o jogo" }, { text: "Desligar o ecrã" }, { text: "Pousar o tablet na mesa" }
+        { title: "Rotina da manhã", steps: [
+            { text: "Acordar",                  img:"" }, 
+            { text: "Ir à casa de banho",       img:"" }, 
+            { text: "Lavar a cara",             img:"" },
+            { text: "Escovar os dentes",        img:"" }, 
+            { text: "Vestir-se",                img:"" }, 
+            { text: "Tomar o pequeno-almoço",   img:"" }, 
+            { text: "Preparar a mochila",       img:"" }
         ]},
         { title: "Rotina do almoço escolar", steps: [
-            { text: "Lavar as mãos" }, { text: "Pegar no tabuleiro" }, { text: "Escolher a refeição" },
-            { text: "Sentar à mesa" }, { text: "Comer a sopa" }, { text: "Comer o prato principal" }, { text: "Beber água" }
+            { text: "Lavar as mãos",             img:"" }, 
+            { text: "Pegar no tabuleiro",        img:"" }, 
+            { text: "Escolher a refeição",       img:"" },
+            { text: "Sentar à mesa",             img:"" }, 
+            { text: "Comer a sopa",              img:"" }, 
+            { text: "Comer o prato principal",   img:"" }, 
+            { text: "Beber água",                img:"" }
         ]},
         { title: "Dia de escola completo", steps: [
-            { text: "Acordar" }, { text: "Tomar banho" }, { text: "Tomar o pequeno-almoço" },
-            { text: "Preparar a mochila" }, { text: "Ir para a escola" }, { text: "Chegar a casa" }, { text: "Fazer os trabalhos de casa" }
+            { text: "Acordar",                      img:"" }, 
+            { text: "Tomar banho",                  img:"" }, 
+            { text: "Tomar o pequeno-almoço",       img:"" },
+            { text: "Preparar a mochila",           img:"" }, 
+            { text: "Ir para a escola",             img:"" }, 
+            { text: "Chegar a casa",                img:"" }, 
+            { text: "Fazer os trabalhos de casa",   img:"" }
         ]},
         { title: "Preparar para sair à rua no frio", steps: [
-            { text: "Pegar no casaco" }, { text: "Vestir o casaco" }, { text: "Fechar o fecho" },
-            { text: "Pôr o gorro na cabeça" }, { text: "Abrir a porta da rua" }, { text: "Sair de casa" }, { text: "Fechar a porta" }
+            { text: "Pegar no casaco",         img:"" }, 
+            { text: "Vestir o casaco",         img:"" }, 
+            { text: "Fechar o fecho",          img:"" },
+            { text: "Pôr o gorro na cabeça",   img:"" }, 
+            { text: "Abrir a porta da rua",    img:"" }, 
+            { text: "Sair de casa",            img:"" }, 
+            { text: "Fechar a porta",          img:"" }
         ]},
         { title: "Rotina completa da noite", steps: [
-            { text: "Jantar" }, { text: "Lavar as mãos" }, { text: "Tomar banho" },
-            { text: "Vestir o pijama" }, { text: "Escovar os dentes" }, { text: "Preparar a roupa para amanhã" }, { text: "Deitar" }
+            { text: "Jantar",                         img:"" }, 
+            { text: "Lavar as mãos",                  img:"" }, 
+            { text: "Tomar banho",                    img:"" },
+            { text: "Vestir o pijama",                img:"" }, 
+            { text: "Escovar os dentes",              img:"" }, 
+            { text: "Preparar a roupa para amanhã",   img:"" }, 
+            { text: "Deitar",                         img:"" }
         ]}
     ]
 };
@@ -120,13 +190,15 @@ const LEVELS_DATA = {
    MAPEAMENTO DE TECLAS – Padrão e persistência
    ════════════════════════════════════════════════ */
 const DEFAULT_KEYMAP = {
-    nav_left:  { label: 'Mover cartão à esquerda',  key: 'ArrowLeft',  display: '←' },
-    nav_right: { label: 'Mover cartão à direita',   key: 'ArrowRight', display: '→' },
-    nav_up:    { label: 'Mover slot acima',          key: 'ArrowUp',    display: '↑' },
-    nav_down:  { label: 'Mover slot abaixo',         key: 'ArrowDown',  display: '↓' },
-    confirm:   { label: 'Colocar / Confirmar',       key: 'Enter',      display: 'Enter' },
-    close:     { label: 'Fechar / Cancelar',         key: 'Escape',     display: 'Esc' },
-    hint:      { label: 'Mostrar dica',              key: 'h',          display: 'H' },
+    confirm:   { label: 'Jogar',                   key: 'Enter',      display: 'Enter' },
+    space:     { label: 'Verificar/Confirmar',     key: ' ',          display: 'Space' },
+    nav_left:  { label: 'Mover à esquerda',        key: 'ArrowLeft',  display: '←' },
+    nav_right: { label: 'Mover à direita',         key: 'ArrowRight', display: '→' },
+    nav_up:    { label: 'Mover para cima',         key: 'ArrowUp',    display: '↑' },
+    nav_down:  { label: 'Mover para baixo',        key: 'ArrowDown',  display: '↓' },
+    back:      { label: 'Voltar atrás',            key: 'Backspace',  display: '⌫' },
+    hint:      { label: 'Mostrar Dica',            key: 'h',          display: 'H' },
+    settings:  { label: 'Abrir Definições',        key: 'Escape',     display: 'Esc' }
 };
 
 function loadKeymap() {
@@ -164,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ══════════════════════════════ */
     let currentSlide        = 0;
     let selectedAvatar      = 'gatinho';
-    let unlockedLevels      = [1];
+    let unlockedLevels      = JSON.parse(localStorage.getItem('taskly_unlocked_levels') || '[1]');
     let currentLevel        = 1;
     let currentRoutineIndex = 0;
     let currentLevelData    = [];
@@ -180,11 +252,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const AVATAR_THRESHOLDS = [0, 15, 30, 50, 75, 100, 125, 150];
 
-    // Teclado
+    // Teclado — jogo
     let keyboardMode     = false;
     let focusedCardIndex = 0;
     let focusedSlotIndex = 0;
     let flyInProgress    = false;
+
+    // Teclado — níveis e rotinas
+    let focusedLevelIndex   = 0;
+    let focusedRoutineIndex = 0;
 
     // Erros consecutivos
     let consecutiveErrors = 0;
@@ -192,8 +268,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Rotinas concluídas por nível: { "1": [0, 2], "2": [0], ... }
     let completedRoutines = JSON.parse(localStorage.getItem('taskly_completed') || '{}');
 
+    // Reforçar consistência: se todas as rotinas de um nível já foram
+    // concluídas, o nível seguinte tem de estar desbloqueado, mesmo que
+    // "taskly_unlocked_levels" ainda não tivesse sido guardado (corrige o
+    // bug de os níveis voltarem a aparecer bloqueados depois de recarregar
+    // a página).
+    Object.keys(LEVELS_DATA).map(Number).sort((a, b) => a - b).forEach(lvl => {
+        const total = LEVELS_DATA[lvl].length;
+        const done  = (completedRoutines[lvl] || []).length;
+        if (done >= total && LEVELS_DATA[lvl + 1] && !unlockedLevels.includes(lvl + 1)) {
+            unlockedLevels.push(lvl + 1);
+        }
+    });
+    localStorage.setItem('taskly_unlocked_levels', JSON.stringify(unlockedLevels));
+
     // Timer de sessão
-    let sessionTime     = 900; // 15 minutos em segundos
+    let sessionTimerEnabled   = localStorage.getItem('taskly_timer_enabled') !== 'false';
+    let sessionDurationMin    = parseInt(localStorage.getItem('taskly_timer_duration')) || 15;
+    let sessionTime     = sessionDurationMin * 60;
     let sessionInterval = null;
     let sessionExtended = false;
     let blockInterval   = null;
@@ -251,6 +343,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeRow      = document.getElementById('volume-row');
     const lowStimToggle  = document.getElementById('low-stim-toggle');
 
+    const sessionTimerToggle  = document.getElementById('session-timer-toggle');
+    const sessionTimerSub     = document.getElementById('session-timer-sub');
+    const sessionDurationBlock = document.getElementById('session-duration-block');
+    const durationPillBtns    = document.querySelectorAll('.size-pill-btn[data-duration]');
+
     const profileCard        = document.getElementById('profile-card');
     const profileNameDisplay = document.getElementById('profile-name-display');
     const profileNameInput   = document.getElementById('profile-name-input');
@@ -288,6 +385,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnStartTutorial = document.getElementById('btn-start-tutorial');
     const btnHelpHome      = document.getElementById('btn-help-home');
 
+    const demoOverlay      = document.getElementById('demo-overlay');
+    const demoProgress     = document.getElementById('demo-progress');
+    const demoCaption      = document.getElementById('demo-caption');
+    const demoSlotsEl      = document.getElementById('demo-slots');
+    const demoCardsEl      = document.getElementById('demo-cards');
+    const demoConfirmBtn   = document.getElementById('demo-confirm-btn');
+    const demoCelebration  = document.getElementById('demo-celebration');
+    const btnDemoPrev      = document.getElementById('btn-demo-prev');
+    const btnDemoNext      = document.getElementById('btn-demo-next');
+    const btnDemoSkip      = document.getElementById('btn-demo-skip');
+    const btnReplayDemo    = document.getElementById('btn-replay-demo');
+
     /* ══════════════════════════════
        ECRÃ DE BOAS-VINDAS
     ══════════════════════════════ */
@@ -303,6 +412,14 @@ document.addEventListener('DOMContentLoaded', () => {
         nameHintText.textContent = val.length > 0
             ? `Olá, ${val}! 👋`
             : 'Escreve o teu nome para começar';
+    });
+
+    // Enter no campo de nome → avançar
+    nameInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !btnStart.disabled) {
+            e.preventDefault();
+            btnStart.click();
+        }
     });
 
     btnStart.addEventListener('click', () => {
@@ -356,6 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
        TIMER DE SESSÃO E BLOQUEIO (15+5+30)
     ══════════════════════════════ */
     function startSessionTimer() {
+        if (!sessionTimerEnabled) return;
         if (sessionInterval) return;
         updateTimerDisplay();
         sessionInterval = setInterval(() => {
@@ -422,11 +540,9 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(sessionInterval);
         sessionInterval = null;
         hideExtensionToast();
-
         const now           = Date.now();
-        const blockDuration = 30 * 60 * 1000; // 30 minutos
+        const blockDuration = 30 * 60 * 1000;
         let   blockUntil    = localStorage.getItem('taskly_block_until');
-
         if (!blockUntil || parseInt(blockUntil) <= now) {
             blockUntil = now + blockDuration;
             localStorage.setItem('taskly_block_until', String(blockUntil));
@@ -438,7 +554,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('rest-mode');
         if (restModeOverlay) restModeOverlay.style.display = 'flex';
         if (blockInterval) clearInterval(blockInterval);
-
         const tick = () => {
             const remaining = blockUntil - Date.now();
             if (remaining <= 0) {
@@ -467,11 +582,67 @@ document.addEventListener('DOMContentLoaded', () => {
         screenHome.classList.add('active');
     }
 
-    // Verificar ao carregar se ainda está bloqueado
     const existingBlock = localStorage.getItem('taskly_block_until');
     if (existingBlock && parseInt(existingBlock) > Date.now()) {
         activateRestMode(parseInt(existingBlock));
     }
+
+    /* ══════════════════════════════
+       ATIVAR/DESATIVAR E DURAÇÃO DA SESSÃO
+       Algumas crianças beneficiam de sessões cronometradas (gestão de
+       tempo de ecrã); outras ficam ansiosas com a pressão do tempo.
+       Por isso, o temporizador pode ser completamente desligado.
+    ══════════════════════════════ */
+    function updateSessionTimerSub() {
+        if (!sessionTimerSub) return;
+        sessionTimerSub.textContent = sessionTimerEnabled
+            ? `${sessionDurationMin} min + 5 min extra se necessário · 30 min de pausa`
+            : 'Desligado — sem limite de tempo nesta sessão';
+    }
+
+    function applySessionTimerEnabled(enabled, save = true) {
+        sessionTimerEnabled = enabled;
+        if (sessionTimerToggle) {
+            sessionTimerToggle.classList.toggle('active', enabled);
+            sessionTimerToggle.setAttribute('aria-checked', String(enabled));
+        }
+        if (sessionDurationBlock) sessionDurationBlock.classList.toggle('disabled', !enabled);
+        document.body.classList.toggle('no-session-timer', !enabled);
+        updateSessionTimerSub();
+        if (save) localStorage.setItem('taskly_timer_enabled', String(enabled));
+
+        if (!enabled) {
+            clearInterval(sessionInterval);
+            sessionInterval = null;
+            hideExtensionToast();
+            if (timerWarningToast) timerWarningToast.classList.add('hidden');
+        }
+    }
+
+    if (sessionTimerToggle) {
+        sessionTimerToggle.addEventListener('click', () => {
+            applySessionTimerEnabled(!sessionTimerEnabled);
+        });
+    }
+
+    durationPillBtns.forEach(btn => {
+        if (parseInt(btn.dataset.duration) === sessionDurationMin) {
+            durationPillBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        btn.addEventListener('click', () => {
+            durationPillBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            sessionDurationMin = parseInt(btn.dataset.duration);
+            localStorage.setItem('taskly_timer_duration', String(sessionDurationMin));
+            sessionTime     = sessionDurationMin * 60;
+            sessionExtended = false;
+            updateTimerDisplay();
+            updateSessionTimerSub();
+        });
+    });
+
+    applySessionTimerEnabled(sessionTimerEnabled, false);
 
     /* ══════════════════════════════
        TAMANHO DOS ELEMENTOS
@@ -621,13 +792,30 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ══════════════════════════════
        TUTORIAL INTERATIVO
     ══════════════════════════════ */
-    const TUTORIAL_STEPS = 5;
+   const TUTORIAL_STEPS = 5;
     let tutorialStep = 0;
 
     const tutorialProgress = document.getElementById('tutorial-progress');
     const btnTutorialPrev  = document.getElementById('btn-tutorial-prev');
     const btnTutorialNext  = document.getElementById('btn-tutorial-next');
     const btnTutorialSkip  = document.getElementById('btn-tutorial-skip');
+
+    function updateTutorialKeys() {
+        const mapping = {
+            'tut-confirm': keymap.space.display,        // Space → "Jogar / Verificar"
+            'tut-nav_left_right': `${keymap.nav_left.display} ${keymap.nav_right.display}`,
+            'tut-nav_up_down': `${keymap.nav_up.display} ${keymap.nav_down.display}`,
+            'tut-confirm-2': keymap.confirm.display,    // Enter → "Confirmar / Colocar"
+            'tut-close': keymap.back.display,
+            'tut-hint': keymap.hint.display,
+            'tut-esc': keymap.settings.display
+        };
+
+        for (const [id, value] of Object.entries(mapping)) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value;
+        }
+    }
 
     function buildTutorialProgress() {
         if (!tutorialProgress) return;
@@ -657,6 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function startTutorial() {
         if (!tutorialOverlay) return;
+        updateTutorialKeys(); // Agora isto vai funcionar perfeitamente!
         tutorialStep = 0;
         goToTutorialStep(0);
         tutorialOverlay.classList.remove('hidden');
@@ -683,6 +872,136 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnHelpHome) btnHelpHome.addEventListener('click', startTutorial);
 
     /* ══════════════════════════════
+       DEMONSTRAÇÃO ANIMADA (antes do 1º Jogar)
+       Mostra, passo a passo, a mesma rotina "Lavar as
+       mãos" que a criança vai encontrar a seguir — com
+       os mesmos cartões e espaços do jogo real — para
+       que saiba exatamente o que esperar antes de jogar.
+    ══════════════════════════════ */
+    const DEMO_ROUTINE = (LEVELS_DATA[1] && LEVELS_DATA[1][0]) || null;
+    const DEMO_STEPS    = DEMO_ROUTINE ? DEMO_ROUTINE.steps.length + 1 : 0;
+    let demoStep            = 0;
+    let demoFromPlayButton  = false;
+    let demoCelebrateTimer  = null;
+
+    function buildDemoProgress() {
+        if (!demoProgress) return;
+        demoProgress.innerHTML = '';
+        for (let i = 0; i < DEMO_STEPS; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'tutorial-dot';
+            if (i === demoStep) dot.classList.add('active');
+            if (i < demoStep)  dot.classList.add('done');
+            demoProgress.appendChild(dot);
+        }
+    }
+
+    function buildDemoCard(stepObj, slotted, isNext) {
+        const card = document.createElement('div');
+        card.className = 'drag-card demo-card';
+        if (slotted) card.classList.add('slotted');
+        if (isNext)  card.classList.add('demo-next');
+
+        if (typeof stepObj === 'object' && stepObj.img) {
+            card.classList.add('drag-card--image');
+            const img = document.createElement('img');
+            img.src = stepObj.img; img.alt = stepObj.text; img.draggable = false; img.loading = 'lazy';
+            img.addEventListener('error', () => card.classList.add('img-error'), { once: true });
+            const label = document.createElement('span');
+            label.className = 'drag-card-label';
+            label.textContent = stepObj.text;
+            card.appendChild(img); card.appendChild(label);
+        } else {
+            const label = document.createElement('span');
+            label.className   = 'drag-card-label--text';
+            label.textContent = typeof stepObj === 'object' ? stepObj.text : stepObj;
+            card.appendChild(label);
+        }
+        return card;
+    }
+
+    function renderDemoFrame(step) {
+        if (!demoOverlay || !DEMO_ROUTINE) return;
+        clearTimeout(demoCelebrateTimer);
+        demoStep = step;
+
+        const steps        = DEMO_ROUTINE.steps;
+        const slottedCount = Math.min(step, steps.length);
+
+        demoSlotsEl.innerHTML = '';
+        demoCardsEl.innerHTML = '';
+        demoConfirmBtn.classList.remove('demo-next', 'demo-pressed');
+        demoCelebration.classList.add('hidden');
+
+        steps.forEach((s, i) => {
+            const slot = document.createElement('div');
+            slot.className = 'drag-slot demo-slot';
+            slot.dataset.stepDisplay = i + 1;
+            if (i < slottedCount) slot.appendChild(buildDemoCard(s, true, false));
+            demoSlotsEl.appendChild(slot);
+        });
+
+        steps.forEach((s, i) => {
+            if (i >= slottedCount) {
+                demoCardsEl.appendChild(buildDemoCard(s, false, i === slottedCount));
+            }
+        });
+
+        const captions = [
+            `As peças aparecem aqui em baixo. Arrasta a primeira — <strong>${steps[0].text}</strong> — para o espaço 1.`,
+            `Muito bem! Agora arrasta a segunda peça${steps[1] ? ' — <strong>' + steps[1].text + '</strong>' : ''} para o espaço 2.`,
+            `Falta uma!${steps[2] ? ' Arrasta <strong>' + steps[2].text + '</strong>' : ' Arrasta a última peça'} para o espaço 3.`,
+            `Quando as peças estiverem todas no lugar certo, carrega em <strong>✔ Verificar</strong>. Ganhas estrelas! ⭐`
+        ];
+        demoCaption.innerHTML = captions[Math.min(step, captions.length - 1)] || '';
+
+        if (step >= steps.length) {
+            demoConfirmBtn.classList.add('demo-next');
+            demoCelebrateTimer = setTimeout(() => {
+                demoConfirmBtn.classList.remove('demo-next');
+                demoConfirmBtn.classList.add('demo-pressed');
+                demoCelebration.classList.remove('hidden');
+            }, 700);
+        }
+
+        buildDemoProgress();
+        if (btnDemoPrev) btnDemoPrev.disabled = step === 0;
+        if (btnDemoNext) {
+            const isLast = step === DEMO_STEPS - 1;
+            btnDemoNext.textContent = isLast ? 'Vamos jogar! ▶' : 'Próximo ›';
+            btnDemoNext.classList.toggle('tutorial-finish-btn', isLast);
+        }
+    }
+
+    function startDemo(fromPlay) {
+        if (!demoOverlay || !DEMO_ROUTINE) { if (fromPlay) proceedToLevels(); return; }
+        demoFromPlayButton = !!fromPlay;
+        renderDemoFrame(0);
+        demoOverlay.classList.remove('hidden');
+    }
+
+    function closeDemo() {
+        if (!demoOverlay) return;
+        clearTimeout(demoCelebrateTimer);
+        demoOverlay.classList.add('hidden');
+        localStorage.setItem('taskly_demo_seen', 'true');
+        if (demoFromPlayButton) proceedToLevels();
+    }
+
+    if (btnDemoNext) btnDemoNext.addEventListener('click', () => {
+        if (demoStep >= DEMO_STEPS - 1) closeDemo();
+        else renderDemoFrame(demoStep + 1);
+    });
+    if (btnDemoPrev) btnDemoPrev.addEventListener('click', () => {
+        if (demoStep > 0) renderDemoFrame(demoStep - 1);
+    });
+    if (btnDemoSkip)   btnDemoSkip.addEventListener('click', closeDemo);
+    if (btnReplayDemo) btnReplayDemo.addEventListener('click', () => {
+        settingsOverlay.classList.add('hidden');
+        startDemo(false);
+    });
+
+    /* ══════════════════════════════
        MAPEAMENTO DE TECLAS
     ══════════════════════════════ */
     let capturingAction = null;
@@ -691,37 +1010,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderKeymap() {
         if (!keymapCard) return;
         keymapCard.innerHTML = '';
-        const order = ['nav_left','nav_right','nav_up','nav_down','confirm','close','hint'];
-        order.forEach((action, idx) => {
-            const entry = keymap[action];
-            const row = document.createElement('div');
-            row.className = 'keymap-row';
+        Object.keys(keymap).forEach((action) => {
+        const entry = keymap[action];
+        const row = document.createElement('div');
+        row.className = 'keymap-row';
 
-            const label = document.createElement('span');
-            label.className   = 'keymap-action-label';
-            label.textContent = entry.label;
-
-            const keyEl = document.createElement('span');
-            keyEl.className   = 'keymap-key-display';
-            keyEl.id          = `keymap-display-${action}`;
-            keyEl.textContent = entry.display;
-
-            const resetBtn = document.createElement('button');
-            resetBtn.className   = 'keymap-reset-btn';
-            resetBtn.id          = `keymap-btn-${action}`;
-            resetBtn.textContent = 'Redefinir';
-            resetBtn.addEventListener('click', () => startCapture(action));
-
-            row.appendChild(label);
-            row.appendChild(keyEl);
-            row.appendChild(resetBtn);
-            keymapCard.appendChild(row);
-
-            if (idx < order.length - 1) {
-                const div = document.createElement('div');
-                div.className = 'settings-divider';
-                keymapCard.appendChild(div);
-            }
+        row.innerHTML = `
+            <span class="keymap-action-label">${entry.label}</span>
+            <span class="keymap-key-display" id="keymap-display-${action}">${entry.display}</span>
+            <button class="keymap-reset-btn" id="keymap-btn-${action}">Redefinir</button>
+        `;
+        
+        keymapCard.appendChild(row);
+        
+        // Listener para o botão de redefinir
+        row.querySelector(`#keymap-btn-${action}`).addEventListener('click', () => startCapture(action));
         });
     }
 
@@ -750,6 +1053,8 @@ document.addEventListener('DOMContentLoaded', () => {
             saveKeymap(keymap);
             finishCapture();
             renderKeymap();
+            updateTutorialKeys();
+            addKeyHintBadges();
         };
         document.addEventListener('keydown', captureListener, { capture: true });
     }
@@ -769,9 +1074,10 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ══════════════════════════════
        DEFINIÇÕES – ABRIR / FECHAR
     ══════════════════════════════ */
+    function openSettings()  { settingsOverlay.classList.remove('hidden'); }
     function closeSettings() { settingsOverlay.classList.add('hidden'); }
 
-    settingsBtns.forEach(btn => btn.addEventListener('click', () => settingsOverlay.classList.remove('hidden')));
+    settingsBtns.forEach(btn => btn.addEventListener('click', openSettings));
     btnCloseSettings.addEventListener('click', closeSettings);
     if (btnCloseSettingsBot) btnCloseSettingsBot.addEventListener('click', closeSettings);
 
@@ -821,7 +1127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressContainer) {
             progressContainer.style.display = 'flex';
             if (nextThreshold !== null) {
-                const prevThreshold       = AVATAR_THRESHOLDS[unlockedAvatares - 1];
+                const prevThreshold        = AVATAR_THRESHOLDS[unlockedAvatares - 1];
                 const gainedInCurrentLevel = tasklyStars - prevThreshold;
                 const neededForNext        = nextThreshold - prevThreshold;
                 const percentage = Math.min(100, (gainedInCurrentLevel / neededForNext) * 100) || 0;
@@ -842,9 +1148,13 @@ document.addEventListener('DOMContentLoaded', () => {
         dots[currentSlide].classList.add('active');
 
         const isLocked = slides[currentSlide].classList.contains('locked');
-        btnPlay.disabled     = isLocked;
+        btnPlay.disabled      = isLocked;
         btnPlay.style.opacity = isLocked ? '0.5' : '1';
-        btnPlay.textContent   = isLocked ? `Precisa de ${AVATAR_THRESHOLDS[currentSlide]} ⭐` : 'Jogar ▶';
+        // Usar innerHTML para manter o badge de teclado
+        btnPlay.innerHTML = (isLocked
+            ? `Precisa de ${AVATAR_THRESHOLDS[currentSlide]} ⭐`
+            : 'Jogar ▶')
+            + (isLocked ? '' : ` <kbd class="btn-key-badge">${keymap.space.display}</kbd>`);
 
         if (!isLocked) {
             btnPlay.style.transform = 'scale(1.05)';
@@ -864,21 +1174,33 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ══════════════════════════════
        NAVEGAÇÃO PRINCIPAL
     ══════════════════════════════ */
-    btnPlay.addEventListener('click', () => {
-        if (!selectedAvatar) return;
+    function proceedToLevels() {
         startSessionTimer();
+        focusedLevelIndex = 0;
         setTimeout(() => {
             screenHome.classList.remove('active');
             screenLevels.classList.add('active');
         }, 150);
+    }
+
+    btnPlay.addEventListener('click', () => {
+        if (!selectedAvatar) return;
+        if (!localStorage.getItem('taskly_demo_seen')) {
+            startDemo(true);
+        } else {
+            proceedToLevels();
+        }
     });
 
     btnBackLevels.addEventListener('click', () => {
+        clearLevelFocus();
         screenLevels.classList.remove('active');
         screenHome.classList.add('active');
     });
 
     btnBackRoutines.addEventListener('click', () => {
+        clearRoutineFocus();
+        focusedLevelIndex = 0;
         screenRoutines.classList.remove('active');
         screenLevels.classList.add('active');
         updateLevelLocksStatus();
@@ -888,6 +1210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         screenGame.classList.remove('active');
         clearKeyboardFocus();
         keyboardMode = false;
+        focusedRoutineIndex = 0;
         showRoutinesScreen(currentLevel);
     });
 
@@ -909,6 +1232,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    updateLevelLocksStatus();
 
     const levelCards = document.querySelectorAll('.level-card');
     levelCards.forEach(card => {
@@ -935,6 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showRoutinesScreen(levelNumber) {
         currentLevel     = levelNumber;
         currentLevelData = LEVELS_DATA[currentLevel];
+        focusedRoutineIndex = 0; // Resetar foco ao entrar no ecrã
 
         routinesLevelTitle.textContent = `Nível ${currentLevel}`;
         routinesList.innerHTML = '';
@@ -1029,6 +1355,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.add('drag-card--image');
                 const img   = document.createElement('img');
                 img.src = step.img; img.alt = step.text; img.draggable = false;
+                img.loading = 'lazy';
+                img.addEventListener('error', () => card.classList.add('img-error'), { once: true });
                 const label = document.createElement('span');
                 label.className   = 'drag-card-label';
                 label.textContent = step.text;
@@ -1125,71 +1453,306 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.hint-target').forEach(el => el.classList.remove('hint-target'));
     }
 
-    /* ══════════════════════════════
-       NAVEGAÇÃO POR TECLADO (usando keymap configurável)
-    ══════════════════════════════ */
-    document.addEventListener('keydown', (e) => {
-        // ESC: fechar definições ou tutorial (sempre ativo)
-        if (e.key === keymap.close.key) {
-            if (!settingsOverlay.classList.contains('hidden')) {
-                e.preventDefault(); closeSettings(); return;
-            }
-            if (tutorialOverlay && !tutorialOverlay.classList.contains('hidden')) {
-                e.preventDefault(); closeTutorial(); return;
-            }
+    /* ════════════════════════════════
+       FOCO DE TECLADO — NÍVEIS
+    ════════════════════════════════ */
+    function updateLevelKeyboardFocus(cards) {
+        clearLevelFocus();
+        const card = cards[focusedLevelIndex];
+        if (card) {
+            card.classList.add('element-focused');
+            card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
+    }
+    function clearLevelFocus() {
+        document.querySelectorAll('#screen-levels .element-focused')
+            .forEach(el => el.classList.remove('element-focused'));
+    }
 
-        if (!screenGame.classList.contains('active')) return;
-        if (!overlay.classList.contains('hidden'))   return;
-        if (flyInProgress) return;
-
-        const cardsContainer = document.getElementById('cards-container');
-        if (!cardsContainer) return;
-        const playableCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
-        const allSlots      = Array.from(document.querySelectorAll('.drag-slot'));
-        const k = e.key;
-
-        if (k === keymap.nav_left.key || k === keymap.nav_right.key) {
-            e.preventDefault();
-            if (!playableCards.length) return;
-            keyboardMode = true;
-            const dir = (k === keymap.nav_right.key) ? 1 : -1;
-            focusedCardIndex = (focusedCardIndex + dir + playableCards.length) % playableCards.length;
-            updateKeyboardFocus(playableCards, allSlots);
-        } else if (k === keymap.nav_up.key || k === keymap.nav_down.key) {
-            e.preventDefault();
-            if (!allSlots.length) return;
-            keyboardMode = true;
-            const dir = (k === keymap.nav_down.key) ? 1 : -1;
-            focusedSlotIndex = (focusedSlotIndex + dir + allSlots.length) % allSlots.length;
-            updateKeyboardFocus(playableCards, allSlots);
-        } else if (k === keymap.confirm.key) {
-            e.preventDefault();
-            if (!keyboardMode) {
-                keyboardMode = true; focusedCardIndex = 0; focusedSlotIndex = 0;
-                updateKeyboardFocus(playableCards, allSlots);
-                showEncouragement(`Usa ${keymap.nav_left.display}/${keymap.nav_right.display} para cartões, ${keymap.nav_up.display}/${keymap.nav_down.display} para slots! ⌨️`);
-                return;
-            }
-            if (!playableCards.length) return;
-            const card = playableCards[focusedCardIndex];
-            const slot = allSlots[focusedSlotIndex];
-            if (card && slot && !slot.firstElementChild) flyCardToSlot(card, slot);
-        } else if (k === keymap.hint.key || k === keymap.hint.key.toUpperCase()) {
-            e.preventDefault();
-            showHint();
+    /* ════════════════════════════════
+       FOCO DE TECLADO — ROTINAS
+    ════════════════════════════════ */
+    function updateRoutineKeyboardFocus(cards) {
+        clearRoutineFocus();
+        const card = cards[focusedRoutineIndex];
+        if (card) {
+            card.classList.add('element-focused');
+            card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
-    });
+    }
+    function clearRoutineFocus() {
+        document.querySelectorAll('#routines-list .element-focused')
+            .forEach(el => el.classList.remove('element-focused'));
+    }
 
+    /* ════════════════════════════════
+       FOCO DE TECLADO — JOGO
+    ════════════════════════════════ */
     function updateKeyboardFocus(playableCards, allSlots) {
         clearKeyboardFocus();
         if (playableCards[focusedCardIndex]) playableCards[focusedCardIndex].classList.add('element-focused');
         if (allSlots[focusedSlotIndex])      allSlots[focusedSlotIndex].classList.add('element-focused');
     }
-
     function clearKeyboardFocus() {
         document.querySelectorAll('.element-focused').forEach(el => el.classList.remove('element-focused'));
     }
+
+    /* ══════════════════════════════════════════════════════
+       NAVEGAÇÃO POR TECLADO — SISTEMA COMPLETO
+       ══════════════════════════════════════════════════════
+       Atalhos fixos (todos os ecrãs):
+         Esc         → Abrir/fechar Definições
+         Space       → Jogar (home) · Verificar (jogo)
+         Backspace   → Voltar ao ecrã anterior
+         ← →         → Carousel (home) · Cartões (jogo)
+         ↑ ↓         → Níveis · Rotinas · Slots de jogo
+         Enter       → Confirmar / Selecionar / Colocar peça
+         H           → Dica (jogo, configurável)
+       Tutorial:
+         → / Enter   → Próximo passo
+         ← / ←       → Passo anterior
+         Esc         → Fechar
+       Modal de resultado:
+         Enter/Space → Botão primário
+    ══════════════════════════════════════════════════════ */
+    document.addEventListener('keydown', (e) => {
+        // Não interferir durante captura de remap
+        if (capturingAction) return;
+
+        // Não interferir em modo de repouso
+        if (document.body.classList.contains('rest-mode')) return;
+
+        const k        = e.key;
+        const activeEl = document.activeElement;
+        const isTyping = activeEl && (
+            activeEl.tagName === 'INPUT' ||
+            activeEl.tagName === 'TEXTAREA' ||
+            activeEl.isContentEditable
+        );
+
+        /* ── DEFINIÇÕES abertas ──────────────────────── */
+        if (!settingsOverlay.classList.contains('hidden')) {
+            if (k === 'Escape' || k === keymap.settings.key) { e.preventDefault(); closeSettings(); }
+            // Deixar todas as outras teclas funcionarem nas definições
+            return;
+        }
+
+        /* ── TUTORIAL aberto ─────────────────────────── */
+        if (tutorialOverlay && !tutorialOverlay.classList.contains('hidden')) {
+            if (k === 'Escape') {
+                e.preventDefault(); closeTutorial(); return;
+            }
+            if ((k === 'ArrowRight' || k === 'Enter') && !isTyping) {
+                e.preventDefault();
+                if (tutorialStep >= TUTORIAL_STEPS - 1) closeTutorial();
+                else goToTutorialStep(tutorialStep + 1);
+                return;
+            }
+            if (k === 'ArrowLeft' && !isTyping) {
+                e.preventDefault();
+                if (tutorialStep > 0) goToTutorialStep(tutorialStep - 1);
+                return;
+            }
+            return;
+        }
+
+        /* ── DEMONSTRAÇÃO aberta ─────────────────────── */
+        if (demoOverlay && !demoOverlay.classList.contains('hidden')) {
+            if (k === 'Escape') {
+                e.preventDefault(); closeDemo(); return;
+            }
+            if ((k === 'ArrowRight' || k === 'Enter' || k === ' ') && !isTyping) {
+                e.preventDefault();
+                if (demoStep >= DEMO_STEPS - 1) closeDemo();
+                else renderDemoFrame(demoStep + 1);
+                return;
+            }
+            if (k === 'ArrowLeft' && !isTyping) {
+                e.preventDefault();
+                if (demoStep > 0) renderDemoFrame(demoStep - 1);
+                return;
+            }
+            return;
+        }
+
+        /* ── MODAL DE RESULTADO aberto ───────────────── */
+        if (!overlay.classList.contains('hidden')) {
+            if ((k === 'Enter' || k === ' ') && !isTyping) {
+                e.preventDefault();
+                const primaryBtn = modalButtons.querySelector('.primary-btn');
+                if (primaryBtn) primaryBtn.click();
+            }
+            return;
+        }
+
+        /* ── Não intercetamos escrita em campos de texto ── */
+        if (isTyping) return;
+
+        /* ── ESC → abrir Definições (qualquer ecrã exceto boas-vindas) ── */
+        if (k === 'Escape' || k === keymap.settings.key) {
+            const onMain = [screenHome, screenLevels, screenRoutines, screenGame]
+                .some(s => s.classList.contains('active'));
+            if (onMain) { e.preventDefault(); openSettings(); }
+            return;
+        }
+
+        /* ════ ECRÃ: BOAS-VINDAS ═══════════════════════ */
+        if (screenWelcome.classList.contains('active')) {
+            // Enter tratado diretamente pelo listener no nameInputEl
+            return;
+        }
+
+        /* ════ ECRÃ: INÍCIO (home) ══════════════════════ */
+        if (screenHome.classList.contains('active')) {
+            if (k === ' ' || k === 'Enter' || k === keymap.space.key || k === keymap.confirm.key) {
+                e.preventDefault();
+                if (!btnPlay.disabled) btnPlay.click();
+                return;
+            }
+            if (k === 'ArrowLeft') {
+                e.preventDefault(); btnPrev.click(); return;
+            }
+            if (k === 'ArrowRight') {
+                e.preventDefault(); btnNext.click(); return;
+            }
+            return;
+        }
+
+        /* ════ ECRÃ: NÍVEIS ═════════════════════════════ */
+        if (screenLevels.classList.contains('active')) {
+            const lvlCards = Array.from(document.querySelectorAll('#screen-levels .level-card'));
+
+            if (k === 'Backspace' || k === keymap.back.key) {
+                e.preventDefault(); clearLevelFocus(); btnBackLevels.click(); return;
+            }
+            if (k === 'ArrowUp') {
+                e.preventDefault();
+                focusedLevelIndex = Math.max(0, focusedLevelIndex - 1);
+                updateLevelKeyboardFocus(lvlCards); return;
+            }
+            if (k === 'ArrowDown') {
+                e.preventDefault();
+                focusedLevelIndex = Math.min(lvlCards.length - 1, focusedLevelIndex + 1);
+                updateLevelKeyboardFocus(lvlCards); return;
+            }
+            if (k === 'Enter' || k === ' ') {
+                e.preventDefault();
+                const focused = lvlCards[focusedLevelIndex];
+                if (focused && !focused.classList.contains('locked')) focused.click();
+                return;
+            }
+            return;
+        }
+
+        /* ════ ECRÃ: ROTINAS ════════════════════════════ */
+        if (screenRoutines.classList.contains('active')) {
+            const routCards = Array.from(document.querySelectorAll('#routines-list .level-card'));
+
+            if (k === 'Backspace' || k === keymap.back.key) {
+                e.preventDefault(); clearRoutineFocus(); btnBackRoutines.click(); return;
+            }
+            if (k === 'ArrowUp') {
+                e.preventDefault();
+                focusedRoutineIndex = Math.max(0, focusedRoutineIndex - 1);
+                updateRoutineKeyboardFocus(routCards); return;
+            }
+            if (k === 'ArrowDown') {
+                e.preventDefault();
+                focusedRoutineIndex = Math.min(routCards.length - 1, focusedRoutineIndex + 1);
+                updateRoutineKeyboardFocus(routCards); return;
+            }
+            if (k === 'Enter' || k === ' ') {
+                e.preventDefault();
+                const focused = routCards[focusedRoutineIndex];
+                if (focused && !focused.classList.contains('locked')) focused.click();
+                return;
+            }
+            return;
+        }
+
+        /* ════ ECRÃ: JOGO ═══════════════════════════════ */
+        /* ════ ECRÃ: JOGO ═══════════════════════════════ */
+        if (screenGame.classList.contains('active')) {
+            if (flyInProgress) return;
+
+            // Backspace → voltar
+            if (k === 'Backspace' || k === keymap.back.key) {
+                e.preventDefault(); btnBackGame.click(); return;
+            }
+
+            // Space → Verificar (apenas quando botão está visível)
+            if (k === ' ' || k === keymap.space.key) {
+                if (!btnConfirmContainer.classList.contains('hidden')) {
+                    e.preventDefault(); btnConfirm.click();
+                }
+                return;
+            }
+
+            const cardsContainer = document.getElementById('cards-container');
+            if (!cardsContainer) return;
+            const playableCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
+            const allSlots      = Array.from(document.querySelectorAll('.drag-slot'));
+
+            if (k === keymap.nav_left.key || k === keymap.nav_right.key) {
+                e.preventDefault();
+                if (!playableCards.length) return;
+                keyboardMode = true;
+                const dir = (k === keymap.nav_right.key) ? 1 : -1;
+                focusedCardIndex = (focusedCardIndex + dir + playableCards.length) % playableCards.length;
+                updateKeyboardFocus(playableCards, allSlots);
+            } else if (k === keymap.nav_up.key || k === keymap.nav_down.key) {
+                e.preventDefault();
+                if (!allSlots.length) return;
+                keyboardMode = true;
+                const dir = (k === keymap.nav_down.key) ? 1 : -1;
+                focusedSlotIndex = (focusedSlotIndex + dir + allSlots.length) % allSlots.length;
+                updateKeyboardFocus(playableCards, allSlots);
+            } else if (k === keymap.hint.key || k === keymap.hint.key.toUpperCase()) {
+                e.preventDefault();
+                showHint();
+            } else if (k === keymap.confirm.key) {
+                e.preventDefault();
+                
+                // Ativa o modo de teclado se for a primeira vez que se carrega no Enter
+                if (!keyboardMode) {
+                    keyboardMode = true; 
+                    focusedCardIndex = 0; 
+                    focusedSlotIndex = 0;
+                    updateKeyboardFocus(playableCards, allSlots);
+                    showEncouragement(`Usa ${keymap.nav_left.display}/${keymap.nav_right.display} para cartões, ${keymap.nav_up.display}/${keymap.nav_down.display} para slots! ⌨️`);
+                    return;
+                }
+
+                const slot = allSlots[focusedSlotIndex];
+
+                // 1. LÓGICA DE REMOÇÃO: Se o slot focado já tiver um cartão, remove-o
+                if (slot && slot.firstElementChild) {
+                    const cardToRemove = slot.firstElementChild;
+                    
+                    // Limpa os dados do slot e a classe do cartão
+                    slot.dataset.slottedId = '';
+                    cardToRemove.classList.remove('slotted');
+                    
+                    // Devolve o cartão à base
+                    returnCardToHome(cardToRemove);
+                    checkWinCondition();
+                    
+                    // Atualiza a lista de cartões jogáveis e reajusta o foco visual
+                    const updatedCards = Array.from(cardsContainer.querySelectorAll('.drag-card'));
+                    updateKeyboardFocus(updatedCards, allSlots);
+                    return;
+                }
+
+                // 2. LÓGICA DE COLOCAÇÃO: Se o slot estiver vazio, tenta colocar o cartão
+                if (!playableCards.length) return;
+                const card = playableCards[focusedCardIndex];
+                
+                if (card && slot && !slot.firstElementChild) {
+                    flyCardToSlot(card, slot);
+                }
+            }
+        }
+    });
 
     /* ══════════════════════════════
        ANIMAÇÃO "VÔO" DO CARTÃO (teclado → slot)
@@ -1489,21 +2052,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function nextRoutine() {
         hideModal();
 
-        // Guardar rotina como concluída
         if (!completedRoutines[currentLevel]) completedRoutines[currentLevel] = [];
         if (!completedRoutines[currentLevel].includes(currentRoutineIndex)) {
             completedRoutines[currentLevel].push(currentRoutineIndex);
             localStorage.setItem('taskly_completed', JSON.stringify(completedRoutines));
         }
 
-        const isLastRoutine  = currentRoutineIndex >= currentLevelData.length - 1;
-        const completedLvl   = currentLevel;
+        const isLastRoutine = currentRoutineIndex >= currentLevelData.length - 1;
+        const completedLvl  = currentLevel;
 
         if (!isLastRoutine) {
             startGame(completedLvl, currentRoutineIndex + 1);
         } else {
             if (!unlockedLevels.includes(currentLevel + 1)) {
                 unlockedLevels.push(currentLevel + 1);
+                localStorage.setItem('taskly_unlocked_levels', JSON.stringify(unlockedLevels));
             }
             updateLevelLocksStatus();
             const hasNextLevel = !!LEVELS_DATA[currentLevel + 1];
@@ -1535,7 +2098,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ══════════════════════════════
        ÁUDIO
-       Sons carregados da pasta sounds/ — Web Audio API apenas como fallback do sucesso
     ══════════════════════════════ */
     function playSuccessSound() {
         if (!soundEnabled || lowStimMode) return;
@@ -1593,5 +2155,31 @@ document.addEventListener('DOMContentLoaded', () => {
             starsContainer.innerHTML = '';
         }, 1500);
     }
+
+    /* ══════════════════════════════
+       BADGES DE ATALHO NOS BOTÕES
+    ══════════════════════════════ */
+    function addKeyHintBadges() {
+        // Badge [Space] no botão Jogar (aplicado via updateCarousel)
+        updateCarousel();
+
+        // Badge [Space] no botão Verificar
+        if (btnConfirm) {
+            btnConfirm.innerHTML = `✔ Verificar <kbd class="btn-key-badge">${keymap.space.display}</kbd>`;
+        }
+
+        // Tooltips (title) nos botões de voltar
+        if (btnBackLevels)   btnBackLevels.title   = 'Voltar (Backspace ⌫)';
+        if (btnBackRoutines) btnBackRoutines.title  = 'Voltar (Backspace ⌫)';
+        if (btnBackGame)     btnBackGame.title      = 'Voltar (Backspace ⌫)';
+
+        // Tooltips nos botões de definições
+        settingsBtns.forEach(btn => { btn.title = 'Definições (Esc)'; });
+
+        // Tooltip na dica
+        if (btnHint) btnHint.title = `Dica (${keymap.hint.display})`;
+    }
+
+    addKeyHintBadges();
 
 });
